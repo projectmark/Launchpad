@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="nl">
 <head>
   <meta charset="UTF-8">
@@ -395,7 +395,7 @@ body.light-theme .weather-widget:hover {
   position: absolute;
   top: calc(100% + 8px);
   left: 0;
-  width: 380px;
+  width: 410px;
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: 16px;
@@ -471,8 +471,8 @@ body.light-theme .forecast-header {
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.03);
   border-radius: 12px;
-  padding: 12px 14px;
-  gap: 10px;
+  padding: 14px 16px;
+  gap: 14px;
   transition: background 0.2s ease;
 }
 
@@ -500,8 +500,9 @@ body.light-theme .forecast-day-row:hover {
   font-size: 0.88rem;
   font-weight: 600;
   color: var(--text-primary);
-  width: 80px;
+  width: 105px;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .forecast-day-desc {
@@ -510,6 +511,8 @@ body.light-theme .forecast-day-row:hover {
   gap: 8px;
   font-size: 0.82rem;
   color: var(--text-secondary);
+  flex-grow: 1;
+  margin-left: 4px;
 }
 
 .forecast-day-icon {
@@ -553,9 +556,9 @@ body.light-theme .forecast-day-row:hover {
 .forecast-day-details {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
   border-top: 1px dashed rgba(255, 255, 255, 0.06);
-  padding-top: 10px;
+  padding-top: 12px;
   font-size: 0.78rem;
   color: var(--text-muted);
 }
@@ -565,52 +568,91 @@ body.light-theme .forecast-day-details {
 }
 
 .forecast-period {
-  display: flex;
+  display: grid;
+  grid-template-columns: 20px 80px 30px 60px 75px 30px;
   align-items: center;
-  gap: 8px;
+  justify-content: space-between;
+  width: 100%;
 }
 
-.forecast-period i {
-  width: 14px;
-  height: 14px;
+.forecast-period i,
+.forecast-period svg {
+  width: 14px !important;
+  height: 14px !important;
   color: var(--text-muted);
+  justify-self: center;
+}
+
+.forecast-period svg:not(.lucide-sunrise):not(.lucide-sunset):not(.lucide-droplet):not(.lucide-umbrella) {
+  width: 16px !important;
+  height: 16px !important;
+  color: var(--text-secondary) !important;
+  justify-self: center;
 }
 
 .forecast-period-label {
-  width: 60px;
   font-weight: 500;
   color: var(--text-secondary);
+  justify-self: start;
 }
 
 .forecast-period-temp {
-  min-width: 40px;
   font-weight: 600;
   color: var(--text-primary);
+  justify-self: start;
 }
 
 /* Rain chance styling inside forecast */
 .forecast-rain {
   display: inline-flex;
   align-items: center;
-  gap: 2px;
-  margin-left: 8px;
+  gap: 4px;
   color: var(--accent-hover);
   font-size: 0.72rem;
   font-weight: 600;
+  justify-self: start;
 }
 
-.forecast-rain i {
+.forecast-rain i,
+.forecast-rain svg {
   width: 11px !important;
   height: 11px !important;
   color: var(--accent-hover) !important;
+  justify-self: center;
 }
 
 body.light-theme .forecast-rain {
   color: var(--accent-color);
 }
 
-body.light-theme .forecast-rain i {
+body.light-theme .forecast-rain i,
+body.light-theme .forecast-rain svg {
   color: var(--accent-color) !important;
+}
+
+/* Raincoat indicator styling */
+.coat-indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-self: center;
+}
+
+.coat-indicator i,
+.coat-indicator svg {
+  width: 13px !important;
+  height: 13px !important;
+  transition: color 0.2s ease;
+  justify-self: center;
+}
+
+.coat-indicator.coat-needed i,
+.coat-indicator.coat-needed svg {
+  color: #ef4444 !important; /* Material Red */
+}
+
+.coat-indicator.coat-not-needed i,
+.coat-indicator.coat-not-needed svg {
+  color: var(--text-muted) !important; /* Neutral grey */
 }
 
 /* Holding and Refreshed States on Weather Widget */
@@ -652,7 +694,8 @@ body.light-theme .forecast-rain i {
   box-shadow: var(--shadow-sm);
 }
 
-.action-btn i {
+.action-btn i,
+.action-btn svg {
   width: 18px;
   height: 18px;
   transition: transform 0.3s ease;
@@ -671,7 +714,8 @@ body.light-theme .action-btn:hover {
   box-shadow: var(--shadow-md), var(--shadow-accent);
 }
 
-.action-btn:hover i {
+.action-btn:hover i,
+.action-btn:hover svg {
   transform: rotate(15deg);
 }
 
@@ -691,7 +735,8 @@ body.light-theme .action-btn:hover {
   box-shadow: var(--shadow-accent);
 }
 
-#btn-edit-mode.active i {
+#btn-edit-mode.active i,
+#btn-edit-mode.active svg {
   color: #fff;
 }
 
@@ -3254,6 +3299,9 @@ function renderForecast(cache) {
               <i data-lucide="droplet"></i>
               ${day.morning_pop}%
             </span>
+            <span class="coat-indicator ${day.morning_pop > 35 ? 'coat-needed' : 'coat-not-needed'}" title="${day.morning_pop > 35 ? 'Regenjas aangeraden' : 'Geen regenjas nodig'}">
+              <i data-lucide="umbrella"></i>
+            </span>
           </div>
           <div class="forecast-period" title="Middag (15:00): ${afternoonWeather.desc}">
             <i data-lucide="sunset"></i>
@@ -3263,6 +3311,9 @@ function renderForecast(cache) {
             <span class="forecast-rain" title="Regenkans: ${day.afternoon_pop}%">
               <i data-lucide="droplet"></i>
               ${day.afternoon_pop}%
+            </span>
+            <span class="coat-indicator ${day.afternoon_pop > 35 ? 'coat-needed' : 'coat-not-needed'}" title="${day.afternoon_pop > 35 ? 'Regenjas aangeraden' : 'Geen regenjas nodig'}">
+              <i data-lucide="umbrella"></i>
             </span>
           </div>
         </div>
