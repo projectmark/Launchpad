@@ -575,15 +575,16 @@ body.light-theme .forecast-day-details {
   width: 100%;
 }
 
-.forecast-period i,
-.forecast-period svg {
+.forecast-period-type-icon,
+.forecast-period svg.forecast-period-type-icon {
   width: 14px !important;
   height: 14px !important;
-  color: var(--text-muted);
+  color: var(--text-muted) !important;
   justify-self: center;
 }
 
-.forecast-period svg:not(.lucide-sunrise):not(.lucide-sunset):not(.lucide-droplet):not(.lucide-umbrella) {
+.forecast-period-weather-icon,
+.forecast-period svg.forecast-period-weather-icon {
   width: 16px !important;
   height: 16px !important;
   color: var(--text-secondary) !important;
@@ -3173,6 +3174,7 @@ function getWeatherData(lat, lon, label = "Mijn Locatie") {
             const dateStr = daily.time[i];
             const morningIdx = i * 24 + 9;
             const afternoonIdx = i * 24 + 15;
+            const eveningIdx = i * 24 + 20;
             
             const morningTemp = Math.round(hourly.temperature_2m[morningIdx]);
             const morningCode = hourly.weathercode[morningIdx];
@@ -3181,6 +3183,10 @@ function getWeatherData(lat, lon, label = "Mijn Locatie") {
             const afternoonTemp = Math.round(hourly.temperature_2m[afternoonIdx]);
             const afternoonCode = hourly.weathercode[afternoonIdx];
             const afternoonPop = hourly.precipitation_probability[afternoonIdx];
+            
+            const eveningTemp = Math.round(hourly.temperature_2m[eveningIdx]);
+            const eveningCode = hourly.weathercode[eveningIdx];
+            const eveningPop = hourly.precipitation_probability[eveningIdx];
             
             forecast.push({
               date: dateStr,
@@ -3194,7 +3200,10 @@ function getWeatherData(lat, lon, label = "Mijn Locatie") {
               morning_pop: morningPop,
               afternoon_temp: afternoonTemp,
               afternoon_code: afternoonCode,
-              afternoon_pop: afternoonPop
+              afternoon_pop: afternoonPop,
+              evening_temp: eveningTemp,
+              evening_code: eveningCode,
+              evening_pop: eveningPop
             });
           }
         }
@@ -3257,6 +3266,50 @@ function renderForecast(cache) {
     return;
   }
   
+  const currentHour = new Date().getHours();
+  // Check if current hour is past noon AND we have evening forecast values cached
+  let isPastNoon = currentHour >= 12;
+  if (isPastNoon && cache.forecast[0] && cache.forecast[0].evening_temp === undefined) {
+    isPastNoon = false; // Fallback if old cache doesn't have evening values yet
+  }
+
+  // Pre-define timeframe configurations once outside the loop for optimal performance
+  const p1Conf = isPastNoon ? {
+    label: "Middag:",
+    tooltip: "Tijdvak: 12:00 tot 18:00",
+    icon: "sunset",
+    tempKey: "afternoon_temp",
+    codeKey: "afternoon_code",
+    popKey: "afternoon_pop",
+    time: "15:00"
+  } : {
+    label: "Ochtend:",
+    tooltip: "Tijdvak: 08:00 tot 12:00",
+    icon: "sunrise",
+    tempKey: "morning_temp",
+    codeKey: "morning_code",
+    popKey: "morning_pop",
+    time: "09:00"
+  };
+
+  const p2Conf = isPastNoon ? {
+    label: "Avond:",
+    tooltip: "Tijdvak: 18:00 tot 00:00",
+    icon: "moon",
+    tempKey: "evening_temp",
+    codeKey: "evening_code",
+    popKey: "evening_pop",
+    time: "20:00"
+  } : {
+    label: "Middag:",
+    tooltip: "Tijdvak: 12:00 tot 18:00",
+    icon: "sunset",
+    tempKey: "afternoon_temp",
+    codeKey: "afternoon_code",
+    popKey: "afternoon_pop",
+    time: "15:00"
+  };
+  
   let html = `
     <div class="forecast-header">
       <div class="forecast-title">5-daagse Verwachting</div>
@@ -3272,9 +3325,8 @@ function renderForecast(cache) {
   cache.forecast.forEach((day, index) => {
     const dayLabel = getDayLabel(day.date, index);
     const dayWeather = translateWeather(day.code);
-    
-    const morningWeather = translateWeather(day.morning_code);
-    const afternoonWeather = translateWeather(day.afternoon_code);
+    const p1Weather = translateWeather(day[p1Conf.codeKey]);
+    const p2Weather = translateWeather(day[p2Conf.codeKey]);
     
     html += `
       <div class="forecast-day-row">
@@ -3290,29 +3342,29 @@ function renderForecast(cache) {
           </div>
         </div>
         <div class="forecast-day-details">
-          <div class="forecast-period" title="Ochtend (09:00): ${morningWeather.desc}">
-            <i data-lucide="sunrise"></i>
-            <span class="forecast-period-label">Ochtend:</span>
-            <i data-lucide="${morningWeather.icon}"></i>
-            <span class="forecast-period-temp">${day.morning_temp}°C</span>
-            <span class="forecast-rain" title="Regenkans: ${day.morning_pop}%">
+          <div class="forecast-period" title="${p1Conf.label.replace(':', '')} (${p1Conf.time}): ${p1Weather.desc}">
+            <i data-lucide="${p1Conf.icon}" class="forecast-period-type-icon"></i>
+            <span class="forecast-period-label" title="${p1Conf.tooltip}">${p1Conf.label}</span>
+            <i data-lucide="${p1Weather.icon}" class="forecast-period-weather-icon"></i>
+            <span class="forecast-period-temp">${day[p1Conf.tempKey]}°C</span>
+            <span class="forecast-rain" title="Regenkans: ${day[p1Conf.popKey]}%">
               <i data-lucide="droplet"></i>
-              ${day.morning_pop}%
+              ${day[p1Conf.popKey]}%
             </span>
-            <span class="coat-indicator ${day.morning_pop > 35 ? 'coat-needed' : 'coat-not-needed'}" title="${day.morning_pop > 35 ? 'Regenjas aangeraden' : 'Geen regenjas nodig'}">
+            <span class="coat-indicator ${day[p1Conf.popKey] > 35 ? 'coat-needed' : 'coat-not-needed'}" title="${day[p1Conf.popKey] > 35 ? 'Regenjas aangeraden' : 'Geen regenjas nodig'}">
               <i data-lucide="umbrella"></i>
             </span>
           </div>
-          <div class="forecast-period" title="Middag (15:00): ${afternoonWeather.desc}">
-            <i data-lucide="sunset"></i>
-            <span class="forecast-period-label">Middag:</span>
-            <i data-lucide="${afternoonWeather.icon}"></i>
-            <span class="forecast-period-temp">${day.afternoon_temp}°C</span>
-            <span class="forecast-rain" title="Regenkans: ${day.afternoon_pop}%">
+          <div class="forecast-period" title="${p2Conf.label.replace(':', '')} (${p2Conf.time}): ${p2Weather.desc}">
+            <i data-lucide="${p2Conf.icon}" class="forecast-period-type-icon"></i>
+            <span class="forecast-period-label" title="${p2Conf.tooltip}">${p2Conf.label}</span>
+            <i data-lucide="${p2Weather.icon}" class="forecast-period-weather-icon"></i>
+            <span class="forecast-period-temp">${day[p2Conf.tempKey]}°C</span>
+            <span class="forecast-rain" title="Regenkans: ${day[p2Conf.popKey]}%">
               <i data-lucide="droplet"></i>
-              ${day.afternoon_pop}%
+              ${day[p2Conf.popKey]}%
             </span>
-            <span class="coat-indicator ${day.afternoon_pop > 35 ? 'coat-needed' : 'coat-not-needed'}" title="${day.afternoon_pop > 35 ? 'Regenjas aangeraden' : 'Geen regenjas nodig'}">
+            <span class="coat-indicator ${day[p2Conf.popKey] > 35 ? 'coat-needed' : 'coat-not-needed'}" title="${day[p2Conf.popKey] > 35 ? 'Regenjas aangeraden' : 'Geen regenjas nodig'}">
               <i data-lucide="umbrella"></i>
             </span>
           </div>
