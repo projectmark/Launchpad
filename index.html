@@ -656,6 +656,36 @@ body.light-theme .forecast-rain svg {
   color: var(--text-muted) !important; /* Neutral grey */
 }
 
+/* Forecast Panel Footer and Source Link */
+.forecast-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4px;
+  padding-top: 10px;
+  border-top: 1px solid var(--card-border);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+body.light-theme .forecast-footer {
+  border-top-color: rgba(0, 0, 0, 0.06);
+}
+
+.forecast-source-link {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease, text-decoration 0.2s ease;
+  margin-left: 3px;
+}
+
+.forecast-source-link:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+
 /* Holding and Refreshed States on Weather Widget */
 .weather-widget.holding {
   transform: scale(0.95);
@@ -2585,6 +2615,19 @@ function escapeQuotes(str) {
   return str.replace(/'/g, "\\'").replace(/"/g, '&quot;');
 }
 
+// Helper to resolve weather fields prioritizing KNMI Harmonie over best_match fallback
+function resolveWeatherModelField(sourceObj, field, idx) {
+  if (!sourceObj) return 0;
+  const knmiVal = sourceObj[`${field}_knmi_harmonie_arome_netherlands`]?.[idx];
+  if (knmiVal !== null && knmiVal !== undefined) return knmiVal;
+  
+  const bestVal = sourceObj[`${field}_best_match`]?.[idx];
+  if (bestVal !== null && bestVal !== undefined) return bestVal;
+  
+  const defaultVal = sourceObj[field]?.[idx];
+  return (defaultVal !== null && defaultVal !== undefined) ? defaultVal : 0;
+}
+
 // CRUD Operations
 function addCategory(name) {
   const newCat = {
@@ -3148,7 +3191,7 @@ function fetchWeather(forceRefresh = false) {
 }
 
 function getWeatherData(lat, lon, label = "Mijn Locatie") {
-  const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&hourly=temperature_2m,apparent_temperature,precipitation_probability,weathercode&daily=weathercode,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min&timezone=auto`;
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&hourly=temperature_2m,apparent_temperature,precipitation_probability,weathercode&daily=weathercode,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min&timezone=auto&models=knmi_harmonie_arome_netherlands,best_match`;
   const widget = document.getElementById('weather-widget');
   widget.classList.add('loading');
   
@@ -3170,31 +3213,37 @@ function getWeatherData(lat, lon, label = "Mijn Locatie") {
         const hourly = data.hourly;
         
         if (daily && hourly) {
+          // Helper to get hourly values prioritising KNMI Harmonie over best_match fallback
+          const getHourlyVal = (field, idx) => resolveWeatherModelField(hourly, field, idx);
+
+          // Helper to get daily values prioritising KNMI Harmonie over best_match fallback
+          const getDailyVal = (field, idx) => resolveWeatherModelField(daily, field, idx);
+
           for (let i = 0; i < 5; i++) {
             const dateStr = daily.time[i];
             const morningIdx = i * 24 + 9;
             const afternoonIdx = i * 24 + 15;
             const eveningIdx = i * 24 + 20;
             
-            const morningTemp = Math.round(hourly.temperature_2m[morningIdx]);
-            const morningCode = hourly.weathercode[morningIdx];
-            const morningPop = hourly.precipitation_probability[morningIdx];
+            const morningTemp = Math.round(getHourlyVal('temperature_2m', morningIdx));
+            const morningCode = getHourlyVal('weathercode', morningIdx);
+            const morningPop = getHourlyVal('precipitation_probability', morningIdx);
             
-            const afternoonTemp = Math.round(hourly.temperature_2m[afternoonIdx]);
-            const afternoonCode = hourly.weathercode[afternoonIdx];
-            const afternoonPop = hourly.precipitation_probability[afternoonIdx];
+            const afternoonTemp = Math.round(getHourlyVal('temperature_2m', afternoonIdx));
+            const afternoonCode = getHourlyVal('weathercode', afternoonIdx);
+            const afternoonPop = getHourlyVal('precipitation_probability', afternoonIdx);
             
-            const eveningTemp = Math.round(hourly.temperature_2m[eveningIdx]);
-            const eveningCode = hourly.weathercode[eveningIdx];
-            const eveningPop = hourly.precipitation_probability[eveningIdx];
+            const eveningTemp = Math.round(getHourlyVal('temperature_2m', eveningIdx));
+            const eveningCode = getHourlyVal('weathercode', eveningIdx);
+            const eveningPop = getHourlyVal('precipitation_probability', eveningIdx);
             
             forecast.push({
               date: dateStr,
-              temp_max: Math.round(daily.temperature_2m_max[i]),
-              temp_min: Math.round(daily.temperature_2m_min[i]),
-              apparent_max: Math.round(daily.apparent_temperature_max[i]),
-              apparent_min: Math.round(daily.apparent_temperature_min[i]),
-              code: daily.weathercode[i],
+              temp_max: Math.round(getDailyVal('temperature_2m_max', i)),
+              temp_min: Math.round(getDailyVal('temperature_2m_min', i)),
+              apparent_max: Math.round(getDailyVal('apparent_temperature_max', i)),
+              apparent_min: Math.round(getDailyVal('apparent_temperature_min', i)),
+              code: getDailyVal('weathercode', i),
               morning_temp: morningTemp,
               morning_code: morningCode,
               morning_pop: morningPop,
@@ -3374,6 +3423,14 @@ function renderForecast(cache) {
   });
   
   html += `</div>`;
+  
+  // Add data source attribution footer
+  html += `
+    <div class="forecast-footer">
+      <span>Bron: <a href="https://www.knmi.nl/" target="_blank" rel="noopener noreferrer" class="forecast-source-link">KNMI</a> (Harmonie) via <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer" class="forecast-source-link">Open-Meteo</a></span>
+    </div>
+  `;
+  
   panel.innerHTML = html;
   
   // Render lucide icons inside the panel
