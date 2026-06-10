@@ -1372,7 +1372,8 @@ body.light-theme .card-action-btn {
   box-shadow: 0 0 10px rgba(239, 68, 68, 0.4);
 }
 
-.card-action-btn i {
+.card-action-btn i,
+.card-action-btn svg {
   width: 13px;
   height: 13px;
 }
@@ -2518,13 +2519,13 @@ function renderBookmarks() {
         <span>${escapeHTML(cat.name)}</span>
       </h3>
       <div class="category-actions">
-        <button class="cat-action-btn btn-sort-cat" onclick="sortCategoryAlphabetically('${cat.id}')" title="Sorteer alfabetisch (A-Z)">
+        <button class="cat-action-btn btn-sort-cat" onclick="sortCategoryAlphabetically(event, '${cat.id}')" title="Sorteer alfabetisch (A-Z)">
           <i data-lucide="arrow-down-a-z"></i>
         </button>
-        <button class="cat-action-btn btn-edit-cat" onclick="openEditCategoryModal('${cat.id}')" title="Categorie bewerken">
+        <button class="cat-action-btn btn-edit-cat" onclick="openEditCategoryModal(event, '${cat.id}')" title="Categorie bewerken">
           <i data-lucide="edit-2"></i>
         </button>
-        <button class="cat-action-btn danger btn-delete-cat" onclick="deleteCategory('${cat.id}')" title="Categorie verwijderen">
+        <button class="cat-action-btn danger btn-delete-cat" onclick="deleteCategory(event, '${cat.id}')" title="Categorie verwijderen">
           <i data-lucide="trash-2"></i>
         </button>
       </div>
@@ -2566,10 +2567,10 @@ function renderBookmarks() {
         
         <!-- Edit actions overlay (shows in Edit Mode) -->
         <div class="bookmark-card-actions" draggable="false">
-          <button class="card-action-btn" draggable="false" onclick="event.preventDefault(); openEditBookmarkModal('${cat.id}', '${link.id}')" title="Bewerken">
+          <button class="card-action-btn" draggable="false" onclick="openEditBookmarkModal(event, '${cat.id}', '${link.id}')" title="Bewerken">
             <i data-lucide="edit-2" draggable="false"></i>
           </button>
-          <button class="card-action-btn danger" draggable="false" onclick="event.preventDefault(); deleteBookmark('${cat.id}', '${link.id}')" title="Verwijderen">
+          <button class="card-action-btn danger" draggable="false" onclick="deleteBookmark(event, '${cat.id}', '${link.id}')" title="Verwijderen">
             <i data-lucide="trash-2" draggable="false"></i>
           </button>
         </div>
@@ -2580,7 +2581,7 @@ function renderBookmarks() {
     // Render "Add Bookmark" Card inside grid
     const addCard = document.createElement('div');
     addCard.className = 'bookmark-card add-bookmark-card';
-    addCard.setAttribute('onclick', `openAddBookmarkModal('${cat.id}')`);
+    addCard.setAttribute('onclick', `openAddBookmarkModal(event, '${cat.id}')`);
     addCard.innerHTML = `
       <i data-lucide="plus"></i>
       <span>Toevoegen</span>
@@ -2649,7 +2650,11 @@ function editCategory(id, newName) {
   }
 }
 
-function deleteCategory(id) {
+function deleteCategory(e, id) {
+  if (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
   if (confirm("Weet je zeker dat je deze gehele categorie wilt verwijderen?")) {
     state.bookmarks = state.bookmarks.filter(c => c.id !== id);
     saveBookmarksState();
@@ -2692,7 +2697,11 @@ function editBookmark(catId, bmId, title, url) {
   }
 }
 
-function deleteBookmark(catId, bmId) {
+function deleteBookmark(e, catId, bmId) {
+  if (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
   const cat = state.bookmarks.find(c => c.id === catId);
   if (cat) {
     cat.items = cat.items.filter(i => i.id !== bmId);
@@ -3656,8 +3665,11 @@ function openAddCategoryModal() {
   lucide.createIcons();
 }
 
-function openEditCategoryModal(catId) {
-  event.stopPropagation();
+function openEditCategoryModal(e, catId) {
+  if (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
   const cat = state.bookmarks.find(c => c.id === catId);
   if (cat) {
     document.getElementById('category-id').value = cat.id;
@@ -3668,7 +3680,11 @@ function openEditCategoryModal(catId) {
   }
 }
 
-function openAddBookmarkModal(catId) {
+function openAddBookmarkModal(e, catId) {
+  if (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
   document.getElementById('bookmark-id').value = '';
   document.getElementById('bookmark-category-id').value = catId;
   document.getElementById('bookmark-title').value = '';
@@ -3678,7 +3694,11 @@ function openAddBookmarkModal(catId) {
   lucide.createIcons();
 }
 
-function openEditBookmarkModal(catId, bmId) {
+function openEditBookmarkModal(e, catId, bmId) {
+  if (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
   const cat = state.bookmarks.find(c => c.id === catId);
   if (cat) {
     const link = cat.items.find(l => l.id === bmId);
@@ -4193,6 +4213,14 @@ function initDragAndDrop() {
 }
 
 function saveDraggedOrder() {
+  // Create a flat Map of all bookmarks in the current state for O(1) lookup speed
+  const bookmarksMap = new Map();
+  state.bookmarks.forEach(cat => {
+    cat.items.forEach(item => {
+      bookmarksMap.set(item.id, item);
+    });
+  });
+
   const newBookmarks = [];
   const catElements = document.querySelectorAll('.bookmarks-category');
   
@@ -4206,15 +4234,7 @@ function saveDraggedOrder() {
     
     cardElements.forEach(cardEl => {
       const bmId = cardEl.getAttribute('data-bm-id');
-      let foundLink = null;
-      for (const cat of state.bookmarks) {
-        const item = cat.items.find(i => i.id === bmId);
-        if (item) {
-          foundLink = item;
-          break;
-        }
-      }
-      
+      const foundLink = bookmarksMap.get(bmId);
       if (foundLink) {
         newItems.push(foundLink);
       }
@@ -4228,9 +4248,14 @@ function saveDraggedOrder() {
   
   state.bookmarks = newBookmarks;
   saveBookmarksState();
+  renderBookmarks();
 }
 
-function sortCategoryAlphabetically(catId) {
+function sortCategoryAlphabetically(e, catId) {
+  if (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
   const cat = state.bookmarks.find(c => c.id === catId);
   if (cat) {
     cat.items.sort((a, b) => a.title.localeCompare(b.title, 'nl', { sensitivity: 'base' }));
