@@ -750,7 +750,8 @@ body.light-theme .action-btn:hover {
   transform: rotate(15deg);
 }
 
-#btn-edit-mode {
+#btn-edit-mode,
+#btn-add-category {
   width: auto;
   border-radius: 20px;
   padding: 0 16px;
@@ -1358,34 +1359,56 @@ body.light-theme .card-action-btn {
 }
 
 .card-action-btn:hover {
-  background: var(--accent-color);
-  border-color: var(--accent-color);
-  color: #ffffff !important;
-  transform: scale(1.1);
-  box-shadow: var(--shadow-accent);
+  background: rgba(15, 23, 42, 0.85) !important;
+  border-color: var(--card-hover-border) !important;
+  color: var(--accent-color) !important;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md), var(--shadow-accent);
+}
+
+body.light-theme .card-action-btn:hover {
+  background: #ffffff !important;
+  border-color: var(--card-hover-border) !important;
 }
 
 .card-action-btn.danger:hover {
-  background: #ef4444;
-  border-color: #ef4444;
-  color: #ffffff !important;
-  box-shadow: 0 0 10px rgba(239, 68, 68, 0.4);
+  background: rgba(15, 23, 42, 0.85) !important;
+  border-color: rgba(239, 68, 68, 0.4) !important;
+  color: #ef4444 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25), 0 0 10px rgba(239, 68, 68, 0.15);
+}
+
+body.light-theme .card-action-btn.danger:hover {
+  background: #ffffff !important;
+  border-color: rgba(239, 68, 68, 0.3) !important;
 }
 
 .card-action-btn i,
 .card-action-btn svg {
   width: 13px;
   height: 13px;
+  transition: transform 0.3s ease;
+}
+
+.card-action-btn:hover i,
+.card-action-btn:hover svg {
+  transform: rotate(15deg);
 }
 
 /* Add Bookmark Card */
 .add-bookmark-card {
+  display: none !important;
   border-style: dashed;
   border-color: rgba(255, 255, 255, 0.15);
   background: rgba(255, 255, 255, 0.02);
   justify-content: center;
   cursor: pointer;
   opacity: 0.65;
+}
+
+body.edit-mode-active .add-bookmark-card {
+  display: flex !important;
 }
 
 .add-bookmark-card:hover {
@@ -1961,7 +1984,7 @@ body.edit-mode-active .bookmark-card:not(.add-bookmark-card):active {
       <!-- Edit Mode Overlay Panel (shows only in Edit Mode) -->
       <div id="edit-controls-bar" class="edit-controls-bar hidden">
         <span class="edit-mode-indicator"><i data-lucide="info"></i> Je bent in Bewerk-modus. Sleep of klik op bewerken om links aan te passen.</span>
-        <button id="btn-add-category" class="btn primary btn-sm">
+        <button id="btn-add-category" class="action-btn">
           <i data-lucide="folder-plus"></i> Categorie toevoegen
         </button>
       </div>
