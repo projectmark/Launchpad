@@ -124,8 +124,8 @@ body.light-theme .search-helper {
   background: rgba(255, 255, 255, 0.96);
   border-color: rgba(0, 0, 0, 0.08);
   box-shadow: 
-    0 10px 30px -10px rgba(0, 0, 0, 0.12),
-    0 1px 3px rgba(0, 0, 0, 0.05);
+    0 -10px 30px -5px rgba(0, 0, 0, 0.08),
+    0 -1px 3px rgba(0, 0, 0, 0.03);
 }
 body.light-theme .helper-header {
   color: var(--text-secondary);
@@ -248,6 +248,7 @@ body {
   border-radius: 50%;
   opacity: 0.22;
   animation: float 25s infinite alternate ease-in-out;
+  will-change: transform;
 }
 
 .blob-1 {
@@ -330,6 +331,7 @@ body {
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: var(--shadow-sm);
+  will-change: transform, box-shadow;
 }
 
 .weather-widget:hover {
@@ -971,24 +973,25 @@ body.light-theme .action-btn:hover {
   display: none !important;
 }
 
-/* Search helper dropdown */
+/* Search helper dropdown (displays above the search bar) */
 .search-helper {
   position: absolute;
-  top: calc(100% + 8px);
+  bottom: calc(100% + 8px);
+  top: auto;
   left: 0;
   width: 100%;
   background: rgba(15, 23, 42, 0.95);
   border: 1px solid var(--input-border);
   border-radius: 16px;
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 -10px 30px -5px rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(20px);
   padding: 14px;
   z-index: 50;
-  animation: fade-down 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: fade-up-helper 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@keyframes fade-down {
-  from { opacity: 0; transform: translateY(-10px); }
+@keyframes fade-up-helper {
+  from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
@@ -1034,6 +1037,50 @@ body.light-theme .action-btn:hover {
   border-color: rgba(59, 130, 246, 0.2);
   color: var(--accent-hover);
   transform: translateY(-1px);
+}
+
+/* Search Suggestions List */
+.suggestions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.suggestion-item i,
+.suggestion-item svg {
+  width: 15px;
+  height: 15px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+}
+
+.suggestion-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+}
+
+.suggestion-item:hover i,
+.suggestion-item:hover svg {
+  color: var(--accent-color);
+}
+
+body.light-theme .suggestion-item:hover {
+  background: rgba(0, 0, 0, 0.04);
 }
 
 /* Edit Mode Controls Bar */
@@ -1185,6 +1232,7 @@ body.light-theme .action-btn:hover {
   backdrop-filter: blur(8px);
   user-select: none;
   min-height: 52px;
+  will-change: transform, box-shadow;
 }
 
 /* Card hover animation */
@@ -1968,12 +2016,20 @@ body.edit-mode-active .bookmark-card:not(.add-bookmark-card):active {
         
         <!-- Search Help dropdown hints -->
         <div id="search-helper" class="search-helper hidden">
-          <div class="helper-header">Zoeksnelkoppelingen:</div>
-          <div class="helper-shortcuts">
-            <div class="shortcut-tip" data-prefix="@g"><kbd>@g</kbd> Google</div>
-            <div class="shortcut-tip" data-prefix="@y"><kbd>@y</kbd> YouTube</div>
-            <div class="shortcut-tip" data-prefix="@w"><kbd>@w</kbd> Wikipedia</div>
-            <div class="shortcut-tip" data-prefix="@d"><kbd>@d</kbd> DuckDuckGo</div>
+          <div id="search-shortcuts-area">
+            <div class="helper-header">Zoeksnelkoppelingen:</div>
+            <div class="helper-shortcuts">
+              <div class="shortcut-tip" data-prefix="@g"><kbd>@g</kbd> Google</div>
+              <div class="shortcut-tip" data-prefix="@y"><kbd>@y</kbd> YouTube</div>
+              <div class="shortcut-tip" data-prefix="@w"><kbd>@w</kbd> Wikipedia</div>
+              <div class="shortcut-tip" data-prefix="@d"><kbd>@d</kbd> DuckDuckGo</div>
+            </div>
+          </div>
+          <div id="search-suggestions-area" class="hidden">
+            <div class="helper-header">Zoeksuggesties:</div>
+            <div id="search-suggestions-list" class="suggestions-list">
+              <!-- Rendered dynamically -->
+            </div>
           </div>
         </div>
       </div>
@@ -2506,16 +2562,22 @@ window.handleFaviconError = function(imgElement, title) {
 // Render bookmarks grids
 function renderBookmarks() {
   const grid = document.getElementById('bookmarks-grid');
-  grid.innerHTML = '';
+  if (!grid) return;
+  
+  const fragment = document.createDocumentFragment();
   
   if (state.bookmarks.length === 0) {
-    grid.innerHTML = `
-      <div class="no-results-msg" style="grid-column: span 12;">
-        <i data-lucide="folder-open" style="width: 48px; height: 48px; color: var(--text-muted); margin-bottom: 16px;"></i>
-        <h3>Geen categorieën gevonden</h3>
-        <p>Gebruik de bewerkmodus om categorieën en snelkoppelingen toe te voegen of importeer je bookmarks via instellingen.</p>
-      </div>
+    const noResults = document.createElement('div');
+    noResults.className = 'no-results-msg';
+    noResults.style.gridColumn = 'span 12';
+    noResults.innerHTML = `
+      <i data-lucide="folder-open" style="width: 48px; height: 48px; color: var(--text-muted); margin-bottom: 16px;"></i>
+      <h3>Geen categorieën gevonden</h3>
+      <p>Gebruik de bewerkmodus om categorieën en snelkoppelingen toe te voegen of importeer je bookmarks via instellingen.</p>
     `;
+    fragment.appendChild(noResults);
+    grid.innerHTML = '';
+    grid.appendChild(fragment);
     lucide.createIcons();
     return;
   }
@@ -2613,8 +2675,11 @@ function renderBookmarks() {
     
     catEl.appendChild(headerEl);
     catEl.appendChild(linksGridEl);
-    grid.appendChild(catEl);
+    fragment.appendChild(catEl);
   });
+  
+  grid.innerHTML = '';
+  grid.appendChild(fragment);
   
   lucide.createIcons();
   
@@ -2749,9 +2814,13 @@ function initClock() {
   }, 1000);
 }
 
+let cachedTimeEl = null;
+let cachedDateEl = null;
+
 function updateClock() {
-  const timeEl = document.getElementById('clock-time');
-  const dateEl = document.getElementById('clock-date');
+  if (!cachedTimeEl) cachedTimeEl = document.getElementById('clock-time');
+  if (!cachedDateEl) cachedDateEl = document.getElementById('clock-date');
+  if (!cachedTimeEl || !cachedDateEl) return;
   
   const now = new Date();
   
@@ -2761,18 +2830,21 @@ function updateClock() {
   let seconds = now.getSeconds().toString().padStart(2, '0');
   
   if (state.showSeconds) {
-    timeEl.textContent = `${hours}:${minutes}:${seconds}`;
+    cachedTimeEl.textContent = `${hours}:${minutes}:${seconds}`;
   } else {
-    timeEl.textContent = `${hours}:${minutes}`;
+    cachedTimeEl.textContent = `${hours}:${minutes}`;
   }
   
   // Format Date (Dutch language options)
   const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
-  dateEl.textContent = now.toLocaleDateString('nl-NL', options);
+  cachedDateEl.textContent = now.toLocaleDateString('nl-NL', options);
 }
 
+let cachedGreetingEl = null;
+
 function updateGreeting() {
-  const greetingEl = document.getElementById('greeting');
+  if (!cachedGreetingEl) cachedGreetingEl = document.getElementById('greeting');
+  if (!cachedGreetingEl) return;
   const hour = new Date().getHours();
   let greetWord = "Goededag";
   
@@ -2787,9 +2859,9 @@ function updateGreeting() {
   }
   
   if (state.userName) {
-    greetingEl.textContent = `${greetWord}, ${state.userName}`;
+    cachedGreetingEl.textContent = `${greetWord}, ${state.userName}`;
   } else {
-    greetingEl.textContent = greetWord;
+    cachedGreetingEl.textContent = greetWord;
   }
 }
 
@@ -2817,11 +2889,24 @@ function initSearch() {
       }
     }
     
-    // Toggle helper overlay showing shortcut options when user starts typing '@'
+    // Toggle helper overlay showing shortcut options or suggestions
+    const shortcutsArea = document.getElementById('search-shortcuts-area');
+    const suggestionsArea = document.getElementById('search-suggestions-area');
+    
     if (value === '@') {
+      shortcutsArea.classList.remove('hidden');
+      suggestionsArea.classList.add('hidden');
       helper.classList.remove('hidden');
-    } else if (!value.startsWith('@') || value === '') {
+      clearTimeout(suggestTimeout);
+    } else if (value.trim() !== '' && !value.startsWith('@')) {
+      shortcutsArea.classList.add('hidden');
+      helper.classList.remove('hidden');
+      fetchSuggestionsDebounced(value);
+    } else {
       helper.classList.add('hidden');
+      shortcutsArea.classList.add('hidden');
+      suggestionsArea.classList.add('hidden');
+      clearTimeout(suggestTimeout);
     }
     
     // Toggle X clear button
@@ -2850,6 +2935,13 @@ function initSearch() {
     // Handle Enter to launch search actions
     if (e.key === 'Enter') {
       performSearch(searchInput.value);
+      helper.classList.add('hidden');
+    }
+    
+    // Handle Escape to close helper dropdown
+    if (e.key === 'Escape') {
+      helper.classList.add('hidden');
+      searchInput.blur();
     }
     
     // Handle ArrowDown and ArrowUp for navigating filtered bookmarks
@@ -2886,8 +2978,18 @@ function initSearch() {
   
   // Toggle helper on focus
   searchInput.addEventListener('focus', () => {
-    if (searchInput.value === '@') {
+    const value = searchInput.value;
+    const shortcutsArea = document.getElementById('search-shortcuts-area');
+    const suggestionsArea = document.getElementById('search-suggestions-area');
+    
+    if (value === '@') {
+      shortcutsArea.classList.remove('hidden');
+      suggestionsArea.classList.add('hidden');
       helper.classList.remove('hidden');
+    } else if (value.trim() !== '' && !value.startsWith('@')) {
+      shortcutsArea.classList.add('hidden');
+      helper.classList.remove('hidden');
+      fetchSuggestionsDebounced(value);
     }
   });
   
@@ -2917,6 +3019,11 @@ function initSearch() {
     deactivateSearchEngine();
     clearBtn.classList.add('hidden');
     helper.classList.add('hidden');
+    const shortcutsArea = document.getElementById('search-shortcuts-area');
+    const suggestionsArea = document.getElementById('search-suggestions-area');
+    if (shortcutsArea) shortcutsArea.classList.add('hidden');
+    if (suggestionsArea) suggestionsArea.classList.add('hidden');
+    clearTimeout(suggestTimeout);
     filterBookmarks('');
     searchInput.focus();
   });
@@ -2994,6 +3101,8 @@ function performSearch(query) {
 }
 
 // Filter layout cards by keywords
+let cachedNoResultsMsg = null;
+
 function filterBookmarks(searchText) {
   searchText = searchText.trim().toLowerCase();
   
@@ -3001,7 +3110,7 @@ function filterBookmarks(searchText) {
   const terms = searchText.split(/\s+/).filter(t => t !== '');
   
   const categories = document.querySelectorAll('.bookmarks-category');
-  const noResultsMsg = document.getElementById('no-results-msg');
+  if (!cachedNoResultsMsg) cachedNoResultsMsg = document.getElementById('no-results-msg');
   let hasAnyVisibleCategory = false;
   
   // Reset active-match classes on all cards
@@ -3057,9 +3166,9 @@ function filterBookmarks(searchText) {
   
   // Toggle no results error message
   if (!hasAnyVisibleCategory && terms.length > 0) {
-    noResultsMsg.classList.remove('hidden');
+    if (cachedNoResultsMsg) cachedNoResultsMsg.classList.remove('hidden');
   } else {
-    noResultsMsg.classList.add('hidden');
+    if (cachedNoResultsMsg) cachedNoResultsMsg.classList.add('hidden');
   }
 }
 
@@ -3600,10 +3709,25 @@ function initModalListeners() {
   
   // Export backup JSON
   document.getElementById('btn-export-data').addEventListener('click', () => {
+    const now = new Date();
+    const pad = (num) => String(num).padStart(2, '0');
+    const timestamp = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}_${pad(now.getHours())}${pad(now.getMinutes())}`;
+    const defaultFilename = `launchpad_backup_${timestamp}.json`;
+    
+    const userFilename = prompt("Voer de bestandsnaam voor de back-up in:", defaultFilename);
+    
+    // Annuleren indrukken stopt de export
+    if (userFilename === null) {
+      return;
+    }
+    
+    const filename = userFilename.trim() || defaultFilename;
+    const finalFilename = filename.endsWith('.json') ? filename : `${filename}.json`;
+    
     const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state.bookmarks, null, 2));
     const downloadAnchor = document.createElement('a');
     downloadAnchor.setAttribute("href", dataStr);
-    downloadAnchor.setAttribute("download", `launchpad_backup_${new Date().toISOString().slice(0,10)}.json`);
+    downloadAnchor.setAttribute("download", finalFilename);
     document.body.appendChild(downloadAnchor);
     downloadAnchor.click();
     downloadAnchor.remove();
@@ -4014,8 +4138,21 @@ function animateCategoryLayoutShift(action) {
 }
 
 // FLIP layout shift animation helper for smooth reordering
-function animateLayoutShift(action) {
-  const cards = document.querySelectorAll('.bookmark-card');
+function animateLayoutShift(action, sourceGrid, targetGrid) {
+  let cards = [];
+  if (sourceGrid || targetGrid) {
+    const uniqueCards = new Set();
+    if (sourceGrid) {
+      sourceGrid.querySelectorAll('.bookmark-card').forEach(c => uniqueCards.add(c));
+    }
+    if (targetGrid) {
+      targetGrid.querySelectorAll('.bookmark-card').forEach(c => uniqueCards.add(c));
+    }
+    cards = Array.from(uniqueCards);
+  } else {
+    cards = Array.from(document.querySelectorAll('.bookmark-card'));
+  }
+  
   const rects = new Map();
   
   // 1. Record First positions (current visual locations, potentially animating)
@@ -4213,7 +4350,7 @@ function initDragAndDrop() {
         if (draggedCard !== referenceNode && draggedCard.nextSibling !== referenceNode) {
           animateLayoutShift(() => {
             targetGrid.insertBefore(draggedCard, referenceNode);
-          });
+          }, draggedCard.parentElement, targetGrid);
         }
       } else {
         const addCard = targetGrid.querySelector('.add-bookmark-card');
@@ -4221,13 +4358,13 @@ function initDragAndDrop() {
           if (draggedCard.nextSibling !== addCard) {
             animateLayoutShift(() => {
               targetGrid.insertBefore(draggedCard, addCard);
-            });
+            }, draggedCard.parentElement, targetGrid);
           }
         } else {
           if (draggedCard.parentElement !== targetGrid || draggedCard.nextSibling !== null) {
             animateLayoutShift(() => {
               targetGrid.appendChild(draggedCard);
-            });
+            }, draggedCard.parentElement, targetGrid);
           }
         }
       }
@@ -4285,6 +4422,114 @@ function sortCategoryAlphabetically(e, catId) {
     saveBookmarksState();
     renderBookmarks();
   }
+}
+
+// -------------------------------------------------------------
+// Search engine suggestions (CORS bypass via JSONP)
+// -------------------------------------------------------------
+let suggestTimeout = null;
+let suggestRequestCounter = 0;
+let lastProcessedRequest = 0;
+
+function fetchSuggestionsDebounced(query) {
+  clearTimeout(suggestTimeout);
+  if (!query || query.trim() === '') {
+    const listEl = document.getElementById('search-suggestions-list');
+    if (listEl) listEl.innerHTML = '';
+    const suggestArea = document.getElementById('search-suggestions-area');
+    if (suggestArea) suggestArea.classList.add('hidden');
+    return;
+  }
+  suggestTimeout = setTimeout(() => {
+    fetchSearchSuggestions(query);
+  }, 150);
+}
+
+function fetchSearchSuggestions(query) {
+  const activeEngineKey = state.activeSearchEngine || state.defaultEngine || 'google';
+  
+  // Remove previous script tags to prevent DOM bloat
+  const oldScript = document.getElementById('search-suggest-script');
+  if (oldScript) {
+    oldScript.remove();
+  }
+  
+  const currentRequestNum = ++suggestRequestCounter;
+  
+  // Clean up any older dynamic callbacks to avoid memory leaks
+  for (let i = 1; i < currentRequestNum; i++) {
+    delete window[`handleSearchSuggestions_${i}`];
+  }
+  
+  // Define temporary dynamic callback on window
+  window[`handleSearchSuggestions_${currentRequestNum}`] = function(data) {
+    if (currentRequestNum >= lastProcessedRequest) {
+      lastProcessedRequest = currentRequestNum;
+      const suggestions = data[1] || [];
+      renderSearchSuggestions(suggestions);
+    }
+    delete window[`handleSearchSuggestions_${currentRequestNum}`];
+    const script = document.getElementById('search-suggest-script');
+    if (script) {
+      script.remove();
+    }
+  };
+  
+  const script = document.createElement('script');
+  script.id = 'search-suggest-script';
+  
+  const callbackName = `handleSearchSuggestions_${currentRequestNum}`;
+  
+  if (activeEngineKey === 'wikipedia') {
+    script.src = `https://nl.wikipedia.org/w/api.php?action=opensearch&search=${encodeURIComponent(query)}&limit=8&namespace=0&format=json&callback=${callbackName}`;
+  } else if (activeEngineKey === 'youtube') {
+    script.src = `https://suggestqueries.google.com/complete/search?client=youtube&q=${encodeURIComponent(query)}&callback=${callbackName}`;
+  } else {
+    // Default to Google suggest for google, bing, duckduckgo
+    script.src = `https://suggestqueries.google.com/complete/search?client=chrome&q=${encodeURIComponent(query)}&callback=${callbackName}`;
+  }
+  
+  document.body.appendChild(script);
+}
+
+function renderSearchSuggestions(suggestions) {
+  const searchInput = document.getElementById('search-input');
+  if (searchInput && searchInput.value.trim() === '') {
+    const suggestArea = document.getElementById('search-suggestions-area');
+    if (suggestArea) suggestArea.classList.add('hidden');
+    return;
+  }
+  const listEl = document.getElementById('search-suggestions-list');
+  const suggestArea = document.getElementById('search-suggestions-area');
+  if (!listEl || !suggestArea) return;
+  
+  listEl.innerHTML = '';
+  
+  if (suggestions.length === 0) {
+    suggestArea.classList.add('hidden');
+    return;
+  }
+  
+  suggestArea.classList.remove('hidden');
+  
+  // Display max 4 suggestions for a clean look
+  suggestions.slice(0, 4).forEach(suggestion => {
+    const item = document.createElement('div');
+    item.className = 'suggestion-item';
+    item.innerHTML = `
+      <i data-lucide="search"></i>
+      <span>${escapeHTML(suggestion)}</span>
+    `;
+    item.addEventListener('click', () => {
+      const searchInput = document.getElementById('search-input');
+      searchInput.value = suggestion;
+      performSearch(suggestion);
+      document.getElementById('search-helper').classList.add('hidden');
+    });
+    listEl.appendChild(item);
+  });
+  
+  lucide.createIcons();
 }
 
 </script>
