@@ -295,20 +295,20 @@ body {
 .app-container {
   width: 100%;
   max-width: 1200px;
-  padding: 24px 24px 80px 24px;
+  padding: 390px 24px 80px 24px; /* Increased top padding to accommodate the 340px centered hero header without overlap */
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
+  transition: padding-top 0.35s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* Top Action Bar */
-.top-bar {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
+@media (max-width: 900px) {
+  .app-container {
+    padding-top: 390px; /* Still keep hero padding here since screens 769px-900px use the hero header */
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 }
 
 /* Weather Widget Wrapper */
@@ -396,8 +396,10 @@ body.light-theme .weather-widget:hover {
 .weather-forecast-panel {
   position: absolute;
   top: calc(100% + 8px);
-  left: 0;
+  right: 0; /* Align right edge with widget */
+  left: auto;
   width: 410px;
+  max-width: 90vw; /* Constrain size on mobile viewports */
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: 16px;
@@ -409,7 +411,7 @@ body.light-theme .weather-widget:hover {
   flex-direction: column;
   gap: 16px;
   user-select: none;
-  transform-origin: top left;
+  transform-origin: top right; /* Expand animation from top right corner */
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   opacity: 1;
   transform: scale(1) translateY(0);
@@ -774,56 +776,423 @@ body.light-theme .action-btn:hover {
   color: #fff;
 }
 
-/* Hero Section (Clock & Greeting) */
-.hero {
-  text-align: center;
-  margin-bottom: 36px;
+/* Fixed Top Navbar with Glassmorphism */
+.top-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  
+  /* Scrolled/collapsed default styles */
+  height: 80px;
+  background: rgba(8, 12, 20, 0.72);
+  border-bottom: 1px solid var(--card-border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 14px 32px;
+  box-shadow: var(--shadow-sm);
+  
+  /* Smooth collapsible transitions */
+  transition: 
+    height 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+    background-color 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    backdrop-filter 0.35s ease;
+}
+
+body.light-theme .top-navbar {
+  background: rgba(244, 246, 250, 0.72);
+  border-bottom-color: rgba(0, 0, 0, 0.05);
+}
+
+.navbar-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  flex: 1 1 0%;
+  min-width: 150px;
+  transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.navbar-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 2 1 0%;
+  max-width: 500px;
+  width: 100%;
+  z-index: 10;
+  transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+  flex: 1 1 0%;
+  min-width: 280px;
+  transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.nav-greeting-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
   user-select: none;
 }
 
-.clock-container {
-  margin-bottom: 8px;
-}
-
-.clock-time {
-  font-family: var(--font-mono);
-  font-size: 4.6rem;
-  font-weight: 500;
-  letter-spacing: 2px;
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
-  background: linear-gradient(180deg, var(--text-primary) 30%, var(--text-secondary) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 10px rgba(var(--accent-rgb), 0.15)) drop-shadow(0 4px 12px rgba(0,0,0,0.4));
-}
-
-.clock-date {
-  font-size: 1rem;
-  font-weight: 500;
-  text-transform: capitalize;
-  color: var(--accent-color);
-  letter-spacing: 0.5px;
-  margin-top: 4px;
-}
-
-.greeting {
+.nav-greeting {
   font-family: var(--font-display);
-  font-size: 2.2rem;
-  font-weight: 600;
-  margin-top: 8px;
+  font-weight: 700;
   color: var(--text-primary);
-  letter-spacing: -0.5px;
+  line-height: 1.2;
+  transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+  
+  /* Collapsed state default */
+  font-size: 1.15rem;
+  margin-top: 0;
+  letter-spacing: -0.2px;
 }
 
-/* Search Section */
-.search-section {
-  width: 100%;
-  max-width: 650px;
-  margin-bottom: 50px;
-  z-index: 10;
-  position: relative;
+.nav-clock-container {
+  display: flex;
+  transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+  
+  /* Collapsed state default */
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
 }
+
+.nav-clock-time {
+  font-family: var(--font-mono);
+  transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+  
+  /* Collapsed state default */
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent-color);
+}
+
+.nav-clock-date {
+  transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+  text-transform: capitalize;
+  
+  /* Collapsed state default */
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+/* Large screen at-top overrides: large hero centered layout */
+@media (min-width: 769px) {
+  .top-navbar.at-top {
+    position: absolute; /* Set position to absolute to scroll naturally with the page */
+    height: 340px;
+    background: transparent;
+    border-bottom-color: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+  }
+  
+  body.light-theme .top-navbar.at-top {
+    background: transparent;
+    border-bottom-color: transparent;
+    box-shadow: none;
+  }
+  
+  .top-navbar.at-top .navbar-left {
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 1200px;
+    flex: none;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .top-navbar.at-top .nav-greeting {
+    font-size: 2.2rem;
+    margin-top: 8px;
+    letter-spacing: -0.5px;
+  }
+  
+  .top-navbar.at-top .nav-clock-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    margin-top: 8px;
+    font-size: 1.05rem;
+  }
+  
+  .top-navbar.at-top .nav-clock-time {
+    font-size: 4.4rem;
+    letter-spacing: 2px;
+    line-height: 1;
+    background: linear-gradient(180deg, var(--text-primary) 30%, var(--text-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 10px rgba(var(--accent-rgb), 0.15)) drop-shadow(0 4px 12px rgba(0,0,0,0.4));
+  }
+  
+  body.light-theme .top-navbar.at-top .nav-clock-time {
+    background: linear-gradient(180deg, #1f1f1f 30%, #4b5563 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.06));
+  }
+  
+  .top-navbar.at-top .nav-clock-date {
+    font-size: 1.05rem;
+    color: var(--accent-color);
+    letter-spacing: 0.5px;
+    font-weight: 500;
+    margin-top: 4px;
+  }
+  
+  .top-navbar.at-top .navbar-center {
+    position: absolute;
+    top: 240px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 650px;
+    flex: none;
+    padding: 0 24px;
+  }
+  
+  .top-navbar.at-top .navbar-right {
+    position: absolute;
+    top: 24px;
+    left: 32px;
+    right: 32px;
+    transform: none;
+    justify-content: space-between;
+    width: auto;
+    flex: none;
+  }
+
+  .top-navbar.at-top .weather-forecast-panel {
+    left: 0;
+    right: auto;
+    transform-origin: top left;
+  }
+}
+
+/* Tablet & Mobile layout: 2 structured rows (always active on <= 768px screen sizes) */
+@media (max-width: 768px) {
+  .app-container {
+    padding-top: 0; /* Reset container padding-top on mobile since navbar is sticky and in-flow */
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .top-navbar {
+    position: sticky; /* Sticky positioning naturally pushes bookmarks down and handles wrapping heights */
+    height: auto;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-row-gap: 16px;
+    grid-column-gap: 12px;
+    padding: 16px 20px;
+    margin-left: -20px; /* Compensate for .app-container padding-left */
+    margin-right: -20px; /* Compensate for .app-container padding-right */
+    margin-bottom: 36px; /* Push bookmarks down by exactly 36px, matching the gap between categories */
+    width: calc(100% + 40px); /* Extend to full viewport width */
+    background: rgba(8, 12, 20, 0.65); /* Softer dark glass background */
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Extremely subtle border */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+  }
+
+  body.light-theme .top-navbar {
+    background: rgba(244, 246, 250, 0.65); /* Softer light glass background */
+    border-bottom-color: rgba(0, 0, 0, 0.04);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02);
+  }
+  
+  .navbar-left {
+    position: static;
+    transform: none;
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 0; /* Reset desktop min-width */
+  }
+  
+  .navbar-right {
+    position: static;
+    transform: none;
+    grid-column: 2;
+    grid-row: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    min-width: 0; /* Reset desktop min-width */
+  }
+
+  .navbar-center {
+    position: static;
+    transform: none;
+    grid-column: 1 / span 2;
+    grid-row: 2;
+    display: flex;
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+  }
+  
+  .nav-greeting {
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+  
+  .nav-clock-container {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 3px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .nav-clock-time {
+    font-weight: 500;
+    color: var(--accent-color);
+  }
+
+  /* Compact button styling on mobile */
+  #btn-edit-mode span {
+    display: none; /* Hide Edit mode text to save horizontal space */
+  }
+  
+  #btn-edit-mode,
+  #btn-theme-toggle,
+  #btn-settings {
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.04);
+  }
+
+  body.light-theme #btn-edit-mode,
+  body.light-theme #btn-theme-toggle,
+  body.light-theme #btn-settings {
+    background: rgba(0, 0, 0, 0.02);
+    border-color: rgba(0, 0, 0, 0.03);
+  }
+  
+  #btn-edit-mode {
+    border-radius: 50%;
+    padding: 0;
+    justify-content: center;
+  }
+
+  /* Compact weather styling on mobile */
+  .weather-wrapper {
+    position: static;
+  }
+
+  .weather-widget {
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 0.85rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.04);
+  }
+
+  body.light-theme .weather-widget {
+    background: rgba(0, 0, 0, 0.02);
+    border-color: rgba(0, 0, 0, 0.03);
+  }
+
+  .weather-desc {
+    display: none; /* Hide weather description text to save horizontal space */
+  }
+  
+  .weather-info {
+    justify-content: center;
+  }
+
+  /* More compact search input wrapper on mobile */
+  .search-input-wrapper {
+    height: 48px;
+    border-radius: 24px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.01);
+  }
+
+  /* Mobile weather forecast panel adjustments */
+  .weather-forecast-panel {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    right: auto;
+    width: calc(100% - 32px);
+    max-width: 410px;
+    padding: 14px;
+    gap: 12px;
+    transform: translateX(-50%) scale(1) translateY(0);
+    transform-origin: top center;
+  }
+  
+  .weather-forecast-panel.hidden {
+    transform: translateX(-50%) scale(0.9) translateY(-10px);
+  }
+  
+  .forecast-day-row {
+    padding: 10px 12px;
+    gap: 10px;
+  }
+  
+  .forecast-day-name {
+    width: 85px; /* Reduce width to fit smaller screens */
+    font-size: 0.82rem;
+  }
+
+  .forecast-day-desc {
+    font-size: 0.78rem;
+  }
+
+  .forecast-day-temps {
+    min-width: 95px;
+  }
+
+  .forecast-period {
+    grid-template-columns: 16px 1fr 20px 42px 52px 20px;
+    font-size: 0.72rem;
+  }
+
+  .forecast-period-weather-icon,
+  .forecast-period svg.forecast-period-weather-icon {
+    width: 14px !important;
+    height: 14px !important;
+  }
+
+  .coat-indicator i,
+  .coat-indicator svg {
+    width: 11px !important;
+    height: 11px !important;
+  }
+}
+
+/* Search Section styles removed, integrated to top-navbar */
 
 .search-container {
   width: 100%;
@@ -976,23 +1345,42 @@ body.light-theme .action-btn:hover {
 /* Search helper dropdown (displays above the search bar) */
 .search-helper {
   position: absolute;
-  bottom: calc(100% + 8px);
-  top: auto;
+  top: calc(100% + 12px);
+  bottom: auto;
   left: 0;
   width: 100%;
-  background: rgba(15, 23, 42, 0.95);
+  background: rgba(15, 23, 42, 0.92);
   border: 1px solid var(--input-border);
-  border-radius: 16px;
-  box-shadow: 0 -10px 30px -5px rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(20px);
-  padding: 14px;
+  border-radius: 20px;
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(25px);
+  padding: 16px;
   z-index: 50;
-  animation: fade-up-helper 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  
+  /* GPU-Accelerated Smooth Transition */
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+  visibility: visible;
+  transition: 
+    opacity 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
+    visibility 0.22s;
 }
 
-@keyframes fade-up-helper {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Override .hidden display:none to allow exit animations */
+.search-helper.hidden {
+  display: block !important;
+  opacity: 0;
+  transform: translateY(-15px) scale(0.97);
+  pointer-events: none;
+  visibility: hidden;
+}
+
+/* Light theme overrides for search helper transition */
+body.light-theme .search-helper {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
 .helper-header {
@@ -1058,6 +1446,7 @@ body.light-theme .action-btn:hover {
   font-size: 0.92rem;
   transition: all 0.2s ease;
   user-select: none;
+  animation: slide-in-suggest 0.24s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
 .suggestion-item i,
@@ -1081,6 +1470,52 @@ body.light-theme .action-btn:hover {
 
 body.light-theme .suggestion-item:hover {
   background: rgba(0, 0, 0, 0.04);
+}
+
+/* No Suggestions Found styles */
+.no-suggestions-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  user-select: none;
+  animation: slide-in-suggest 0.24s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes slide-in-suggest {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.no-suggestions-item i,
+.no-suggestions-item svg {
+  width: 15px;
+  height: 15px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.no-suggestions-item kbd {
+  font-family: var(--font-mono);
+  background: rgba(255, 255, 255, 0.10);
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  color: var(--text-primary);
+  margin: 0 2px;
+}
+
+body.light-theme .no-suggestions-item kbd {
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--text-primary);
 }
 
 /* Edit Mode Controls Bar */
@@ -1953,87 +2388,91 @@ body.edit-mode-active .bookmark-card:not(.add-bookmark-card):active {
   </div>
 
   <div class="app-container">
-    <!-- Top Action Bar -->
-    <header class="top-bar">
-      <!-- Weather Widget Wrapper -->
-      <div class="weather-wrapper">
-        <div id="weather-widget" class="weather-widget loading" title="Klik voor voorspelling, houd 2s ingedrukt om te verversen">
-          <i data-lucide="loader-2" class="weather-loading-icon"></i>
-          <i data-lucide="cloud-sun" class="weather-icon"></i>
-          <div class="weather-info">
-            <span class="weather-temp">--°C</span>
-            <span class="weather-desc">Locatie zoeken...</span>
+    <!-- Fixed Top Navbar with Glassmorphism -->
+    <header class="top-navbar at-top">
+      <div class="navbar-left">
+        <!-- Greetings & Clock Widget -->
+        <div class="nav-greeting-container">
+          <h1 id="greeting" class="nav-greeting">Goededag</h1>
+          <div class="nav-clock-container">
+            <span id="clock-time" class="nav-clock-time">00:00:00</span>
+            <span id="clock-date" class="nav-clock-date">laden...</span>
           </div>
         </div>
-        <div id="weather-forecast-panel" class="weather-forecast-panel hidden"></div>
       </div>
-      
-      <!-- Action buttons -->
-      <div class="top-actions">
-        <button id="btn-theme-toggle" class="action-btn" title="Thema wisselen">
-          <i data-lucide="sun"></i>
-        </button>
-        <button id="btn-edit-mode" class="action-btn" title="Bewerk-modus inschakelen">
-          <i data-lucide="edit-3"></i>
-          <span>Bewerken</span>
-        </button>
-        <button id="btn-settings" class="action-btn" title="Instellingen">
-          <i data-lucide="settings"></i>
-        </button>
-      </div>
-    </header>
 
-    <!-- Hero Header: Clock and Greeting -->
-    <section class="hero">
-      <div class="clock-container">
-        <div id="clock-time" class="clock-time">00:00:00</div>
-        <div id="clock-date" class="clock-date">laden...</div>
-      </div>
-      <h1 id="greeting" class="greeting">Goededag</h1>
-    </section>
-
-    <!-- Search Area -->
-    <section class="search-section">
-      <div class="search-container">
-        <div class="search-input-wrapper">
-          <div id="search-engine-badge" class="search-engine-badge hidden">
-            <i data-lucide="google" class="badge-icon"></i>
-            <span class="badge-text">Google</span>
+      <div class="navbar-center">
+        <!-- Search Area -->
+        <div class="search-container">
+          <div class="search-input-wrapper">
+            <div id="search-engine-badge" class="search-engine-badge hidden">
+              <i data-lucide="google" class="badge-icon"></i>
+              <span class="badge-text">Google</span>
+            </div>
+            <i data-lucide="search" class="search-icon"></i>
+            <input 
+              type="text" 
+              id="search-input" 
+              placeholder="Zoek of typ @g voor Google, @y voor YouTube..." 
+              autocomplete="off" 
+              spellcheck="false"
+              autofocus
+            >
+            <button id="search-clear-btn" class="search-clear-btn hidden" title="Zoekopdracht wissen">
+              <i data-lucide="x"></i>
+            </button>
           </div>
-          <i data-lucide="search" class="search-icon"></i>
-          <input 
-            type="text" 
-            id="search-input" 
-            placeholder="Zoek of typ @g voor Google, @y voor YouTube..." 
-            autocomplete="off" 
-            spellcheck="false"
-            autofocus
-          >
-          <button id="search-clear-btn" class="search-clear-btn hidden" title="Zoekopdracht wissen">
-            <i data-lucide="x"></i>
-          </button>
+          
+          <!-- Search Help dropdown hints -->
+          <div id="search-helper" class="search-helper hidden">
+            <div id="search-shortcuts-area">
+              <div class="helper-header">Zoeksnelkoppelingen:</div>
+              <div class="helper-shortcuts">
+                <div class="shortcut-tip" data-prefix="@g"><kbd>@g</kbd> Google</div>
+                <div class="shortcut-tip" data-prefix="@y"><kbd>@y</kbd> YouTube</div>
+                <div class="shortcut-tip" data-prefix="@w"><kbd>@w</kbd> Wikipedia</div>
+                <div class="shortcut-tip" data-prefix="@d"><kbd>@d</kbd> DuckDuckGo</div>
+              </div>
+            </div>
+            <div id="search-suggestions-area" class="hidden">
+              <div class="helper-header">Zoeksuggesties:</div>
+              <div id="search-suggestions-list" class="suggestions-list">
+                <!-- Rendered dynamically -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="navbar-right">
+        <!-- Weather Widget Wrapper -->
+        <div class="weather-wrapper">
+          <div id="weather-widget" class="weather-widget loading" title="Klik voor voorspelling, houd 2s ingedrukt om te verversen">
+            <i data-lucide="loader-2" class="weather-loading-icon"></i>
+            <i data-lucide="cloud-sun" class="weather-icon"></i>
+            <div class="weather-info">
+              <span class="weather-temp">--°C</span>
+              <span class="weather-desc">Locatie zoeken...</span>
+            </div>
+          </div>
+          <div id="weather-forecast-panel" class="weather-forecast-panel hidden"></div>
         </div>
         
-        <!-- Search Help dropdown hints -->
-        <div id="search-helper" class="search-helper hidden">
-          <div id="search-shortcuts-area">
-            <div class="helper-header">Zoeksnelkoppelingen:</div>
-            <div class="helper-shortcuts">
-              <div class="shortcut-tip" data-prefix="@g"><kbd>@g</kbd> Google</div>
-              <div class="shortcut-tip" data-prefix="@y"><kbd>@y</kbd> YouTube</div>
-              <div class="shortcut-tip" data-prefix="@w"><kbd>@w</kbd> Wikipedia</div>
-              <div class="shortcut-tip" data-prefix="@d"><kbd>@d</kbd> DuckDuckGo</div>
-            </div>
-          </div>
-          <div id="search-suggestions-area" class="hidden">
-            <div class="helper-header">Zoeksuggesties:</div>
-            <div id="search-suggestions-list" class="suggestions-list">
-              <!-- Rendered dynamically -->
-            </div>
-          </div>
+        <!-- Action buttons -->
+        <div class="top-actions">
+          <button id="btn-theme-toggle" class="action-btn" title="Thema wisselen">
+            <i data-lucide="sun"></i>
+          </button>
+          <button id="btn-edit-mode" class="action-btn" title="Bewerk-modus inschakelen">
+            <i data-lucide="edit-3"></i>
+            <span>Bewerken</span>
+          </button>
+          <button id="btn-settings" class="action-btn" title="Instellingen">
+            <i data-lucide="settings"></i>
+          </button>
         </div>
       </div>
-    </section>
+    </header>
 
     <!-- Bookmarks Container -->
     <main class="bookmarks-section">
@@ -2092,6 +2531,14 @@ body.edit-mode-active .bookmark-card:not(.add-bookmark-card):active {
               <input type="checkbox" id="settings-show-seconds" checked>
               Laat seconden zien op de klok
             </label>
+          </div>
+          <div class="form-group">
+            <label for="settings-search-criteria">Zoek Bladwijzers Op</label>
+            <select id="settings-search-criteria">
+              <option value="both">Beide (Titel en URL)</option>
+              <option value="title">Alleen Titel</option>
+              <option value="url">Alleen URL</option>
+            </select>
           </div>
         </div>
 
@@ -2195,7 +2642,8 @@ let state = {
   showSeconds: true,
   editMode: false,
   activeSearchEngine: null, // 'google', 'youtube', 'wikipedia', 'duckduckgo', 'bing' or null
-  theme: 'dark'
+  theme: 'dark',
+  searchCriteria: 'both'
 };
 
 // Search engine configurations
@@ -2324,6 +2772,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initEditMode();
   initThemeToggle();
   initDragAndDrop();
+  initNavbarScroll();
   
   // Create Initial Lucide Icons
   lucide.createIcons();
@@ -2336,12 +2785,14 @@ function loadSettings() {
   state.userName = localStorage.getItem('lp_userName') || '';
   state.defaultEngine = localStorage.getItem('lp_defaultEngine') || 'google';
   state.showSeconds = localStorage.getItem('lp_showSeconds') !== 'false';
+  state.searchCriteria = localStorage.getItem('lp_searchCriteria') || 'both';
   state.theme = localStorage.getItem('lp_theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
   
   // Populate settings fields in modal
   document.getElementById('settings-user-name').value = state.userName;
   document.getElementById('settings-default-engine').value = state.defaultEngine;
   document.getElementById('settings-show-seconds').checked = state.showSeconds;
+  document.getElementById('settings-search-criteria').value = state.searchCriteria;
   
   const weatherLoc = localStorage.getItem('lp_weather_location') || '';
   document.getElementById('settings-weather-location').value = weatherLoc;
@@ -2374,7 +2825,7 @@ function applyTheme() {
     toggleBtn.title = "Licht thema inschakelen";
   }
   if (window.lucide) {
-    lucide.createIcons();
+    lucide.createIcons({ root: toggleBtn });
   }
 }
 
@@ -2452,6 +2903,7 @@ function saveSettings() {
   const nameInput = document.getElementById('settings-user-name').value.trim();
   const defaultEngineInput = document.getElementById('settings-default-engine').value;
   const showSecondsInput = document.getElementById('settings-show-seconds').checked;
+  const searchCriteriaInput = document.getElementById('settings-search-criteria').value;
   const locationInput = document.getElementById('settings-weather-location').value.trim();
   
   let proceedToSave = true;
@@ -2492,10 +2944,12 @@ function saveSettings() {
     state.userName = nameInput;
     state.defaultEngine = defaultEngineInput;
     state.showSeconds = showSecondsInput;
+    state.searchCriteria = searchCriteriaInput;
     
     localStorage.setItem('lp_userName', state.userName);
     localStorage.setItem('lp_defaultEngine', state.defaultEngine);
     localStorage.setItem('lp_showSeconds', state.showSeconds);
+    localStorage.setItem('lp_searchCriteria', state.searchCriteria);
     
     // Refresh layout
     updateClock();
@@ -2530,7 +2984,11 @@ function saveBookmarksState() {
 // Extract domain for favicons
 function getDomain(url) {
   try {
-    const parsed = new URL(url);
+    let checkUrl = url.trim();
+    if (!/^https?:\/\//i.test(checkUrl)) {
+      checkUrl = 'https://' + checkUrl;
+    }
+    const parsed = new URL(checkUrl);
     return parsed.hostname;
   } catch (e) {
     return "";
@@ -2578,7 +3036,7 @@ function renderBookmarks() {
     fragment.appendChild(noResults);
     grid.innerHTML = '';
     grid.appendChild(fragment);
-    lucide.createIcons();
+    lucide.createIcons({ root: grid });
     return;
   }
   
@@ -2681,7 +3139,7 @@ function renderBookmarks() {
   grid.innerHTML = '';
   grid.appendChild(fragment);
   
-  lucide.createIcons();
+  lucide.createIcons({ root: grid });
   
   // Re-run filter in case the search bar has text
   filterBookmarks(document.getElementById('search-input').value);
@@ -3044,7 +3502,7 @@ function activateSearchEngine(engineKey) {
   
   searchInput.placeholder = config.placeholder;
   
-  lucide.createIcons();
+  lucide.createIcons({ root: badge });
 }
 
 function deactivateSearchEngine() {
@@ -3129,9 +3587,19 @@ function filterBookmarks(searchText) {
       
       let matches = true;
       if (terms.length > 0) {
+        const criteria = state.searchCriteria || 'both';
         // Loop through terms. All terms must match (AND filter)
         for (const term of terms) {
-          if (!title.includes(term) && !url.includes(term)) {
+          let termMatches = false;
+          if (criteria === 'title') {
+            termMatches = title.includes(term);
+          } else if (criteria === 'url') {
+            termMatches = url.includes(term);
+          } else {
+            termMatches = title.includes(term) || url.includes(term);
+          }
+          
+          if (!termMatches) {
             matches = false;
             break;
           }
@@ -3313,10 +3781,26 @@ function fetchWeather(forceRefresh = false) {
   // Request geolocation
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
-      (position) => {
+      async (position) => {
         const lat = position.coords.latitude;
         const lon = position.coords.longitude;
-        getWeatherData(lat, lon);
+        let cityLabel = "Mijn Locatie";
+        try {
+          const revGeoRes = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=nl`);
+          if (revGeoRes.ok) {
+            const geoData = await revGeoRes.json();
+            const city = geoData.city || geoData.locality || geoData.principalSubdivision;
+            if (city) {
+              cityLabel = city;
+              if (geoData.countryName) {
+                cityLabel += `, ${geoData.countryName}`;
+              }
+            }
+          }
+        } catch (e) {
+          console.warn("Reverse geocoding failed, using fallback label.", e);
+        }
+        getWeatherData(lat, lon, cityLabel);
       },
       (error) => {
         console.warn("Geolocation geweigerd of mislukt. Gebruik standaardlocatie (Amsterdam).");
@@ -3332,7 +3816,9 @@ function fetchWeather(forceRefresh = false) {
 }
 
 function getWeatherData(lat, lon, label = "Mijn Locatie") {
-  const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&hourly=temperature_2m,apparent_temperature,precipitation_probability,weathercode&daily=weathercode,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min&timezone=auto&models=knmi_harmonie_arome_netherlands,best_match`;
+  const isNL = (lat >= 50.0 && lat <= 54.0 && lon >= 3.0 && lon <= 7.5);
+  const modelsParam = isNL ? '&models=knmi_harmonie_arome_netherlands,best_match' : '';
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&hourly=temperature_2m,apparent_temperature,precipitation_probability,weathercode&daily=weathercode,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min&timezone=auto${modelsParam}`;
   const widget = document.getElementById('weather-widget');
   widget.classList.add('loading');
   
@@ -3441,7 +3927,9 @@ function renderWeather(cache) {
   widget.title = `${cache.location || "Mijn Locatie"} - Klik voor voorspelling, houd 2s ingedrukt om te verversen`;
   
   widget.classList.remove('loading');
-  lucide.createIcons();
+  if (window.lucide) {
+    lucide.createIcons({ root: widget });
+  }
   
   // Update the forecast panel
   renderForecast(cache);
@@ -3650,7 +4138,7 @@ function initEditMode() {
     // Re-render bookmarks to apply draggable attributes in DOM
     renderBookmarks();
     
-    lucide.createIcons();
+    lucide.createIcons({ root: editBtn });
   });
 }
 
@@ -3696,6 +4184,7 @@ function initModalListeners() {
       localStorage.removeItem('lp_userName');
       localStorage.removeItem('lp_defaultEngine');
       localStorage.removeItem('lp_showSeconds');
+      localStorage.removeItem('lp_searchCriteria');
       localStorage.removeItem('lp_weather_location');
       localStorage.removeItem('lp_weather_fixed_lat');
       localStorage.removeItem('lp_weather_fixed_lon');
@@ -3808,8 +4297,9 @@ function openAddCategoryModal() {
   document.getElementById('category-id').value = '';
   document.getElementById('category-name').value = '';
   document.getElementById('category-modal-title').innerHTML = '<i data-lucide="folder-plus"></i> Categorie toevoegen';
-  document.getElementById('category-modal').classList.remove('hidden');
-  lucide.createIcons();
+  const modal = document.getElementById('category-modal');
+  modal.classList.remove('hidden');
+  lucide.createIcons({ root: modal });
 }
 
 function openEditCategoryModal(e, catId) {
@@ -3822,8 +4312,9 @@ function openEditCategoryModal(e, catId) {
     document.getElementById('category-id').value = cat.id;
     document.getElementById('category-name').value = cat.name;
     document.getElementById('category-modal-title').innerHTML = '<i data-lucide="edit-2"></i> Categorie bewerken';
-    document.getElementById('category-modal').classList.remove('hidden');
-    lucide.createIcons();
+    const modal = document.getElementById('category-modal');
+    modal.classList.remove('hidden');
+    lucide.createIcons({ root: modal });
   }
 }
 
@@ -3837,8 +4328,9 @@ function openAddBookmarkModal(e, catId) {
   document.getElementById('bookmark-title').value = '';
   document.getElementById('bookmark-url').value = '';
   document.getElementById('bookmark-modal-title').innerHTML = '<i data-lucide="plus-circle"></i> Snelkoppeling toevoegen';
-  document.getElementById('bookmark-modal').classList.remove('hidden');
-  lucide.createIcons();
+  const modal = document.getElementById('bookmark-modal');
+  modal.classList.remove('hidden');
+  lucide.createIcons({ root: modal });
 }
 
 function openEditBookmarkModal(e, catId, bmId) {
@@ -3855,8 +4347,9 @@ function openEditBookmarkModal(e, catId, bmId) {
       document.getElementById('bookmark-title').value = link.title;
       document.getElementById('bookmark-url').value = link.url;
       document.getElementById('bookmark-modal-title').innerHTML = '<i data-lucide="edit-2"></i> Snelkoppeling bewerken';
-      document.getElementById('bookmark-modal').classList.remove('hidden');
-      lucide.createIcons();
+      const modal = document.getElementById('bookmark-modal');
+      modal.classList.remove('hidden');
+      lucide.createIcons({ root: modal });
     }
   }
 }
@@ -4456,9 +4949,14 @@ function fetchSearchSuggestions(query) {
   
   const currentRequestNum = ++suggestRequestCounter;
   
-  // Clean up any older dynamic callbacks to avoid memory leaks
+  // Clean up any older dynamic callbacks by turning them into no-ops to avoid global JS errors on late responses
   for (let i = 1; i < currentRequestNum; i++) {
-    delete window[`handleSearchSuggestions_${i}`];
+    const cbName = `handleSearchSuggestions_${i}`;
+    if (window[cbName]) {
+      window[cbName] = () => {
+        delete window[cbName];
+      };
+    }
   }
   
   // Define temporary dynamic callback on window
@@ -4480,10 +4978,15 @@ function fetchSearchSuggestions(query) {
   
   const callbackName = `handleSearchSuggestions_${currentRequestNum}`;
   
+  script.onerror = function() {
+    delete window[callbackName];
+    script.remove();
+  };
+  
   if (activeEngineKey === 'wikipedia') {
     script.src = `https://nl.wikipedia.org/w/api.php?action=opensearch&search=${encodeURIComponent(query)}&limit=8&namespace=0&format=json&callback=${callbackName}`;
   } else if (activeEngineKey === 'youtube') {
-    script.src = `https://suggestqueries.google.com/complete/search?client=youtube&q=${encodeURIComponent(query)}&callback=${callbackName}`;
+    script.src = `https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=${encodeURIComponent(query)}&callback=${callbackName}`;
   } else {
     // Default to Google suggest for google, bing, duckduckgo
     script.src = `https://suggestqueries.google.com/complete/search?client=chrome&q=${encodeURIComponent(query)}&callback=${callbackName}`;
@@ -4506,16 +5009,27 @@ function renderSearchSuggestions(suggestions) {
   listEl.innerHTML = '';
   
   if (suggestions.length === 0) {
-    suggestArea.classList.add('hidden');
+    suggestArea.classList.remove('hidden');
+    const noSuggestEl = document.createElement('div');
+    noSuggestEl.className = 'no-suggestions-item';
+    noSuggestEl.innerHTML = `
+      <i data-lucide="info"></i>
+      <span>Geen suggesties gevonden. Druk op <kbd>Enter</kbd> om te zoeken.</span>
+    `;
+    listEl.appendChild(noSuggestEl);
+    if (window.lucide) {
+      lucide.createIcons({ root: listEl });
+    }
     return;
   }
   
   suggestArea.classList.remove('hidden');
   
   // Display max 4 suggestions for a clean look
-  suggestions.slice(0, 4).forEach(suggestion => {
+  suggestions.slice(0, 4).forEach((suggestion, index) => {
     const item = document.createElement('div');
     item.className = 'suggestion-item';
+    item.style.animationDelay = `${index * 0.03}s`;
     item.innerHTML = `
       <i data-lucide="search"></i>
       <span>${escapeHTML(suggestion)}</span>
@@ -4529,7 +5043,31 @@ function renderSearchSuggestions(suggestions) {
     listEl.appendChild(item);
   });
   
-  lucide.createIcons();
+  if (window.lucide) {
+    lucide.createIcons({ root: listEl });
+  }
+}
+
+function initNavbarScroll() {
+  const navbar = document.querySelector('.top-navbar');
+  if (!navbar) return;
+  
+  let isAtTop = true;
+  const handleScroll = () => {
+    // Collapse header only after scrolling past 240px (clock scrolled out of view)
+    const shouldBeAtTop = window.scrollY <= 240;
+    if (shouldBeAtTop !== isAtTop) {
+      isAtTop = shouldBeAtTop;
+      if (isAtTop) {
+        navbar.classList.add('at-top');
+      } else {
+        navbar.classList.remove('at-top');
+      }
+    }
+  };
+  
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  handleScroll();
 }
 
 </script>
