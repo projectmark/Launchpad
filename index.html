@@ -83,6 +83,110 @@ body.light-theme {
   --shadow-accent: 0 0 20px rgba(11, 87, 208, 0.15);
 }
 
+/* Catppuccin Mauve theme overrides */
+body.theme-catppuccin-mauve {
+  --bg-primary: #1e1e2e;
+  --text-primary: #cdd6f4;
+  --text-secondary: #a6adc8;
+  --text-muted: #585b70;
+  
+  --accent-color: #cba6f7; /* Catppuccin Mauve */
+  --accent-hover: #f5c2e7; /* Catppuccin Pink */
+  --accent-rgb: 203, 166, 247;
+  
+  --card-bg: rgba(30, 30, 46, 0.45);
+  --card-border: rgba(203, 166, 247, 0.12); /* Subtle mauve border */
+  --card-hover-border: rgba(203, 166, 247, 0.45);
+  --card-hover-shadow: rgba(203, 166, 247, 0.2);
+  
+  --input-bg: rgba(17, 17, 27, 0.65);
+  --input-border: rgba(203, 166, 247, 0.15); /* Subtle mauve border */
+  --input-focus-border: #cba6f7;
+  
+  --btn-secondary-bg: rgba(203, 166, 247, 0.08); /* Mauve-tinted button */
+  --btn-secondary-hover: rgba(203, 166, 247, 0.18);
+  --btn-danger-border: rgba(243, 139, 168, 0.4);
+  --btn-danger-bg: rgba(243, 139, 168, 0.1);
+  --btn-danger-hover: rgba(243, 139, 168, 0.2);
+  
+  --shadow-accent: 0 0 20px rgba(203, 166, 247, 0.3);
+}
+
+/* Catppuccin Mauve Light theme overrides */
+body.theme-catppuccin-mauve.light-theme {
+  --bg-primary: #f5f2fb; /* Beautiful soft pastel lavender/mauve background */
+  --text-primary: #4c4f69;
+  --text-secondary: #6c6f85;
+  --text-muted: #8c8fa1;
+  
+  --accent-color: #8839ef; /* Catppuccin Mauve (Latte) */
+  --accent-hover: #7287fd; /* Catppuccin Lavender (Latte) */
+  --accent-rgb: 136, 57, 239;
+  
+  --card-bg: rgba(255, 255, 255, 0.75); /* Bright white with high opacity for card pop */
+  --card-border: rgba(136, 57, 239, 0.12); /* Subtle mauve border */
+  --card-hover-border: rgba(136, 57, 239, 0.45);
+  --card-hover-shadow: rgba(136, 57, 239, 0.15);
+  
+  --input-bg: rgba(245, 240, 255, 0.9); /* Pale mauve-tinted input bg */
+  --input-border: rgba(136, 57, 239, 0.18); /* Subtle mauve border */
+  --input-focus-border: #8839ef;
+  
+  --btn-secondary-bg: rgba(136, 57, 239, 0.08); /* Mauve-tinted button bg */
+  --btn-secondary-hover: rgba(136, 57, 239, 0.16);
+  --btn-danger-border: rgba(210, 15, 57, 0.3);
+  --btn-danger-bg: rgba(210, 15, 57, 0.05);
+  --btn-danger-hover: rgba(210, 15, 57, 0.1);
+  
+  --shadow-accent: 0 0 20px rgba(136, 57, 239, 0.2);
+}
+
+/* Catppuccin Mauve Search Wrapper overrides */
+body.theme-catppuccin-mauve .search-input-wrapper:hover {
+  background: rgba(30, 30, 46, 0.85);
+  border-color: rgba(203, 166, 247, 0.35);
+}
+body.theme-catppuccin-mauve .search-input-wrapper:focus-within {
+  background: rgba(17, 17, 27, 0.95);
+  border-color: var(--input-focus-border);
+  box-shadow: var(--shadow-accent);
+}
+
+body.theme-catppuccin-mauve.light-theme .search-input-wrapper:hover {
+  background: rgba(245, 240, 255, 0.95);
+  border-color: rgba(136, 57, 239, 0.3);
+}
+body.theme-catppuccin-mauve.light-theme .search-input-wrapper:focus-within {
+  background: #ffffff;
+  border-color: var(--accent-color);
+  box-shadow: var(--shadow-accent);
+}
+
+/* Catppuccin Mauve Blob Gradients */
+body.theme-catppuccin-mauve .blob-1 {
+  background: radial-gradient(circle, #cba6f7 0%, rgba(203, 166, 247, 0) 70%);
+}
+body.theme-catppuccin-mauve .blob-2 {
+  background: radial-gradient(circle, #b4befe 0%, rgba(180, 190, 254, 0) 70%);
+}
+body.theme-catppuccin-mauve .blob-3 {
+  background: radial-gradient(circle, #f5e0dc 0%, rgba(245, 224, 220, 0) 70%);
+}
+
+body.theme-catppuccin-mauve.light-theme .blob-1 {
+  background: radial-gradient(circle, #8839ef 0%, rgba(136, 57, 239, 0) 70%);
+  opacity: 0.35;
+}
+body.theme-catppuccin-mauve.light-theme .blob-2 {
+  background: radial-gradient(circle, #7287fd 0%, rgba(114, 135, 253, 0) 70%);
+  opacity: 0.35;
+}
+body.theme-catppuccin-mauve.light-theme .blob-3 {
+  background: radial-gradient(circle, #dd7878 0%, rgba(221, 120, 120, 0) 70%);
+  opacity: 0.35;
+}
+
+
 /* Light Theme Element Adjustments */
 body.light-theme .blob-1 {
   background: radial-gradient(circle, #a0c2f9 0%, rgba(160, 194, 249, 0) 70%);
@@ -2540,6 +2644,13 @@ body.edit-mode-active .bookmark-card:not(.add-bookmark-card):active {
               <option value="url">Alleen URL</option>
             </select>
           </div>
+          <div class="form-group">
+            <label for="settings-theme-select">Thema</label>
+            <select id="settings-theme-select">
+              <option value="default">Standaard</option>
+              <option value="catppuccin-mauve">Catppuccin Mauve</option>
+            </select>
+          </div>
         </div>
 
         <!-- Section: Weer -->
@@ -2643,6 +2754,7 @@ let state = {
   editMode: false,
   activeSearchEngine: null, // 'google', 'youtube', 'wikipedia', 'duckduckgo', 'bing' or null
   theme: 'dark',
+  themeName: 'default',
   searchCriteria: 'both'
 };
 
@@ -2787,12 +2899,14 @@ function loadSettings() {
   state.showSeconds = localStorage.getItem('lp_showSeconds') !== 'false';
   state.searchCriteria = localStorage.getItem('lp_searchCriteria') || 'both';
   state.theme = localStorage.getItem('lp_theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+  state.themeName = localStorage.getItem('lp_themeName') || 'default';
   
   // Populate settings fields in modal
   document.getElementById('settings-user-name').value = state.userName;
   document.getElementById('settings-default-engine').value = state.defaultEngine;
   document.getElementById('settings-show-seconds').checked = state.showSeconds;
   document.getElementById('settings-search-criteria').value = state.searchCriteria;
+  document.getElementById('settings-theme-select').value = state.themeName;
   
   const weatherLoc = localStorage.getItem('lp_weather_location') || '';
   document.getElementById('settings-weather-location').value = weatherLoc;
@@ -2814,6 +2928,14 @@ function initThemeToggle() {
 function applyTheme() {
   const toggleBtn = document.getElementById('btn-theme-toggle');
   if (!toggleBtn) return;
+  
+  // Remove existing themes first
+  document.body.classList.remove('theme-catppuccin-mauve');
+  
+  // Add selected theme if it is not default
+  if (state.themeName === 'catppuccin-mauve') {
+    document.body.classList.add('theme-catppuccin-mauve');
+  }
   
   if (state.theme === 'light') {
     document.body.classList.add('light-theme');
@@ -2904,6 +3026,7 @@ function saveSettings() {
   const defaultEngineInput = document.getElementById('settings-default-engine').value;
   const showSecondsInput = document.getElementById('settings-show-seconds').checked;
   const searchCriteriaInput = document.getElementById('settings-search-criteria').value;
+  const themeNameInput = document.getElementById('settings-theme-select').value;
   const locationInput = document.getElementById('settings-weather-location').value.trim();
   
   let proceedToSave = true;
@@ -2945,11 +3068,16 @@ function saveSettings() {
     state.defaultEngine = defaultEngineInput;
     state.showSeconds = showSecondsInput;
     state.searchCriteria = searchCriteriaInput;
+    state.themeName = themeNameInput;
     
     localStorage.setItem('lp_userName', state.userName);
     localStorage.setItem('lp_defaultEngine', state.defaultEngine);
     localStorage.setItem('lp_showSeconds', state.showSeconds);
     localStorage.setItem('lp_searchCriteria', state.searchCriteria);
+    localStorage.setItem('lp_themeName', state.themeName);
+    
+    // Refresh theme
+    applyTheme();
     
     // Refresh layout
     updateClock();
@@ -4190,6 +4318,8 @@ function initModalListeners() {
       localStorage.removeItem('lp_weather_fixed_lon');
       localStorage.removeItem('lp_weather_fixed_name');
       localStorage.removeItem('lp_weather_cache');
+      localStorage.removeItem('lp_theme');
+      localStorage.removeItem('lp_themeName');
       loadSettings();
       loadBookmarks();
       closeAllModals();
