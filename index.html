@@ -41,6 +41,9 @@
   --btn-danger-bg: rgba(239, 68, 68, 0.1);
   --btn-danger-hover: rgba(239, 68, 68, 0.2);
   
+  --navbar-bg: rgba(8, 12, 20, 0.72);
+  --navbar-border: rgba(255, 255, 255, 0.08);
+  
   --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
@@ -81,6 +84,9 @@ body.light-theme {
   --shadow-md: 0 8px 30px -4px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 16px 40px -8px rgba(0, 0, 0, 0.1);
   --shadow-accent: 0 0 20px rgba(11, 87, 208, 0.15);
+  
+  --navbar-bg: rgba(244, 246, 250, 0.72);
+  --navbar-border: rgba(0, 0, 0, 0.05);
 }
 
 /* Catppuccin Mauve theme overrides */
@@ -110,6 +116,9 @@ body.theme-catppuccin-mauve {
   --btn-danger-hover: rgba(243, 139, 168, 0.2);
   
   --shadow-accent: 0 0 20px rgba(203, 166, 247, 0.3);
+  
+  --navbar-bg: rgba(30, 30, 46, 0.75);
+  --navbar-border: rgba(203, 166, 247, 0.12);
 }
 
 /* Catppuccin Mauve Light theme overrides */
@@ -139,6 +148,9 @@ body.theme-catppuccin-mauve.light-theme {
   --btn-danger-hover: rgba(210, 15, 57, 0.1);
   
   --shadow-accent: 0 0 20px rgba(136, 57, 239, 0.2);
+  
+  --navbar-bg: rgba(245, 242, 251, 0.75);
+  --navbar-border: rgba(136, 57, 239, 0.12);
 }
 
 /* Catppuccin Mauve Search Wrapper overrides */
@@ -160,6 +172,17 @@ body.theme-catppuccin-mauve.light-theme .search-input-wrapper:focus-within {
   background: #ffffff;
   border-color: var(--accent-color);
   box-shadow: var(--shadow-accent);
+}
+
+/* Catppuccin Component Overrides */
+body.theme-catppuccin-mauve .modal-content {
+  background: rgba(24, 24, 37, 0.95);
+}
+body.theme-catppuccin-mauve .search-helper {
+  background: rgba(24, 24, 37, 0.92);
+}
+body.theme-catppuccin-mauve .weather-widget:hover {
+  background: rgba(30, 30, 46, 0.75);
 }
 
 /* Catppuccin Mauve Blob Gradients */
@@ -430,7 +453,6 @@ body {
   border-radius: 20px;
   background: var(--card-bg);
   border: 1px solid var(--card-border);
-  backdrop-filter: blur(12px);
   font-size: 0.9rem;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -828,7 +850,6 @@ body.light-theme .forecast-footer {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  backdrop-filter: blur(12px);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: var(--shadow-sm);
 }
@@ -893,8 +914,8 @@ body.light-theme .action-btn:hover {
   
   /* Scrolled/collapsed default styles */
   height: 80px;
-  background: rgba(8, 12, 20, 0.72);
-  border-bottom: 1px solid var(--card-border);
+  background: var(--navbar-bg);
+  border-bottom: 1px solid var(--navbar-border);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   padding: 14px 32px;
@@ -910,8 +931,8 @@ body.light-theme .action-btn:hover {
 }
 
 body.light-theme .top-navbar {
-  background: rgba(244, 246, 250, 0.72);
-  border-bottom-color: rgba(0, 0, 0, 0.05);
+  background: var(--navbar-bg);
+  border-bottom-color: var(--navbar-border);
 }
 
 .navbar-left {
@@ -1100,32 +1121,34 @@ body.light-theme .top-navbar {
 @media (max-width: 768px) {
   .app-container {
     padding-top: 0; /* Reset container padding-top on mobile since navbar is sticky and in-flow */
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 16px;
+    padding-right: 16px;
   }
 
   .top-navbar {
     position: sticky; /* Sticky positioning naturally pushes bookmarks down and handles wrapping heights */
+    top: 0; /* Align perfectly at the very top of mobile viewport */
+    z-index: 100;
     height: auto;
     display: grid;
     grid-template-columns: 1fr auto;
     grid-row-gap: 16px;
     grid-column-gap: 12px;
-    padding: 16px 20px;
-    margin-left: -20px; /* Compensate for .app-container padding-left */
-    margin-right: -20px; /* Compensate for .app-container padding-right */
+    padding: 16px 16px; /* Aligned padding */
+    margin-left: -16px; /* Compensate for .app-container padding-left */
+    margin-right: -16px; /* Compensate for .app-container padding-right */
     margin-bottom: 36px; /* Push bookmarks down by exactly 36px, matching the gap between categories */
-    width: calc(100% + 40px); /* Extend to full viewport width */
-    background: rgba(8, 12, 20, 0.65); /* Softer dark glass background */
+    width: calc(100% + 32px); /* Extend to full viewport width */
+    background: var(--navbar-bg); /* Use consistent theme-aware navbar background */
     backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Extremely subtle border */
+    border-bottom: 1px solid var(--navbar-border); /* Consistent border */
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
   }
 
   body.light-theme .top-navbar {
-    background: rgba(244, 246, 250, 0.65); /* Softer light glass background */
-    border-bottom-color: rgba(0, 0, 0, 0.04);
+    background: var(--navbar-bg);
+    border-bottom-color: var(--navbar-border);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02);
   }
   
@@ -1192,15 +1215,6 @@ body.light-theme .top-navbar {
   #btn-settings {
     width: 36px;
     height: 36px;
-    background: rgba(255, 255, 255, 0.03);
-    border-color: rgba(255, 255, 255, 0.04);
-  }
-
-  body.light-theme #btn-edit-mode,
-  body.light-theme #btn-theme-toggle,
-  body.light-theme #btn-settings {
-    background: rgba(0, 0, 0, 0.02);
-    border-color: rgba(0, 0, 0, 0.03);
   }
   
   #btn-edit-mode {
@@ -1218,13 +1232,6 @@ body.light-theme .top-navbar {
     padding: 6px 12px;
     border-radius: 16px;
     font-size: 0.85rem;
-    background: rgba(255, 255, 255, 0.03);
-    border-color: rgba(255, 255, 255, 0.04);
-  }
-
-  body.light-theme .weather-widget {
-    background: rgba(0, 0, 0, 0.02);
-    border-color: rgba(0, 0, 0, 0.03);
   }
 
   .weather-desc {
@@ -1446,11 +1453,11 @@ body.light-theme .top-navbar {
   display: none !important;
 }
 
-/* Search helper dropdown (displays above the search bar) */
+/* Search helper dropdown (displays above the search bar on desktop) */
 .search-helper {
   position: absolute;
-  top: calc(100% + 12px);
-  bottom: auto;
+  bottom: calc(100% + 12px);
+  top: auto;
   left: 0;
   width: 100%;
   background: rgba(15, 23, 42, 0.92);
@@ -1476,7 +1483,7 @@ body.light-theme .top-navbar {
 .search-helper.hidden {
   display: block !important;
   opacity: 0;
-  transform: translateY(-15px) scale(0.97);
+  transform: translateY(15px) scale(0.97);
   pointer-events: none;
   visibility: hidden;
 }
@@ -2447,7 +2454,7 @@ body.edit-mode-active .bookmark-card:not(.add-bookmark-card):active {
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
   .app-container {
-    padding: 16px 16px 60px 16px;
+    padding: 0 16px 60px 16px;
   }
   
   .top-bar {
@@ -2478,6 +2485,15 @@ body.edit-mode-active .bookmark-card:not(.add-bookmark-card):active {
     flex-direction: column;
     gap: 12px;
     align-items: flex-start;
+  }
+
+  .search-helper {
+    top: calc(100% + 12px);
+    bottom: auto;
+  }
+
+  .search-helper.hidden {
+    transform: translateY(-15px) scale(0.97);
   }
 }
 
@@ -5155,8 +5171,8 @@ function renderSearchSuggestions(suggestions) {
   
   suggestArea.classList.remove('hidden');
   
-  // Display max 4 suggestions for a clean look
-  suggestions.slice(0, 4).forEach((suggestion, index) => {
+  // Display max 3 suggestions for a clean look
+  suggestions.slice(0, 3).forEach((suggestion, index) => {
     const item = document.createElement('div');
     item.className = 'suggestion-item';
     item.style.animationDelay = `${index * 0.03}s`;
