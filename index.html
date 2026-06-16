@@ -1715,13 +1715,14 @@ body.light-theme .no-suggestions-item kbd {
   display: flex;
   gap: 6px;
   opacity: 0;
+  pointer-events: none;
   transition: opacity 0.2s ease;
 }
 
-/* Show actions only in edit mode or when hovering header */
-.bookmarks-category:hover .category-actions,
-#edit-controls-bar:not(.hidden) ~ #bookmarks-grid .category-actions {
+/* Show actions only in edit mode */
+body.edit-mode-active .category-actions {
   opacity: 1;
+  pointer-events: auto;
 }
 
 .cat-action-btn {
@@ -2902,6 +2903,19 @@ document.addEventListener('DOMContentLoaded', () => {
   initDragAndDrop();
   initNavbarScroll();
   
+  // Prevent bookmark card navigation during Edit Mode via delegation
+  const grid = document.getElementById('bookmarks-grid');
+  if (grid) {
+    grid.addEventListener('click', (e) => {
+      if (state.editMode) {
+        const card = e.target.closest('.bookmark-card');
+        if (card && card.tagName === 'A') {
+          e.preventDefault();
+        }
+      }
+    });
+  }
+  
   // Create Initial Lucide Icons
   lucide.createIcons();
 });
@@ -3222,7 +3236,6 @@ function renderBookmarks() {
     const linksGridEl = document.createElement('div');
     linksGridEl.className = 'links-grid';
     
-    // Render links
     cat.items.forEach(link => {
       const linkEl = document.createElement('a');
       linkEl.className = 'bookmark-card';
@@ -3234,13 +3247,6 @@ function renderBookmarks() {
       } else {
         linkEl.setAttribute('draggable', 'false');
       }
-      
-      // Prevent navigation in Edit Mode
-      linkEl.addEventListener('click', (e) => {
-        if (state.editMode) {
-          e.preventDefault();
-        }
-      });
       
       const domain = getDomain(link.url);
       const faviconUrl = domain ? `https://www.google.com/s2/favicons?sz=64&domain=${domain}` : '';
@@ -3418,6 +3424,7 @@ function initClock() {
 
 let cachedTimeEl = null;
 let cachedDateEl = null;
+let lastDay = -1;
 
 function updateClock() {
   if (!cachedTimeEl) cachedTimeEl = document.getElementById('clock-time');
@@ -3437,9 +3444,13 @@ function updateClock() {
     cachedTimeEl.textContent = `${hours}:${minutes}`;
   }
   
-  // Format Date (Dutch language options)
-  const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
-  cachedDateEl.textContent = now.toLocaleDateString('nl-NL', options);
+  // Format Date (Dutch language options) - Only update if the day has changed
+  const currentDay = now.getDate();
+  if (currentDay !== lastDay) {
+    lastDay = currentDay;
+    const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+    cachedDateEl.textContent = now.toLocaleDateString('nl-NL', options);
+  }
 }
 
 let cachedGreetingEl = null;
