@@ -180,7 +180,7 @@ body.theme-catppuccin-mauve .modal-content {
   background: rgba(24, 24, 37, 0.95);
 }
 body.theme-catppuccin-mauve .search-helper {
-  background: rgba(24, 24, 37, 0.72);
+  background: var(--card-bg);
 }
 body.theme-catppuccin-mauve .weather-widget:hover {
   background: rgba(30, 30, 46, 0.55);
@@ -249,8 +249,8 @@ body.light-theme .search-input-wrapper:focus-within {
   border-color: var(--accent-color);
 }
 body.light-theme .search-helper {
-  background: rgba(255, 255, 255, 0.61);
-  border-color: rgba(0, 0, 0, 0.08);
+  background: var(--card-bg);
+  border-color: var(--card-border);
   box-shadow: 
     0 -10px 30px -5px rgba(0, 0, 0, 0.08),
     0 -1px 3px rgba(0, 0, 0, 0.03);
@@ -524,8 +524,8 @@ body.light-theme .weather-widget:hover {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: 16px;
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
   box-shadow: var(--shadow-lg);
   padding: 20px;
   z-index: 100;
@@ -550,8 +550,8 @@ body.light-theme .weather-widget:hover {
 body.light-theme .weather-forecast-panel {
   background: rgba(255, 255, 255, 0.36);
   border-color: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
   box-shadow: 
     0 10px 30px -10px rgba(0, 0, 0, 0.1),
     0 1px 3px rgba(0, 0, 0, 0.02);
@@ -943,10 +943,7 @@ body.light-theme .action-btn:hover {
   left: 0;
   width: 100%;
   z-index: 100;
-  background: var(--navbar-bg);
   border-bottom: 1px solid var(--navbar-border);
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
   box-shadow: var(--shadow-sm);
   height: 76px; /* Material You standard top bar height */
   display: flex;
@@ -957,8 +954,22 @@ body.light-theme .action-btn:hover {
   box-sizing: border-box;
 }
 
-body.light-theme .top-navbar {
+.navbar-bg-layer {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
   background: var(--navbar-bg);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.navbar-center-bg-layer {
+  display: none;
+}
+
+body.light-theme .top-navbar {
   border-bottom-color: var(--navbar-border);
 }
 
@@ -1112,15 +1123,11 @@ body.light-theme .top-navbar {
     margin-left: -16px;
     margin-right: -16px;
     margin-bottom: 36px;
-    background: var(--navbar-bg);
-    backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
     border-bottom: 1px solid var(--navbar-border);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
   }
 
   body.light-theme .top-navbar {
-    background: var(--navbar-bg);
     border-bottom-color: var(--navbar-border);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02);
   }
@@ -1154,14 +1161,23 @@ body.light-theme .top-navbar {
     width: 100%;
     max-width: none;
     padding: 10px 16px;
-    background: var(--navbar-bg);
     border-bottom: 1px solid var(--navbar-border);
-    backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
     z-index: -1; /* Slide behind the main navbar */
     transform: translateY(-100%);
     opacity: 0;
+    pointer-events: none;
+  }
+
+  .navbar-center-bg-layer {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background: var(--navbar-bg);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border-radius: inherit;
     pointer-events: none;
   }
 
@@ -1358,7 +1374,8 @@ body.light-theme .top-navbar {
   background: var(--input-bg);
   border: 1px solid var(--input-border);
   box-shadow: var(--shadow-sm);
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
   transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   box-sizing: border-box;
 }
@@ -1497,19 +1514,20 @@ body.light-theme .search-input-wrapper:hover {
   display: none !important;
 }
 
-/* Search helper dropdown (displays above the search bar on desktop) */
+/* Search helper dropdown (displays below the search bar) */
 .search-helper {
   position: absolute;
-  bottom: calc(100% + 12px);
-  top: auto;
+  top: calc(100% + 8px);
+  bottom: auto;
   left: 0;
   width: 100%;
-  background: rgba(15, 23, 42, 0.72);
-  border: 1px solid var(--input-border);
-  border-radius: 20px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
   box-shadow: var(--shadow-lg);
-  backdrop-filter: blur(25px);
-  padding: 16px;
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  padding: 12px 14px;
   z-index: 50;
   
   /* GPU-Accelerated Smooth Transition */
@@ -1527,38 +1545,38 @@ body.light-theme .search-input-wrapper:hover {
 .search-helper.hidden {
   display: block !important;
   opacity: 0;
-  transform: translateY(15px) scale(0.97);
+  transform: translateY(-10px) scale(0.97);
   pointer-events: none;
   visibility: hidden;
 }
 
 /* Light theme overrides for search helper transition */
 body.light-theme .search-helper {
-  background: rgba(255, 255, 255, 0.75);
+  background: var(--card-bg);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
 .helper-header {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   text-transform: uppercase;
   color: var(--text-muted);
   font-weight: 600;
   letter-spacing: 0.5px;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .helper-shortcuts {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
 }
 
 .shortcut-tip {
-  padding: 6px 12px;
+  padding: 4px 10px;
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.05);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 500;
   cursor: pointer;
   color: var(--text-secondary);
@@ -1568,10 +1586,10 @@ body.light-theme .search-helper {
 .shortcut-tip kbd {
   font-family: var(--font-mono);
   background: rgba(255, 255, 255, 0.1);
-  padding: 2px 5px;
+  padding: 1px 4px;
   border-radius: 4px;
   margin-right: 4px;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: var(--text-primary);
 }
 
@@ -1586,19 +1604,19 @@ body.light-theme .search-helper {
 .suggestions-list {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  margin-top: 8px;
+  gap: 2px;
+  margin-top: 6px;
 }
 
 .suggestion-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 14px;
-  border-radius: 10px;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 8px;
   cursor: pointer;
   color: var(--text-secondary);
-  font-size: 0.92rem;
+  font-size: 0.88rem;
   transition: all 0.2s ease;
   user-select: none;
   animation: slide-in-suggest 0.24s cubic-bezier(0.2, 0.8, 0.2, 1) both;
@@ -1606,8 +1624,8 @@ body.light-theme .search-helper {
 
 .suggestion-item i,
 .suggestion-item svg {
-  width: 15px;
-  height: 15px;
+  width: 14px;
+  height: 14px;
   color: var(--text-muted);
   flex-shrink: 0;
   transition: color 0.2s ease;
@@ -1631,10 +1649,10 @@ body.light-theme .suggestion-item:hover {
 .no-suggestions-item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 14px;
+  gap: 8px;
+  padding: 6px 12px;
   color: var(--text-secondary);
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   user-select: none;
   animation: slide-in-suggest 0.24s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
@@ -1652,8 +1670,8 @@ body.light-theme .suggestion-item:hover {
 
 .no-suggestions-item i,
 .no-suggestions-item svg {
-  width: 15px;
-  height: 15px;
+  width: 14px;
+  height: 14px;
   color: var(--text-muted);
   flex-shrink: 0;
 }
@@ -1820,7 +1838,8 @@ body.edit-mode-active .category-actions {
   color: var(--text-primary);
   transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: var(--shadow-sm);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
   user-select: none;
   min-height: 52px;
   will-change: transform, box-shadow;
@@ -2154,7 +2173,8 @@ body.edit-mode-active .bookmark-card:not(.add-bookmark-card):active {
   width: 100%;
   height: 100%;
   background: rgba(3, 7, 18, 0.6);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
   z-index: 100;
   display: flex;
   align-items: center;
@@ -2533,12 +2553,13 @@ body.edit-mode-active .bookmark-card:not(.add-bookmark-card):active {
   }
 
   .search-helper {
-    top: calc(100% + 12px);
+    top: calc(100% + 8px);
     bottom: auto;
+    padding: 10px 12px;
   }
 
   .search-helper.hidden {
-    transform: translateY(-15px) scale(0.97);
+    transform: translateY(-10px) scale(0.97);
   }
 }
 
@@ -2555,6 +2576,7 @@ body.edit-mode-active .bookmark-card:not(.add-bookmark-card):active {
   <div class="app-container">
     <!-- Fixed Top Navbar with Glassmorphism -->
     <header class="top-navbar">
+      <div class="navbar-bg-layer"></div>
       <div class="navbar-left">
         <!-- Greetings & Clock Widget -->
         <div class="nav-greeting-container">
@@ -2567,6 +2589,7 @@ body.edit-mode-active .bookmark-card:not(.add-bookmark-card):active {
       </div>
 
       <div class="navbar-center">
+        <div class="navbar-center-bg-layer"></div>
         <!-- Search Area -->
         <div class="search-container">
           <div class="search-input-wrapper">
