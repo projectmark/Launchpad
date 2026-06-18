@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Launchpad - Een gepersonaliseerde startpagina met handige bladwijzers, actuele weersinformatie en geavanceerde zoekfuncties.">
   <title>Launchpad - By Mark Tapking</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cstyle%3Erect%7Bfill:%23080c14;%7D@media(prefers-color-scheme:dark)%7Brect%7Bfill:%23f8fafc;%7D%7D%3C/style%3E%3Crect x='2' y='2' width='5' height='5' rx='1.5'/%3E%3Crect x='9.5' y='2' width='5' height='5' rx='1.5'/%3E%3Crect x='17' y='2' width='5' height='5' rx='1.5'/%3E%3Crect x='2' y='9.5' width='5' height='5' rx='1.5'/%3E%3Crect x='9.5' y='9.5' width='5' height='5' rx='1.5'/%3E%3Crect x='17' y='9.5' width='5' height='5' rx='1.5'/%3E%3Crect x='2' y='17' width='5' height='5' rx='1.5'/%3E%3Crect x='9.5' y='17' width='5' height='5' rx='1.5'/%3E%3Crect x='17' y='17' width='5' height='5' rx='1.5'/%3E%3C/svg%3E">
   
@@ -25,85 +26,100 @@
   </div>
 
   <div class="app-container">
-    <!-- Top Action Bar -->
-    <header class="top-bar">
-      <!-- Weather Widget Wrapper -->
-      <div class="weather-wrapper">
-        <div id="weather-widget" class="weather-widget loading" title="Klik voor voorspelling, houd 2s ingedrukt om te verversen">
-          <i data-lucide="cloud-sun" class="weather-icon"></i>
-          <div class="weather-info">
-            <span class="weather-temp">--°C</span>
-            <span class="weather-desc">Locatie zoeken...</span>
+    <!-- Fixed Top Navbar with Glassmorphism -->
+    <header class="top-navbar">
+      <div class="navbar-left">
+        <!-- Greetings & Clock Widget -->
+        <div class="nav-greeting-container">
+          <h1 id="greeting" class="nav-greeting">Goededag</h1>
+          <div class="nav-clock-container">
+            <span id="clock-time" class="nav-clock-time">00:00:00</span>
+            <span id="clock-date" class="nav-clock-date">laden...</span>
           </div>
         </div>
-        <div id="weather-forecast-panel" class="weather-forecast-panel hidden"></div>
       </div>
-      
-      <!-- Action buttons -->
-      <div class="top-actions">
-        <button id="btn-theme-toggle" class="action-btn" title="Thema wisselen">
-          <i data-lucide="sun"></i>
-        </button>
-        <button id="btn-edit-mode" class="action-btn" title="Bewerk-modus inschakelen">
-          <i data-lucide="edit-3"></i>
-          <span>Bewerken</span>
-        </button>
-        <button id="btn-settings" class="action-btn" title="Instellingen">
-          <i data-lucide="settings"></i>
-        </button>
-      </div>
-    </header>
 
-    <!-- Hero Header: Clock and Greeting -->
-    <section class="hero">
-      <div class="clock-container">
-        <div id="clock-time" class="clock-time">00:00:00</div>
-        <div id="clock-date" class="clock-date">laden...</div>
-      </div>
-      <h1 id="greeting" class="greeting">Goededag</h1>
-    </section>
-
-    <!-- Search Area -->
-    <section class="search-section">
-      <div class="search-container">
-        <div class="search-input-wrapper">
-          <div id="search-engine-badge" class="search-engine-badge hidden">
-            <i data-lucide="google" class="badge-icon"></i>
-            <span class="badge-text">Google</span>
+      <div class="navbar-center">
+        <!-- Search Area -->
+        <div class="search-container">
+          <div class="search-input-wrapper">
+            <div id="search-engine-badge" class="search-engine-badge hidden">
+              <i data-lucide="google" class="badge-icon"></i>
+              <span class="badge-text">Google</span>
+            </div>
+            <i data-lucide="search" class="search-icon"></i>
+            <input 
+              type="text" 
+              id="search-input" 
+              placeholder="Zoek of typ @g voor Google, @y voor YouTube..." 
+              autocomplete="off" 
+              spellcheck="false"
+              autofocus
+            >
+            <button id="search-clear-btn" class="search-clear-btn hidden" title="Zoekopdracht wissen">
+              <i data-lucide="x"></i>
+            </button>
           </div>
-          <i data-lucide="search" class="search-icon"></i>
-          <input 
-            type="text" 
-            id="search-input" 
-            placeholder="Zoek of typ @g voor Google, @y voor YouTube..." 
-            autocomplete="off" 
-            spellcheck="false"
-            autofocus
-          >
-          <button id="search-clear-btn" class="search-clear-btn hidden" title="Zoekopdracht wissen">
-            <i data-lucide="x"></i>
-          </button>
+          
+          <!-- Search Help dropdown hints -->
+          <div id="search-helper" class="search-helper hidden">
+            <div id="search-shortcuts-area">
+              <div class="helper-header">Zoeksnelkoppelingen:</div>
+              <div class="helper-shortcuts">
+                <div class="shortcut-tip" data-prefix="@g"><kbd>@g</kbd> Google</div>
+                <div class="shortcut-tip" data-prefix="@y"><kbd>@y</kbd> YouTube</div>
+                <div class="shortcut-tip" data-prefix="@w"><kbd>@w</kbd> Wikipedia</div>
+                <div class="shortcut-tip" data-prefix="@d"><kbd>@d</kbd> DuckDuckGo</div>
+              </div>
+            </div>
+            <div id="search-suggestions-area" class="hidden">
+              <div class="helper-header">Zoeksuggesties:</div>
+              <div id="search-suggestions-list" class="suggestions-list">
+                <!-- Rendered dynamically -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="navbar-right">
+        <!-- Weather Widget Wrapper -->
+        <div class="weather-wrapper">
+          <div id="weather-widget" class="weather-widget loading" title="Klik voor voorspelling, houd 2s ingedrukt om te verversen">
+            <i data-lucide="loader-2" class="weather-loading-icon"></i>
+            <i data-lucide="cloud-sun" class="weather-icon"></i>
+            <div class="weather-info">
+              <span class="weather-temp">--°C</span>
+              <span class="weather-desc">Locatie zoeken...</span>
+            </div>
+          </div>
         </div>
         
-        <!-- Search Help dropdown hints -->
-        <div id="search-helper" class="search-helper hidden">
-          <div class="helper-header">Zoeksnelkoppelingen:</div>
-          <div class="helper-shortcuts">
-            <div class="shortcut-tip" data-prefix="@g"><kbd>@g</kbd> Google</div>
-            <div class="shortcut-tip" data-prefix="@y"><kbd>@y</kbd> YouTube</div>
-            <div class="shortcut-tip" data-prefix="@w"><kbd>@w</kbd> Wikipedia</div>
-            <div class="shortcut-tip" data-prefix="@d"><kbd>@d</kbd> DuckDuckGo</div>
-          </div>
+        <!-- Action buttons -->
+        <div class="top-actions">
+          <button id="btn-mobile-search" class="action-btn" title="Zoeken">
+            <i data-lucide="search"></i>
+          </button>
+          <button id="btn-theme-toggle" class="action-btn" title="Thema wisselen">
+            <i data-lucide="sun"></i>
+          </button>
+          <button id="btn-edit-mode" class="action-btn" title="Bewerk-modus inschakelen">
+            <i data-lucide="edit-3"></i>
+            <span>Bewerken</span>
+          </button>
+          <button id="btn-settings" class="action-btn" title="Instellingen">
+            <i data-lucide="settings"></i>
+          </button>
         </div>
       </div>
-    </section>
+    </header>
 
     <!-- Bookmarks Container -->
     <main class="bookmarks-section">
       <!-- Edit Mode Overlay Panel (shows only in Edit Mode) -->
       <div id="edit-controls-bar" class="edit-controls-bar hidden">
         <span class="edit-mode-indicator"><i data-lucide="info"></i> Je bent in Bewerk-modus. Sleep of klik op bewerken om links aan te passen.</span>
-        <button id="btn-add-category" class="btn primary btn-sm">
+        <button id="btn-add-category" class="action-btn">
           <i data-lucide="folder-plus"></i> Categorie toevoegen
         </button>
       </div>
@@ -155,6 +171,34 @@
               <input type="checkbox" id="settings-show-seconds" checked>
               Laat seconden zien op de klok
             </label>
+          </div>
+          <div class="form-group">
+            <label for="settings-search-criteria">Zoek Bladwijzers Op</label>
+            <select id="settings-search-criteria">
+              <option value="both">Beide (Titel en URL)</option>
+              <option value="title">Alleen Titel</option>
+              <option value="url">Alleen URL</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="settings-theme-select">Thema</label>
+            <select id="settings-theme-select">
+              <option value="default">Standaard</option>
+              <option value="catppuccin-mauve">Catppuccin Mauve</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Section: Weer -->
+        <div class="settings-section">
+          <h3>Weer</h3>
+          <div class="form-group">
+            <label for="settings-weather-location">Vaste Locatie (bijv. Utrecht, Groningen)</label>
+            <div class="location-input-wrapper">
+              <input type="text" id="settings-weather-location" placeholder="Laat leeg voor automatische geolocatie">
+              <button id="btn-validate-location" class="btn secondary btn-sm" title="Valideer locatie">Valideer</button>
+            </div>
+            <div id="weather-search-status" class="import-status"></div>
           </div>
         </div>
 
@@ -232,6 +276,33 @@
       <div class="modal-footer">
         <button id="btn-cancel-category" class="btn secondary" data-close-modal>Annuleren</button>
         <button id="btn-save-category" class="btn primary">Opslaan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Weather Forecast Panel -->
+  <div id="weather-forecast-panel" class="weather-forecast-panel hidden"></div>
+
+  <!-- Import Confirm Modal -->
+  <div id="import-confirm-modal" class="modal-overlay hidden">
+    <div class="modal-content glass-card form-modal">
+      <div class="modal-header">
+        <h2><i data-lucide="upload"></i> Bladwijzers importeren</h2>
+        <button class="modal-close-btn" data-close-modal><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal-body">
+        <p id="import-confirm-text" style="margin-bottom: 12px; font-size: 0.92rem; color: var(--text-primary);">
+          Er zijn categorieën gevonden in het bestand. Hoe wil je deze importeren?
+        </p>
+        <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.45;">
+          <strong>Samenvoegen:</strong> Voeg de geïmporteerde bladwijzers toe aan je huidige lijst.<br>
+          <strong>Vervangen:</strong> Verwijder al je huidige bladwijzers en vervang ze door de nieuwe lijst.
+        </p>
+      </div>
+      <div class="modal-footer" style="flex-direction: column; gap: 8px;">
+        <button id="btn-import-merge" class="btn primary" style="width: 100%;">Samenvoegen</button>
+        <button id="btn-import-replace" class="btn danger-outline" style="width: 100%;">Vervangen</button>
+        <button id="btn-import-cancel" class="btn secondary" style="width: 100%;" data-close-modal>Annuleren</button>
       </div>
     </div>
   </div>

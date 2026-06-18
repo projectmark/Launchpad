@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Launchpad - Een gepersonaliseerde startpagina met handige bladwijzers, actuele weersinformatie en geavanceerde zoekfuncties.">
   <title>Launchpad - By Mark Tapking</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cstyle%3Erect%7Bfill:%23080c14;%7D@media(prefers-color-scheme:dark)%7Brect%7Bfill:%23f8fafc;%7D%7D%3C/style%3E%3Crect x='2' y='2' width='5' height='5' rx='1.5'/%3E%3Crect x='9.5' y='2' width='5' height='5' rx='1.5'/%3E%3Crect x='17' y='2' width='5' height='5' rx='1.5'/%3E%3Crect x='2' y='9.5' width='5' height='5' rx='1.5'/%3E%3Crect x='9.5' y='9.5' width='5' height='5' rx='1.5'/%3E%3Crect x='17' y='9.5' width='5' height='5' rx='1.5'/%3E%3Crect x='2' y='17' width='5' height='5' rx='1.5'/%3E%3Crect x='9.5' y='17' width='5' height='5' rx='1.5'/%3E%3Crect x='17' y='17' width='5' height='5' rx='1.5'/%3E%3C/svg%3E">
   
@@ -26,22 +27,22 @@
   --accent-hover: #60a5fa;
   --accent-rgb: 59, 130, 246;
   
-  --card-bg: rgba(15, 23, 42, 0.55);
+  --card-bg: rgba(15, 23, 42, 0.28);
   --card-border: rgba(255, 255, 255, 0.08);
   --card-hover-border: rgba(59, 130, 246, 0.4);
   --card-hover-shadow: rgba(59, 130, 246, 0.15);
   
-  --input-bg: rgba(15, 23, 42, 0.75);
+  --input-bg: rgba(15, 23, 42, 0.55);
   --input-border: rgba(255, 255, 255, 0.1);
   --input-focus-border: #3b82f6;
   
-  --btn-secondary-bg: rgba(255, 255, 255, 0.05);
+  --btn-secondary-bg: rgba(255, 255, 255, 0.03);
   --btn-secondary-hover: rgba(255, 255, 255, 0.1);
   --btn-danger-border: rgba(239, 68, 68, 0.4);
   --btn-danger-bg: rgba(239, 68, 68, 0.1);
   --btn-danger-hover: rgba(239, 68, 68, 0.2);
   
-  --navbar-bg: rgba(8, 12, 20, 0.72);
+  --navbar-bg: rgba(8, 12, 20, 0.42);
   --navbar-border: rgba(255, 255, 255, 0.08);
   
   --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -65,12 +66,12 @@ body.light-theme {
   --accent-hover: #1a73e8;
   --accent-rgb: 11, 87, 208;
   
-  --card-bg: rgba(255, 255, 255, 0.7);
+  --card-bg: rgba(255, 255, 255, 0.4);
   --card-border: rgba(0, 0, 0, 0.05);
   --card-hover-border: rgba(11, 87, 208, 0.3);
   --card-hover-shadow: rgba(11, 87, 208, 0.08);
   
-  --input-bg: rgba(240, 244, 249, 0.95);
+  --input-bg: rgba(240, 244, 249, 0.75);
   --input-border: rgba(0, 0, 0, 0.06);
   --input-focus-border: #0b57d0;
   
@@ -85,7 +86,7 @@ body.light-theme {
   --shadow-lg: 0 16px 40px -8px rgba(0, 0, 0, 0.1);
   --shadow-accent: 0 0 20px rgba(11, 87, 208, 0.15);
   
-  --navbar-bg: rgba(244, 246, 250, 0.72);
+  --navbar-bg: rgba(244, 246, 250, 0.42);
   --navbar-border: rgba(0, 0, 0, 0.05);
 }
 
@@ -100,12 +101,12 @@ body.theme-catppuccin-mauve {
   --accent-hover: #f5c2e7; /* Catppuccin Pink */
   --accent-rgb: 203, 166, 247;
   
-  --card-bg: rgba(30, 30, 46, 0.45);
+  --card-bg: rgba(30, 30, 46, 0.20);
   --card-border: rgba(203, 166, 247, 0.12); /* Subtle mauve border */
   --card-hover-border: rgba(203, 166, 247, 0.45);
   --card-hover-shadow: rgba(203, 166, 247, 0.2);
   
-  --input-bg: rgba(17, 17, 27, 0.65);
+  --input-bg: rgba(17, 17, 27, 0.45);
   --input-border: rgba(203, 166, 247, 0.15); /* Subtle mauve border */
   --input-focus-border: #cba6f7;
   
@@ -117,7 +118,7 @@ body.theme-catppuccin-mauve {
   
   --shadow-accent: 0 0 20px rgba(203, 166, 247, 0.3);
   
-  --navbar-bg: rgba(30, 30, 46, 0.75);
+  --navbar-bg: rgba(30, 30, 46, 0.44);
   --navbar-border: rgba(203, 166, 247, 0.12);
 }
 
@@ -132,12 +133,12 @@ body.theme-catppuccin-mauve.light-theme {
   --accent-hover: #7287fd; /* Catppuccin Lavender (Latte) */
   --accent-rgb: 136, 57, 239;
   
-  --card-bg: rgba(255, 255, 255, 0.75); /* Bright white with high opacity for card pop */
+  --card-bg: rgba(255, 255, 255, 0.44); /* Bright white with high opacity for card pop */
   --card-border: rgba(136, 57, 239, 0.12); /* Subtle mauve border */
   --card-hover-border: rgba(136, 57, 239, 0.45);
   --card-hover-shadow: rgba(136, 57, 239, 0.15);
   
-  --input-bg: rgba(245, 240, 255, 0.9); /* Pale mauve-tinted input bg */
+  --input-bg: rgba(245, 240, 255, 0.7); /* Pale mauve-tinted input bg */
   --input-border: rgba(136, 57, 239, 0.18); /* Subtle mauve border */
   --input-focus-border: #8839ef;
   
@@ -149,23 +150,23 @@ body.theme-catppuccin-mauve.light-theme {
   
   --shadow-accent: 0 0 20px rgba(136, 57, 239, 0.2);
   
-  --navbar-bg: rgba(245, 242, 251, 0.75);
+  --navbar-bg: rgba(245, 242, 251, 0.44);
   --navbar-border: rgba(136, 57, 239, 0.12);
 }
 
 /* Catppuccin Mauve Search Wrapper overrides */
 body.theme-catppuccin-mauve .search-input-wrapper:hover {
-  background: rgba(30, 30, 46, 0.85);
+  background: rgba(30, 30, 46, 0.65);
   border-color: rgba(203, 166, 247, 0.35);
 }
 body.theme-catppuccin-mauve .search-input-wrapper:focus-within {
-  background: rgba(17, 17, 27, 0.95);
+  background: rgba(17, 17, 27, 0.75);
   border-color: var(--input-focus-border);
   box-shadow: var(--shadow-accent);
 }
 
 body.theme-catppuccin-mauve.light-theme .search-input-wrapper:hover {
-  background: rgba(245, 240, 255, 0.95);
+  background: rgba(245, 240, 255, 0.75);
   border-color: rgba(136, 57, 239, 0.3);
 }
 body.theme-catppuccin-mauve.light-theme .search-input-wrapper:focus-within {
@@ -179,10 +180,10 @@ body.theme-catppuccin-mauve .modal-content {
   background: rgba(24, 24, 37, 0.95);
 }
 body.theme-catppuccin-mauve .search-helper {
-  background: rgba(24, 24, 37, 0.92);
+  background: rgba(24, 24, 37, 0.72);
 }
 body.theme-catppuccin-mauve .weather-widget:hover {
-  background: rgba(30, 30, 46, 0.75);
+  background: rgba(30, 30, 46, 0.55);
 }
 
 /* Catppuccin Mauve Blob Gradients */
@@ -240,7 +241,7 @@ body.light-theme .modal-content {
   border-color: rgba(0, 0, 0, 0.08);
 }
 body.light-theme .search-input-wrapper:hover {
-  background: rgba(225, 233, 246, 0.95);
+  background: rgba(225, 233, 246, 0.75);
   border-color: rgba(0, 0, 0, 0.1);
 }
 body.light-theme .search-input-wrapper:focus-within {
@@ -248,7 +249,7 @@ body.light-theme .search-input-wrapper:focus-within {
   border-color: var(--accent-color);
 }
 body.light-theme .search-helper {
-  background: rgba(255, 255, 255, 0.96);
+  background: rgba(255, 255, 255, 0.61);
   border-color: rgba(0, 0, 0, 0.08);
   box-shadow: 
     0 -10px 30px -5px rgba(0, 0, 0, 0.08),
@@ -422,21 +423,13 @@ body {
 .app-container {
   width: 100%;
   max-width: 1200px;
-  padding: 390px 24px 80px 24px; /* Increased top padding to accommodate the 340px centered hero header without overlap */
+  padding: 120px 24px 80px 24px; /* Accommodate the 80px compact header without overlap */
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  transition: padding-top 0.35s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-@media (max-width: 900px) {
-  .app-container {
-    padding-top: 390px; /* Still keep hero padding here since screens 769px-900px use the hero header */
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-}
 
 /* Weather Widget Wrapper */
 .weather-wrapper {
@@ -448,35 +441,36 @@ body {
 .weather-widget {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 8px 16px;
+  gap: 8px;
+  height: 40px;
+  padding: 0 14px;
   border-radius: 20px;
   background: var(--card-bg);
   border: 1px solid var(--card-border);
-  font-size: 0.9rem;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1), color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: var(--shadow-sm);
-  will-change: transform, box-shadow;
+  box-sizing: border-box;
 }
 
 .weather-widget:hover {
   border-color: var(--card-hover-border);
-  background: rgba(15, 23, 42, 0.75);
+  background: var(--btn-secondary-hover);
   transform: translateY(-2px);
-  box-shadow: var(--shadow-md), var(--shadow-accent);
+  box-shadow: var(--shadow-md);
 }
 
 body.light-theme .weather-widget:hover {
   background: #ffffff;
-  box-shadow: var(--shadow-md), var(--shadow-accent);
+  box-shadow: var(--shadow-md);
 }
 
 .weather-icon,
 .weather-loading-icon {
   color: var(--accent-color);
-  width: 22px;
-  height: 22px;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
 }
 
 .weather-loading-icon {
@@ -485,7 +479,9 @@ body.light-theme .weather-widget:hover {
 
 .weather-info {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
 }
 
 .weather-temp {
@@ -494,7 +490,6 @@ body.light-theme .weather-widget:hover {
 }
 
 .weather-desc {
-  font-size: 0.75rem;
   color: var(--text-secondary);
 }
 
@@ -529,7 +524,8 @@ body.light-theme .weather-widget:hover {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: 16px;
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
   box-shadow: var(--shadow-lg);
   padding: 20px;
   z-index: 100;
@@ -538,24 +534,27 @@ body.light-theme .weather-widget:hover {
   gap: 16px;
   user-select: none;
   transform-origin: top right; /* Expand animation from top right corner */
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: opacity 200ms cubic-bezier(0.2, 0, 0, 1), transform 200ms cubic-bezier(0.2, 0, 0, 1);
   opacity: 1;
-  transform: scale(1) translateY(0);
+  transform: scale(1);
 }
 
 .weather-forecast-panel.hidden {
+  display: flex !important; /* Prevent display: none from blocking transition */
   opacity: 0;
-  transform: scale(0.9) translateY(-10px);
+  transform: scale(0.95);
   pointer-events: none;
 }
 
 /* Light theme overrides for panel */
 body.light-theme .weather-forecast-panel {
-  background: rgba(255, 255, 255, 0.98);
-  border-color: rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.36);
+  border-color: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
   box-shadow: 
-    0 10px 30px -10px rgba(0, 0, 0, 0.15),
-    0 1px 3px rgba(0, 0, 0, 0.05);
+    0 10px 30px -10px rgba(0, 0, 0, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.02);
 }
 
 /* Header inside forecast panel */
@@ -837,6 +836,7 @@ body.light-theme .forecast-footer {
 .top-actions {
   display: flex;
   gap: 12px;
+  align-items: center;
 }
 
 .action-btn {
@@ -850,28 +850,30 @@ body.light-theme .forecast-footer {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1), color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: var(--shadow-sm);
+  box-sizing: border-box;
+  padding: 0;
 }
 
 .action-btn i,
 .action-btn svg {
   width: 18px;
   height: 18px;
-  transition: transform 0.3s ease;
+  transition: transform 0.25s ease;
 }
 
 .action-btn:hover {
-  background: rgba(15, 23, 42, 0.8);
+  background: var(--btn-secondary-hover);
   border-color: var(--card-hover-border);
   transform: translateY(-2px);
   color: var(--accent-color);
-  box-shadow: var(--shadow-md), var(--shadow-accent);
+  box-shadow: var(--shadow-md);
 }
 
 body.light-theme .action-btn:hover {
   background: #ffffff;
-  box-shadow: var(--shadow-md), var(--shadow-accent);
+  box-shadow: var(--shadow-md);
 }
 
 .action-btn:hover i,
@@ -879,14 +881,47 @@ body.light-theme .action-btn:hover {
   transform: rotate(15deg);
 }
 
-#btn-edit-mode,
-#btn-add-category {
+#btn-mobile-search {
+  display: none !important;
+}
+
+#btn-edit-mode {
   width: auto;
   border-radius: 20px;
   padding: 0 16px;
   gap: 8px;
   font-size: 0.85rem;
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#btn-add-category {
+  width: auto;
+  height: 40px;
+  border-radius: 20px;
+  padding: 0 16px;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1), color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-sm);
+  box-sizing: border-box;
+}
+
+#btn-add-category:hover {
+  background: var(--btn-secondary-hover);
+  border-color: var(--card-hover-border);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 #btn-edit-mode.active {
@@ -908,26 +943,18 @@ body.light-theme .action-btn:hover {
   left: 0;
   width: 100%;
   z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  
-  /* Scrolled/collapsed default styles */
-  height: 80px;
   background: var(--navbar-bg);
   border-bottom: 1px solid var(--navbar-border);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  padding: 14px 32px;
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
   box-shadow: var(--shadow-sm);
-  
-  /* Smooth collapsible transitions */
-  transition: 
-    height 0.35s cubic-bezier(0.25, 1, 0.5, 1),
-    background-color 0.35s ease,
-    border-color 0.35s ease,
-    box-shadow 0.35s ease,
-    backdrop-filter 0.35s ease;
+  height: 76px; /* Material You standard top bar height */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 32px;
+  gap: 20px;
+  box-sizing: border-box;
 }
 
 body.light-theme .top-navbar {
@@ -936,34 +963,31 @@ body.light-theme .top-navbar {
 }
 
 .navbar-left {
+  flex: 1;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: flex-start;
-  text-align: left;
-  flex: 1 1 0%;
-  min-width: 150px;
-  transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+  min-width: 140px; /* Allow greeting to shrink and truncate down to 140px */
 }
 
 .navbar-center {
+  flex: 0 1 520px;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 2 1 0%;
-  max-width: 500px;
-  width: 100%;
-  z-index: 10;
-  transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+  min-width: 180px; /* Let the search field shrink fluidly down to 180px */
+  margin: 0;
 }
 
 .navbar-right {
+  flex: 1;
   display: flex;
-  align-items: center;
   justify-content: flex-end;
-  gap: 16px;
-  flex: 1 1 0%;
-  min-width: 280px;
-  transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+  align-items: center;
+  gap: 12px;
+  min-width: max-content; /* Never shrink below the buttons to prevent layout overflow */
 }
 
 .nav-greeting-container {
@@ -971,178 +995,127 @@ body.light-theme .top-navbar {
   flex-direction: column;
   gap: 2px;
   user-select: none;
+  min-width: 0;
+  width: 100%;
 }
 
 .nav-greeting {
   font-family: var(--font-display);
   font-weight: 700;
   color: var(--text-primary);
-  line-height: 1.2;
-  transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
-  
-  /* Collapsed state default */
-  font-size: 1.15rem;
+  line-height: 1.25;
+  font-size: 1.1rem;
   margin-top: 0;
   letter-spacing: -0.2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
 }
 
 .nav-clock-container {
   display: flex;
-  transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
-  
-  /* Collapsed state default */
   flex-direction: row;
   align-items: center;
-  gap: 6px;
-  margin-top: 2px;
-  font-size: 0.8rem;
+  gap: 8px;
+  margin-top: 1px;
+  font-size: 0.82rem;
   color: var(--text-secondary);
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
 }
 
 .nav-clock-time {
   font-family: var(--font-mono);
-  transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
-  
-  /* Collapsed state default */
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   font-weight: 600;
   color: var(--accent-color);
+  flex-shrink: 0;
 }
 
 .nav-clock-date {
-  transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
-  text-transform: capitalize;
-  
-  /* Collapsed state default */
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   font-weight: 400;
   color: var(--text-muted);
+  text-transform: capitalize;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* Large screen at-top overrides: large hero centered layout */
-@media (min-width: 769px) {
-  .top-navbar.at-top {
-    position: absolute; /* Set position to absolute to scroll naturally with the page */
-    height: 340px;
-    background: transparent;
-    border-bottom-color: transparent;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    box-shadow: none;
-  }
-  
-  body.light-theme .top-navbar.at-top {
-    background: transparent;
-    border-bottom-color: transparent;
-    box-shadow: none;
-  }
-  
-  .top-navbar.at-top .navbar-left {
-    position: absolute;
-    top: 60px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 1200px;
-    flex: none;
-    align-items: center;
-    text-align: center;
-  }
-  
-  .top-navbar.at-top .nav-greeting {
-    font-size: 2.2rem;
-    margin-top: 8px;
-    letter-spacing: -0.5px;
-  }
-  
-  .top-navbar.at-top .nav-clock-container {
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    margin-top: 8px;
-    font-size: 1.05rem;
-  }
-  
-  .top-navbar.at-top .nav-clock-time {
-    font-size: 4.4rem;
-    letter-spacing: 2px;
-    line-height: 1;
-    background: linear-gradient(180deg, var(--text-primary) 30%, var(--text-secondary) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 0 10px rgba(var(--accent-rgb), 0.15)) drop-shadow(0 4px 12px rgba(0,0,0,0.4));
-  }
-  
-  body.light-theme .top-navbar.at-top .nav-clock-time {
-    background: linear-gradient(180deg, #1f1f1f 30%, #4b5563 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.06));
-  }
-  
-  .top-navbar.at-top .nav-clock-date {
-    font-size: 1.05rem;
-    color: var(--accent-color);
-    letter-spacing: 0.5px;
-    font-weight: 500;
-    margin-top: 4px;
-  }
-  
-  .top-navbar.at-top .navbar-center {
-    position: absolute;
-    top: 240px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 650px;
-    flex: none;
-    padding: 0 24px;
-  }
-  
-  .top-navbar.at-top .navbar-right {
-    position: absolute;
-    top: 24px;
-    left: 32px;
-    right: 32px;
-    transform: none;
-    justify-content: space-between;
-    width: auto;
-    flex: none;
-  }
-
-  .top-navbar.at-top .weather-forecast-panel {
-    left: 0;
-    right: auto;
-    transform-origin: top left;
+/* Hide weather description earlier (at 1200px) to keep plenty of space for date, time, and greeting */
+@media (max-width: 1200px) {
+  .weather-desc {
+    display: none !important;
   }
 }
 
-/* Tablet & Mobile layout: 2 structured rows (always active on <= 768px screen sizes) */
-@media (max-width: 768px) {
-  .app-container {
-    padding-top: 0; /* Reset container padding-top on mobile since navbar is sticky and in-flow */
-    padding-left: 16px;
-    padding-right: 16px;
+/* Tablet responsiveness: hide clock date and edit label on screens <= 1024px to give search bar more room */
+@media (max-width: 1024px) {
+  .nav-clock-date {
+    display: none !important;
+  }
+
+  #btn-edit-mode span {
+    display: none !important;
+  }
+
+  #btn-edit-mode {
+    width: 40px !important;
+    padding: 0 !important;
+    justify-content: center !important;
+    border-radius: 50% !important;
   }
 
   .top-navbar {
+    padding: 0 24px;
+    gap: 12px;
+  }
+
+  /* Compact weather widget styling on tablet viewports */
+  .weather-widget {
+    height: 36px !important;
+    padding: 0 10px !important;
+    border-radius: 18px !important;
+    font-size: 0.85rem;
+    gap: 6px !important;
+  }
+
+  .weather-temp {
+    font-size: 0.8rem;
+  }
+
+  .weather-icon {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* Tablet & Mobile layout: always active on <= 768px screen sizes */
+@media (max-width: 768px) {
+  .app-container {
+    padding: 0 16px 60px 16px;
+  }
+  
+  .top-navbar {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
     position: sticky; /* Sticky positioning naturally pushes bookmarks down and handles wrapping heights */
     top: 0; /* Align perfectly at the very top of mobile viewport */
     z-index: 100;
-    height: auto;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    grid-row-gap: 16px;
-    grid-column-gap: 12px;
-    padding: 16px 16px; /* Aligned padding */
-    margin-left: -16px; /* Compensate for .app-container padding-left */
-    margin-right: -16px; /* Compensate for .app-container padding-right */
-    margin-bottom: 36px; /* Push bookmarks down by exactly 36px, matching the gap between categories */
-    width: calc(100% + 32px); /* Extend to full viewport width */
-    background: var(--navbar-bg); /* Use consistent theme-aware navbar background */
+    height: 64px; /* Collapsed mobile height */
+    width: calc(100% + 32px);
+    margin-left: -16px;
+    margin-right: -16px;
+    margin-bottom: 36px;
+    background: var(--navbar-bg);
     backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
-    border-bottom: 1px solid var(--navbar-border); /* Consistent border */
+    border-bottom: 1px solid var(--navbar-border);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
   }
 
@@ -1151,50 +1124,62 @@ body.light-theme .top-navbar {
     border-bottom-color: var(--navbar-border);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02);
   }
-  
+
   .navbar-left {
-    position: static;
-    transform: none;
-    grid-column: 1;
-    grid-row: 1;
+    position: static !important;
+    transform: none !important;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    min-width: 0; /* Reset desktop min-width */
+    width: auto !important;
+    flex: none !important;
   }
-  
+
   .navbar-right {
-    position: static;
-    transform: none;
-    grid-column: 2;
-    grid-row: 1;
+    position: static !important;
+    transform: none !important;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 10px;
-    min-width: 0; /* Reset desktop min-width */
+    gap: 8px !important;
+    width: auto !important;
+    flex: none !important;
   }
 
   .navbar-center {
-    position: static;
-    transform: none;
-    grid-column: 1 / span 2;
-    grid-row: 2;
-    display: flex;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 64px; /* Directly below the collapsed mobile navbar */
     width: 100%;
-    max-width: 100%;
-    padding: 0;
+    max-width: none;
+    padding: 10px 16px;
+    background: var(--navbar-bg);
+    border-bottom: 1px solid var(--navbar-border);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    z-index: -1; /* Slide behind the main navbar */
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .top-navbar.mobile-search-active .navbar-center {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
   }
   
   .nav-greeting {
-    font-size: 1.1rem;
-    font-weight: 600;
+    display: none !important;
   }
   
   .nav-clock-container {
     font-size: 0.78rem;
     color: var(--text-muted);
-    margin-top: 3px;
+    margin-top: 0;
     display: flex;
     align-items: center;
     gap: 6px;
@@ -1205,22 +1190,28 @@ body.light-theme .top-navbar {
     color: var(--accent-color);
   }
 
+  .nav-clock-date {
+    display: none !important;
+  }
+
   /* Compact button styling on mobile */
   #btn-edit-mode span {
-    display: none; /* Hide Edit mode text to save horizontal space */
+    display: none !important; /* Hide Edit mode text to save horizontal space */
   }
   
+  #btn-mobile-search,
   #btn-edit-mode,
   #btn-theme-toggle,
   #btn-settings {
-    width: 36px;
-    height: 36px;
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 50% !important;
+    padding: 0 !important;
+    justify-content: center !important;
   }
   
-  #btn-edit-mode {
-    border-radius: 50%;
-    padding: 0;
-    justify-content: center;
+  #btn-mobile-search {
+    display: flex !important;
   }
 
   /* Compact weather styling on mobile */
@@ -1229,24 +1220,59 @@ body.light-theme .top-navbar {
   }
 
   .weather-widget {
-    padding: 6px 12px;
-    border-radius: 16px;
+    height: 36px !important;
+    padding: 0 10px !important;
+    border-radius: 18px !important;
     font-size: 0.85rem;
+    gap: 6px !important;
+  }
+
+  .weather-temp {
+    font-size: 0.8rem;
+  }
+
+  .weather-icon {
+    width: 16px;
+    height: 16px;
   }
 
   .weather-desc {
-    display: none; /* Hide weather description text to save horizontal space */
+    display: none !important; /* Hide weather description text to save horizontal space */
   }
   
   .weather-info {
     justify-content: center;
+    align-items: center;
+    display: flex;
   }
 
   /* More compact search input wrapper on mobile */
   .search-input-wrapper {
-    height: 48px;
-    border-radius: 24px;
+    height: 38px;
+    padding: 0 12px;
+    border-radius: 19px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.01);
+  }
+
+  .search-icon {
+    margin-right: 8px;
+    width: 16px;
+    height: 16px;
+  }
+
+  .badge-icon {
+    width: 12px;
+    height: 12px;
+  }
+
+  .search-engine-badge {
+    padding: 4px 8px;
+    margin-right: 8px;
+    border-radius: 12px;
+  }
+  
+  #search-input {
+    font-size: 0.95rem;
   }
 
   /* Mobile weather forecast panel adjustments */
@@ -1259,12 +1285,14 @@ body.light-theme .top-navbar {
     max-width: 410px;
     padding: 14px;
     gap: 12px;
-    transform: translateX(-50%) scale(1) translateY(0);
+    transform: translateX(-50%) scale(1);
     transform-origin: top center;
+    transition: opacity 200ms cubic-bezier(0.2, 0, 0, 1), transform 200ms cubic-bezier(0.2, 0, 0, 1);
   }
   
   .weather-forecast-panel.hidden {
-    transform: translateX(-50%) scale(0.9) translateY(-10px);
+    display: flex !important; /* Prevent display: none from blocking transition */
+    transform: translateX(-50%) scale(0.95);
   }
   
   .forecast-day-row {
@@ -1273,7 +1301,7 @@ body.light-theme .top-navbar {
   }
   
   .forecast-day-name {
-    width: 85px; /* Reduce width to fit smaller screens */
+    width: 75px; /* Reduce width to fit smaller screens */
     font-size: 0.82rem;
   }
 
@@ -1281,12 +1309,21 @@ body.light-theme .top-navbar {
     font-size: 0.78rem;
   }
 
+  .forecast-day-desc span {
+    display: none; /* Hide long description text on mobile to prevent overflow */
+  }
+
   .forecast-day-temps {
-    min-width: 95px;
+    min-width: 90px;
+    align-items: flex-end;
+  }
+
+  .forecast-feels-range {
+    font-size: 0.68rem;
   }
 
   .forecast-period {
-    grid-template-columns: 16px 1fr 20px 42px 52px 20px;
+    grid-template-columns: 16px 1fr 20px 40px 48px 20px;
     font-size: 0.72rem;
   }
 
@@ -1308,41 +1345,47 @@ body.light-theme .top-navbar {
 .search-container {
   width: 100%;
   position: relative;
+  min-width: 0;
 }
 
 .search-input-wrapper {
   display: flex;
   align-items: center;
   width: 100%;
-  height: 56px;
-  padding: 0 20px;
-  border-radius: 28px;
+  height: 46px; /* Material You height */
+  padding: 0 16px;
+  border-radius: 23px; /* Pill shape */
   background: var(--input-bg);
   border: 1px solid var(--input-border);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-sm);
   backdrop-filter: blur(20px);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-sizing: border-box;
 }
 
 .search-input-wrapper:hover {
-  background: rgba(15, 23, 42, 0.85);
-  border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: var(--shadow-lg);
+  background: var(--btn-secondary-hover);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+body.light-theme .search-input-wrapper:hover {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.08);
 }
 
 .search-input-wrapper:focus-within {
-  background: rgba(15, 23, 42, 0.95);
-  border-color: var(--input-focus-border);
-  box-shadow: var(--shadow-accent);
+  background: var(--bg-primary);
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 2px rgba(var(--accent-rgb), 0.2);
 }
 
 .search-icon {
   color: var(--text-muted);
-  width: 20px;
-  height: 20px;
-  margin-right: 14px;
+  width: 18px;
+  height: 18px;
+  margin-right: 12px;
   flex-shrink: 0;
-  transition: color 0.3s ease;
+  transition: color 0.25s ease;
 }
 
 .search-input-wrapper:focus-within .search-icon {
@@ -1356,10 +1399,11 @@ body.light-theme .top-navbar {
   outline: none;
   font-family: var(--font-sans);
   color: var(--text-primary);
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   font-weight: 400;
   width: 100%;
   height: 100%;
+  min-width: 0;
 }
 
 #search-input::placeholder {
@@ -1460,7 +1504,7 @@ body.light-theme .top-navbar {
   top: auto;
   left: 0;
   width: 100%;
-  background: rgba(15, 23, 42, 0.92);
+  background: rgba(15, 23, 42, 0.72);
   border: 1px solid var(--input-border);
   border-radius: 20px;
   box-shadow: var(--shadow-lg);
@@ -1490,7 +1534,7 @@ body.light-theme .top-navbar {
 
 /* Light theme overrides for search helper transition */
 body.light-theme .search-helper {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.75);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
@@ -1774,7 +1818,7 @@ body.edit-mode-active .category-actions {
   border: 1px solid var(--card-border);
   text-decoration: none;
   color: var(--text-primary);
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: var(--shadow-sm);
   backdrop-filter: blur(8px);
   user-select: none;
@@ -1784,7 +1828,7 @@ body.edit-mode-active .category-actions {
 
 /* Card hover animation */
 .bookmark-card:hover {
-  background: rgba(15, 23, 42, 0.75);
+  background: rgba(15, 23, 42, 0.55);
   border-color: var(--card-hover-border);
   transform: translateY(-3px);
   box-shadow: var(--shadow-md), var(--shadow-accent);
@@ -1937,7 +1981,7 @@ body.edit-mode-active .bookmark-card:not(.add-bookmark-card) {
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  background: rgba(15, 23, 42, 0.7);
+  background: rgba(15, 23, 42, 0.5);
   border: 1px solid var(--card-border);
   color: var(--text-primary);
   display: flex;
@@ -1948,13 +1992,13 @@ body.edit-mode-active .bookmark-card:not(.add-bookmark-card) {
 }
 
 body.light-theme .card-action-btn {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.75);
   border-color: rgba(0, 0, 0, 0.1);
   color: var(--text-primary);
 }
 
 .card-action-btn:hover {
-  background: rgba(15, 23, 42, 0.85) !important;
+  background: rgba(15, 23, 42, 0.65) !important;
   border-color: var(--card-hover-border) !important;
   color: var(--accent-color) !important;
   transform: translateY(-2px);
@@ -1962,12 +2006,12 @@ body.light-theme .card-action-btn {
 }
 
 body.light-theme .card-action-btn:hover {
-  background: #ffffff !important;
+  background: rgba(255, 255, 255, 0.8) !important;
   border-color: var(--card-hover-border) !important;
 }
 
 .card-action-btn.danger:hover {
-  background: rgba(15, 23, 42, 0.85) !important;
+  background: rgba(15, 23, 42, 0.65) !important;
   border-color: rgba(239, 68, 68, 0.4) !important;
   color: #ef4444 !important;
   transform: translateY(-2px);
@@ -2510,7 +2554,7 @@ body.edit-mode-active .bookmark-card:not(.add-bookmark-card):active {
 
   <div class="app-container">
     <!-- Fixed Top Navbar with Glassmorphism -->
-    <header class="top-navbar at-top">
+    <header class="top-navbar">
       <div class="navbar-left">
         <!-- Greetings & Clock Widget -->
         <div class="nav-greeting-container">
@@ -2576,11 +2620,13 @@ body.edit-mode-active .bookmark-card:not(.add-bookmark-card):active {
               <span class="weather-desc">Locatie zoeken...</span>
             </div>
           </div>
-          <div id="weather-forecast-panel" class="weather-forecast-panel hidden"></div>
         </div>
         
         <!-- Action buttons -->
         <div class="top-actions">
+          <button id="btn-mobile-search" class="action-btn" title="Zoeken">
+            <i data-lucide="search"></i>
+          </button>
           <button id="btn-theme-toggle" class="action-btn" title="Thema wisselen">
             <i data-lucide="sun"></i>
           </button>
@@ -2761,6 +2807,33 @@ body.edit-mode-active .bookmark-card:not(.add-bookmark-card):active {
     </div>
   </div>
 
+  <!-- Weather Forecast Panel -->
+  <div id="weather-forecast-panel" class="weather-forecast-panel hidden"></div>
+
+  <!-- Import Confirm Modal -->
+  <div id="import-confirm-modal" class="modal-overlay hidden">
+    <div class="modal-content glass-card form-modal">
+      <div class="modal-header">
+        <h2><i data-lucide="upload"></i> Bladwijzers importeren</h2>
+        <button class="modal-close-btn" data-close-modal><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal-body">
+        <p id="import-confirm-text" style="margin-bottom: 12px; font-size: 0.92rem; color: var(--text-primary);">
+          Er zijn categorieën gevonden in het bestand. Hoe wil je deze importeren?
+        </p>
+        <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.45;">
+          <strong>Samenvoegen:</strong> Voeg de geïmporteerde bladwijzers toe aan je huidige lijst.<br>
+          <strong>Vervangen:</strong> Verwijder al je huidige bladwijzers en vervang ze door de nieuwe lijst.
+        </p>
+      </div>
+      <div class="modal-footer" style="flex-direction: column; gap: 8px;">
+        <button id="btn-import-merge" class="btn primary" style="width: 100%;">Samenvoegen</button>
+        <button id="btn-import-replace" class="btn danger-outline" style="width: 100%;">Vervangen</button>
+        <button id="btn-import-cancel" class="btn secondary" style="width: 100%;" data-close-modal>Annuleren</button>
+      </div>
+    </div>
+  </div>
+
   <script>
 // Global state
 let state = {
@@ -2774,6 +2847,12 @@ let state = {
   themeName: 'default',
   searchCriteria: 'both'
 };
+
+// DOM Caching and JSONP Callback Tracking variables
+let cachedCategories = null;
+let cachedCards = null;
+let pendingImportedCategories = null;
+const activeCallbacks = new Set();
 
 // Search engine configurations
 const searchEngines = {
@@ -2901,19 +2980,88 @@ document.addEventListener('DOMContentLoaded', () => {
   initEditMode();
   initThemeToggle();
   initDragAndDrop();
-  initNavbarScroll();
+  initMobileSearch();
   
-  // Prevent bookmark card navigation during Edit Mode via delegation
+  // Centralized Event Delegation for bookmarks-grid interactions
   const grid = document.getElementById('bookmarks-grid');
   if (grid) {
     grid.addEventListener('click', (e) => {
+      // 1. Prevent bookmark card navigation during Edit Mode
       if (state.editMode) {
-        const card = e.target.closest('.bookmark-card');
-        if (card && card.tagName === 'A') {
+        const cardLink = e.target.closest('.bookmark-card:not(.add-bookmark-card)');
+        if (cardLink && cardLink.tagName === 'A') {
           e.preventDefault();
         }
       }
+      
+      // 2. Handle Add Bookmark Card click
+      const addCard = e.target.closest('.add-bookmark-card');
+      if (addCard) {
+        e.preventDefault();
+        e.stopPropagation();
+        const catId = addCard.closest('.bookmarks-category').getAttribute('data-cat-id');
+        openAddBookmarkModal(e, catId);
+        return;
+      }
+      
+      // 3. Handle Category actions
+      const btnSortCat = e.target.closest('.btn-sort-cat');
+      if (btnSortCat) {
+        e.preventDefault();
+        e.stopPropagation();
+        const catId = btnSortCat.closest('.bookmarks-category').getAttribute('data-cat-id');
+        sortCategoryAlphabetically(e, catId);
+        return;
+      }
+      
+      const btnEditCat = e.target.closest('.btn-edit-cat');
+      if (btnEditCat) {
+        e.preventDefault();
+        e.stopPropagation();
+        const catId = btnEditCat.closest('.bookmarks-category').getAttribute('data-cat-id');
+        openEditCategoryModal(e, catId);
+        return;
+      }
+      
+      const btnDeleteCat = e.target.closest('.btn-delete-cat');
+      if (btnDeleteCat) {
+        e.preventDefault();
+        e.stopPropagation();
+        const catId = btnDeleteCat.closest('.bookmarks-category').getAttribute('data-cat-id');
+        deleteCategory(e, catId);
+        return;
+      }
+      
+      // 4. Handle Bookmark card actions (in edit mode)
+      const btnEditBm = e.target.closest('.bookmark-card-actions .card-action-btn:not(.danger)');
+      if (btnEditBm) {
+        e.preventDefault();
+        e.stopPropagation();
+        const catId = btnEditBm.closest('.bookmarks-category').getAttribute('data-cat-id');
+        const bmId = btnEditBm.closest('.bookmark-card').getAttribute('data-bm-id');
+        openEditBookmarkModal(e, catId, bmId);
+        return;
+      }
+      
+      const btnDeleteBm = e.target.closest('.bookmark-card-actions .card-action-btn.danger');
+      if (btnDeleteBm) {
+        e.preventDefault();
+        e.stopPropagation();
+        const catId = btnDeleteBm.closest('.bookmarks-category').getAttribute('data-cat-id');
+        const bmId = btnDeleteBm.closest('.bookmark-card').getAttribute('data-bm-id');
+        deleteBookmark(e, catId, bmId);
+        return;
+      }
     });
+    
+    // 5. Capture image load errors for favicons programmatically (since error event does not bubble)
+    grid.addEventListener('error', (e) => {
+      if (e.target.tagName === 'IMG' && e.target.classList.contains('bookmark-favicon')) {
+        const card = e.target.closest('.bookmark-card');
+        const title = card ? card.querySelector('.bookmark-name').textContent : '';
+        handleFaviconError(e.target, title);
+      }
+    }, true); // Use capture phase
   }
   
   // Create Initial Lucide Icons
@@ -3026,7 +3174,7 @@ async function validateWeatherLocation(e) {
         };
         
         statusEl.className = 'import-status success';
-        statusEl.innerHTML = `<i data-lucide="check" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> Gevonden: ${fullName}`;
+        statusEl.innerHTML = `<i data-lucide="check" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> Gevonden: ${escapeHTML(fullName)}`;
         if (window.lucide) {
           lucide.createIcons({ root: statusEl });
         }
@@ -3154,7 +3302,7 @@ function getDomain(url) {
 }
 
 // Fallback favicon generator (on error)
-window.handleFaviconError = function(imgElement, title) {
+function handleFaviconError(imgElement, title) {
   const firstLetter = title ? title.trim().charAt(0).toUpperCase() : '?';
   const fallback = document.createElement('div');
   fallback.className = 'bookmark-favicon-fallback';
@@ -3173,12 +3321,16 @@ window.handleFaviconError = function(imgElement, title) {
   fallback.style.background = colors[charCode % colors.length];
   
   imgElement.replaceWith(fallback);
-};
+}
 
 // Render bookmarks grids
 function renderBookmarks() {
   const grid = document.getElementById('bookmarks-grid');
   if (!grid) return;
+  
+  // Reset DOM cache for filtering
+  cachedCategories = null;
+  cachedCards = null;
   
   const fragment = document.createDocumentFragment();
   
@@ -3206,7 +3358,7 @@ function renderBookmarks() {
       catEl.setAttribute('draggable', 'true');
     }
     
-    // Category Header
+    // Category Header (Removed inline onclick attributes)
     const headerEl = document.createElement('div');
     headerEl.className = 'category-header';
     headerEl.innerHTML = `
@@ -3220,13 +3372,13 @@ function renderBookmarks() {
         <span>${escapeHTML(cat.name)}</span>
       </h3>
       <div class="category-actions">
-        <button class="cat-action-btn btn-sort-cat" onclick="sortCategoryAlphabetically(event, '${cat.id}')" title="Sorteer alfabetisch (A-Z)">
+        <button class="cat-action-btn btn-sort-cat" title="Sorteer alfabetisch (A-Z)">
           <i data-lucide="arrow-down-a-z"></i>
         </button>
-        <button class="cat-action-btn btn-edit-cat" onclick="openEditCategoryModal(event, '${cat.id}')" title="Categorie bewerken">
+        <button class="cat-action-btn btn-edit-cat" title="Categorie bewerken">
           <i data-lucide="edit-2"></i>
         </button>
-        <button class="cat-action-btn danger btn-delete-cat" onclick="deleteCategory(event, '${cat.id}')" title="Categorie verwijderen">
+        <button class="cat-action-btn danger btn-delete-cat" title="Categorie verwijderen">
           <i data-lucide="trash-2"></i>
         </button>
       </div>
@@ -3251,8 +3403,9 @@ function renderBookmarks() {
       const domain = getDomain(link.url);
       const faviconUrl = domain ? `https://www.google.com/s2/favicons?sz=64&domain=${domain}` : '';
       
+      // Removed inline onclick and onerror attributes
       linkEl.innerHTML = `
-        <img src="${faviconUrl}" class="bookmark-favicon" alt="" draggable="false" onerror="handleFaviconError(this, '${escapeQuotes(link.title)}')">
+        <img src="${faviconUrl}" class="bookmark-favicon" alt="" draggable="false">
         <div class="bookmark-info" draggable="false">
           <span class="bookmark-name" title="${escapeQuotes(link.title)}" draggable="false">${escapeHTML(link.title)}</span>
           <span class="bookmark-url" draggable="false">${escapeHTML(domain || link.url)}</span>
@@ -3260,10 +3413,10 @@ function renderBookmarks() {
         
         <!-- Edit actions overlay (shows in Edit Mode) -->
         <div class="bookmark-card-actions" draggable="false">
-          <button class="card-action-btn" draggable="false" onclick="openEditBookmarkModal(event, '${cat.id}', '${link.id}')" title="Bewerken">
+          <button class="card-action-btn" draggable="false" title="Bewerken">
             <i data-lucide="edit-2" draggable="false"></i>
           </button>
-          <button class="card-action-btn danger" draggable="false" onclick="deleteBookmark(event, '${cat.id}', '${link.id}')" title="Verwijderen">
+          <button class="card-action-btn danger" draggable="false" title="Verwijderen">
             <i data-lucide="trash-2" draggable="false"></i>
           </button>
         </div>
@@ -3271,10 +3424,9 @@ function renderBookmarks() {
       linksGridEl.appendChild(linkEl);
     });
     
-    // Render "Add Bookmark" Card inside grid
+    // Render "Add Bookmark" Card inside grid (Removed inline onclick)
     const addCard = document.createElement('div');
     addCard.className = 'bookmark-card add-bookmark-card';
-    addCard.setAttribute('onclick', `openAddBookmarkModal(event, '${cat.id}')`);
     addCard.innerHTML = `
       <i data-lucide="plus"></i>
       <span>Toevoegen</span>
@@ -3297,7 +3449,8 @@ function renderBookmarks() {
 
 // Helper to escape HTML characters
 function escapeHTML(str) {
-  return str.replace(/[&<>'"]/g, 
+  if (str === null || str === undefined) return '';
+  return String(str).replace(/[&<>'"]/g, 
     tag => ({
       '&': '&amp;',
       '<': '&lt;',
@@ -3309,7 +3462,8 @@ function escapeHTML(str) {
 }
 
 function escapeQuotes(str) {
-  return str.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+  if (str === null || str === undefined) return '';
+  return String(str).replace(/'/g, "\\'").replace(/"/g, '&quot;');
 }
 
 // Helper to resolve weather fields prioritizing KNMI Harmonie over best_match fallback
@@ -3722,17 +3876,19 @@ function filterBookmarks(searchText) {
   // Parse terms: split by whitespace. Filters cards that match *all* words
   const terms = searchText.split(/\s+/).filter(t => t !== '');
   
-  const categories = document.querySelectorAll('.bookmarks-category');
+  if (!cachedCategories) cachedCategories = document.querySelectorAll('.bookmarks-category');
+  if (!cachedCards) cachedCards = document.querySelectorAll('.bookmark-card');
   if (!cachedNoResultsMsg) cachedNoResultsMsg = document.getElementById('no-results-msg');
+  
   let hasAnyVisibleCategory = false;
   
   // Reset active-match classes on all cards
-  document.querySelectorAll('.bookmark-card').forEach(card => {
+  cachedCards.forEach(card => {
     card.classList.remove('active-match');
   });
   
   // Don't filter out the "Add Bookmark" elements if search is empty
-  categories.forEach(catEl => {
+  cachedCategories.forEach(catEl => {
     const cards = catEl.querySelectorAll('.bookmark-card:not(.add-bookmark-card)');
     let visibleCardsInCat = 0;
     
@@ -3870,18 +4026,54 @@ function initWeather() {
   }, { passive: true });
   
   // Click event (toggles panel)
+  let lastScrollY = window.scrollY;
+
+  // Function to calculate and apply correct coordinates dynamically
+  const updatePanelPosition = () => {
+    if (panel.classList.contains('hidden')) return;
+    const rect = widget.getBoundingClientRect();
+    panel.style.position = 'fixed';
+    panel.style.top = `${rect.bottom + 8}px`;
+    
+    if (window.innerWidth <= 768) {
+      panel.style.left = '50%';
+      panel.style.right = 'auto';
+    } else {
+      panel.style.left = 'auto';
+      panel.style.right = `${window.innerWidth - rect.right}px`;
+    }
+  };
+
   widget.addEventListener('click', (e) => {
     if (isLongPress) {
       e.preventDefault();
       e.stopPropagation();
       return;
     }
+    e.stopPropagation(); // Prevent bubbling to document click listener
     
-    // Toggle forecast panel
-    panel.classList.toggle('hidden');
+    const isShow = panel.classList.contains('hidden');
     
-    // If panel is shown, render the cached forecast immediately
-    if (!panel.classList.contains('hidden')) {
+    // If panel is going to be shown, position it and render the cached forecast immediately
+    if (isShow) {
+      lastScrollY = window.scrollY; // Capture starting scroll position
+      
+      // Position the panel BEFORE making it visible so it transitions from the correct spot
+      const rect = widget.getBoundingClientRect();
+      panel.style.position = 'fixed';
+      panel.style.top = `${rect.bottom + 8}px`;
+      
+      if (window.innerWidth <= 768) {
+        panel.style.left = '50%';
+        panel.style.right = 'auto';
+      } else {
+        panel.style.left = 'auto';
+        panel.style.right = `${window.innerWidth - rect.right}px`;
+      }
+      
+      // Force layout/style recalculation so the browser registers the position before transition starts
+      panel.offsetHeight;
+      
       const cache = localStorage.getItem('lp_weather_cache');
       if (cache) {
         renderForecast(JSON.parse(cache));
@@ -3894,14 +4086,29 @@ function initWeather() {
         }
       }
     }
+    
+    panel.classList.toggle('hidden');
   });
   
-  // Close forecast panel when clicking outside
+  // Close forecast panel when clicking outside widget or panel
   document.addEventListener('click', (e) => {
-    if (!e.target.closest('.weather-wrapper')) {
+    if (!e.target.closest('#weather-widget') && !e.target.closest('#weather-forecast-panel')) {
       panel.classList.add('hidden');
     }
   });
+  
+  // Auto-close weather forecast on actual page scrolls, ignoring touch micro-scrolls
+  window.addEventListener('scroll', () => {
+    if (!panel.classList.contains('hidden')) {
+      const diff = Math.abs(window.scrollY - lastScrollY);
+      if (diff > 10) {
+        panel.classList.add('hidden');
+      }
+    }
+  }, { passive: true });
+
+  // Dynamically reposition panel on resize/orientation changes
+  window.addEventListener('resize', updatePanelPosition, { passive: true });
   
   fetchWeather();
 }
@@ -4332,6 +4539,55 @@ function initModalListeners() {
   const fileInput = document.getElementById('bookmarks-file-input');
   fileInput.addEventListener('change', handleBookmarkImport);
   
+  // Import confirm modal actions
+  const mergeBtn = document.getElementById('btn-import-merge');
+  if (mergeBtn) {
+    mergeBtn.addEventListener('click', () => {
+      if (pendingImportedCategories && pendingImportedCategories.length > 0) {
+        state.bookmarks = [...state.bookmarks, ...pendingImportedCategories];
+        saveBookmarksState();
+        renderBookmarks();
+        closeAllModals();
+        const statusEl = document.getElementById('import-status');
+        statusEl.className = 'import-status success';
+        statusEl.textContent = 'Import (samenvoegen) succesvol voltooid!';
+        statusEl.style.display = 'block';
+        pendingImportedCategories = null;
+      }
+    });
+  }
+
+  const replaceBtn = document.getElementById('btn-import-replace');
+  if (replaceBtn) {
+    replaceBtn.addEventListener('click', () => {
+      if (pendingImportedCategories && pendingImportedCategories.length > 0) {
+        if (confirm("Weet je zeker dat je AL je huidige bladwijzers wilt vervangen? Dit kan niet ongedaan worden gemaakt.")) {
+          state.bookmarks = pendingImportedCategories;
+          saveBookmarksState();
+          renderBookmarks();
+          closeAllModals();
+          const statusEl = document.getElementById('import-status');
+          statusEl.className = 'import-status success';
+          statusEl.textContent = 'Import (vervangen) succesvol voltooid!';
+          statusEl.style.display = 'block';
+          pendingImportedCategories = null;
+        }
+      }
+    });
+  }
+
+  const cancelBtn = document.getElementById('btn-import-cancel');
+  if (cancelBtn) {
+    cancelBtn.addEventListener('click', () => {
+      closeAllModals();
+      const statusEl = document.getElementById('import-status');
+      statusEl.className = 'import-status info';
+      statusEl.textContent = 'Import geannuleerd.';
+      statusEl.style.display = 'block';
+      pendingImportedCategories = null;
+    });
+  }
+  
   // Reset Defaults handler
   document.getElementById('btn-reset-defaults').addEventListener('click', () => {
     if (confirm("Weet je zeker dat je alle gegevens wilt resetten naar fabrieksinstellingen? Dit wist al je bookmarks!")) {
@@ -4409,7 +4665,7 @@ function initModalListeners() {
         state.tempLocationValid = false;
       } else {
         statusEl.className = 'import-status success';
-        statusEl.innerHTML = `<i data-lucide="check" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> Gevalideerd: ${state.tempLocation.name}`;
+        statusEl.innerHTML = `<i data-lucide="check" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> Gevalideerd: ${escapeHTML(state.tempLocation.name)}`;
         statusEl.style.display = 'block';
         if (window.lucide) lucide.createIcons({ root: statusEl });
         state.tempLocationValid = true;
@@ -4442,7 +4698,7 @@ function openSettingsModal() {
   
   if (rawLoc && state.tempLocationValid) {
     statusEl.className = 'import-status success';
-    statusEl.innerHTML = `<i data-lucide="check" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> Gevalideerd: ${fixedName}`;
+    statusEl.innerHTML = `<i data-lucide="check" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> Gevalideerd: ${escapeHTML(fixedName)}`;
     statusEl.style.display = 'block';
     if (window.lucide) {
       lucide.createIcons({ root: statusEl });
@@ -4572,21 +4828,23 @@ function handleBookmarkImport(e) {
       if (importedCategories.length === 0) {
         statusEl.className = 'import-status error';
         statusEl.textContent = 'Geen bookmarks gevonden in dit bestand.';
+        e.target.value = '';
         return;
       }
       
-      // Merge or overwrite bookmarks
-      if (confirm(`Er zijn ${importedCategories.length} categorieën gevonden. Wil je deze toevoegen aan je huidige bookmarks? (Kies 'Annuleren' om je huidige bookmarks te vervangen)`)) {
-        state.bookmarks = [...state.bookmarks, ...importedCategories];
-      } else {
-        state.bookmarks = importedCategories;
+      // Hide status text while modal is shown
+      statusEl.style.display = 'none';
+      
+      pendingImportedCategories = importedCategories;
+      
+      const modal = document.getElementById('import-confirm-modal');
+      const textEl = document.getElementById('import-confirm-text');
+      textEl.innerHTML = `Er zijn <strong>${importedCategories.length}</strong> categorieën gevonden in het bestand. Hoe wil je deze importeren?`;
+      
+      modal.classList.remove('hidden');
+      if (window.lucide) {
+        lucide.createIcons({ root: modal });
       }
-      
-      saveBookmarksState();
-      renderBookmarks();
-      
-      statusEl.className = 'import-status success';
-      statusEl.textContent = 'Import succesvol voltooid!';
       
       // Clear file input
       e.target.value = '';
@@ -4594,6 +4852,7 @@ function handleBookmarkImport(e) {
       console.error(err);
       statusEl.className = 'import-status error';
       statusEl.textContent = 'Fout bij verwerken bestand. Zorg ervoor dat het een geldig HTML bladwijzerbestand is.';
+      e.target.value = '';
     }
   };
   
@@ -5105,25 +5364,27 @@ function fetchSearchSuggestions(query) {
   }
   
   const currentRequestNum = ++suggestRequestCounter;
+  const callbackName = `handleSearchSuggestions_${currentRequestNum}`;
   
-  // Clean up any older dynamic callbacks by turning them into no-ops to avoid global JS errors on late responses
-  for (let i = 1; i < currentRequestNum; i++) {
-    const cbName = `handleSearchSuggestions_${i}`;
-    if (window[cbName]) {
-      window[cbName] = () => {
-        delete window[cbName];
-      };
-    }
-  }
+  // Clean up any older dynamic callbacks using Set to avoid global JS errors on late responses (O(1) complexity)
+  activeCallbacks.forEach(cbName => {
+    window[cbName] = () => {
+      delete window[cbName];
+    };
+  });
+  activeCallbacks.clear();
+  
+  activeCallbacks.add(callbackName);
   
   // Define temporary dynamic callback on window
-  window[`handleSearchSuggestions_${currentRequestNum}`] = function(data) {
+  window[callbackName] = function(data) {
+    activeCallbacks.delete(callbackName);
     if (currentRequestNum >= lastProcessedRequest) {
       lastProcessedRequest = currentRequestNum;
       const suggestions = data[1] || [];
       renderSearchSuggestions(suggestions);
     }
-    delete window[`handleSearchSuggestions_${currentRequestNum}`];
+    delete window[callbackName];
     const script = document.getElementById('search-suggest-script');
     if (script) {
       script.remove();
@@ -5133,9 +5394,8 @@ function fetchSearchSuggestions(query) {
   const script = document.createElement('script');
   script.id = 'search-suggest-script';
   
-  const callbackName = `handleSearchSuggestions_${currentRequestNum}`;
-  
   script.onerror = function() {
+    activeCallbacks.delete(callbackName);
     delete window[callbackName];
     script.remove();
   };
@@ -5205,26 +5465,42 @@ function renderSearchSuggestions(suggestions) {
   }
 }
 
-function initNavbarScroll() {
+function initMobileSearch() {
+  const btnSearch = document.getElementById('btn-mobile-search');
   const navbar = document.querySelector('.top-navbar');
-  if (!navbar) return;
-  
-  let isAtTop = true;
-  const handleScroll = () => {
-    // Collapse header only after scrolling past 240px (clock scrolled out of view)
-    const shouldBeAtTop = window.scrollY <= 240;
-    if (shouldBeAtTop !== isAtTop) {
-      isAtTop = shouldBeAtTop;
-      if (isAtTop) {
-        navbar.classList.add('at-top');
-      } else {
-        navbar.classList.remove('at-top');
+  const searchInput = document.getElementById('search-input');
+  if (!btnSearch || !navbar || !searchInput) return;
+
+  btnSearch.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isActive = navbar.classList.toggle('mobile-search-active');
+    if (isActive) {
+      setTimeout(() => {
+        searchInput.focus();
+      }, 50);
+    } else {
+      searchInput.blur();
+    }
+  });
+
+  // Close search if clicked outside navbar
+  document.addEventListener('click', (e) => {
+    if (navbar.classList.contains('mobile-search-active')) {
+      const isClickInside = navbar.contains(e.target);
+      if (!isClickInside) {
+        navbar.classList.remove('mobile-search-active');
+        searchInput.blur();
       }
     }
-  };
-  
-  window.addEventListener('scroll', handleScroll, { passive: true });
-  handleScroll();
+  });
+
+  // Close search when scrolling on mobile
+  window.addEventListener('scroll', () => {
+    if (navbar.classList.contains('mobile-search-active')) {
+      navbar.classList.remove('mobile-search-active');
+      searchInput.blur();
+    }
+  }, { passive: true });
 }
 
 </script>

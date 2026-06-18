@@ -9,20 +9,23 @@
   --accent-hover: #60a5fa;
   --accent-rgb: 59, 130, 246;
   
-  --card-bg: rgba(15, 23, 42, 0.55);
+  --card-bg: rgba(15, 23, 42, 0.28);
   --card-border: rgba(255, 255, 255, 0.08);
   --card-hover-border: rgba(59, 130, 246, 0.4);
   --card-hover-shadow: rgba(59, 130, 246, 0.15);
   
-  --input-bg: rgba(15, 23, 42, 0.75);
+  --input-bg: rgba(15, 23, 42, 0.55);
   --input-border: rgba(255, 255, 255, 0.1);
   --input-focus-border: #3b82f6;
   
-  --btn-secondary-bg: rgba(255, 255, 255, 0.05);
+  --btn-secondary-bg: rgba(255, 255, 255, 0.03);
   --btn-secondary-hover: rgba(255, 255, 255, 0.1);
   --btn-danger-border: rgba(239, 68, 68, 0.4);
   --btn-danger-bg: rgba(239, 68, 68, 0.1);
   --btn-danger-hover: rgba(239, 68, 68, 0.2);
+  
+  --navbar-bg: rgba(8, 12, 20, 0.42);
+  --navbar-border: rgba(255, 255, 255, 0.08);
   
   --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -45,12 +48,12 @@ body.light-theme {
   --accent-hover: #1a73e8;
   --accent-rgb: 11, 87, 208;
   
-  --card-bg: rgba(255, 255, 255, 0.7);
+  --card-bg: rgba(255, 255, 255, 0.4);
   --card-border: rgba(0, 0, 0, 0.05);
   --card-hover-border: rgba(11, 87, 208, 0.3);
   --card-hover-shadow: rgba(11, 87, 208, 0.08);
   
-  --input-bg: rgba(240, 244, 249, 0.95);
+  --input-bg: rgba(240, 244, 249, 0.75);
   --input-border: rgba(0, 0, 0, 0.06);
   --input-focus-border: #0b57d0;
   
@@ -64,7 +67,131 @@ body.light-theme {
   --shadow-md: 0 8px 30px -4px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 16px 40px -8px rgba(0, 0, 0, 0.1);
   --shadow-accent: 0 0 20px rgba(11, 87, 208, 0.15);
+  
+  --navbar-bg: rgba(244, 246, 250, 0.42);
+  --navbar-border: rgba(0, 0, 0, 0.05);
 }
+
+/* Catppuccin Mauve theme overrides */
+body.theme-catppuccin-mauve {
+  --bg-primary: #1e1e2e;
+  --text-primary: #cdd6f4;
+  --text-secondary: #a6adc8;
+  --text-muted: #585b70;
+  
+  --accent-color: #cba6f7; /* Catppuccin Mauve */
+  --accent-hover: #f5c2e7; /* Catppuccin Pink */
+  --accent-rgb: 203, 166, 247;
+  
+  --card-bg: rgba(30, 30, 46, 0.20);
+  --card-border: rgba(203, 166, 247, 0.12); /* Subtle mauve border */
+  --card-hover-border: rgba(203, 166, 247, 0.45);
+  --card-hover-shadow: rgba(203, 166, 247, 0.2);
+  
+  --input-bg: rgba(17, 17, 27, 0.45);
+  --input-border: rgba(203, 166, 247, 0.15); /* Subtle mauve border */
+  --input-focus-border: #cba6f7;
+  
+  --btn-secondary-bg: rgba(203, 166, 247, 0.08); /* Mauve-tinted button */
+  --btn-secondary-hover: rgba(203, 166, 247, 0.18);
+  --btn-danger-border: rgba(243, 139, 168, 0.4);
+  --btn-danger-bg: rgba(243, 139, 168, 0.1);
+  --btn-danger-hover: rgba(243, 139, 168, 0.2);
+  
+  --shadow-accent: 0 0 20px rgba(203, 166, 247, 0.3);
+  
+  --navbar-bg: rgba(30, 30, 46, 0.44);
+  --navbar-border: rgba(203, 166, 247, 0.12);
+}
+
+/* Catppuccin Mauve Light theme overrides */
+body.theme-catppuccin-mauve.light-theme {
+  --bg-primary: #f5f2fb; /* Beautiful soft pastel lavender/mauve background */
+  --text-primary: #4c4f69;
+  --text-secondary: #6c6f85;
+  --text-muted: #8c8fa1;
+  
+  --accent-color: #8839ef; /* Catppuccin Mauve (Latte) */
+  --accent-hover: #7287fd; /* Catppuccin Lavender (Latte) */
+  --accent-rgb: 136, 57, 239;
+  
+  --card-bg: rgba(255, 255, 255, 0.44); /* Bright white with high opacity for card pop */
+  --card-border: rgba(136, 57, 239, 0.12); /* Subtle mauve border */
+  --card-hover-border: rgba(136, 57, 239, 0.45);
+  --card-hover-shadow: rgba(136, 57, 239, 0.15);
+  
+  --input-bg: rgba(245, 240, 255, 0.7); /* Pale mauve-tinted input bg */
+  --input-border: rgba(136, 57, 239, 0.18); /* Subtle mauve border */
+  --input-focus-border: #8839ef;
+  
+  --btn-secondary-bg: rgba(136, 57, 239, 0.08); /* Mauve-tinted button bg */
+  --btn-secondary-hover: rgba(136, 57, 239, 0.16);
+  --btn-danger-border: rgba(210, 15, 57, 0.3);
+  --btn-danger-bg: rgba(210, 15, 57, 0.05);
+  --btn-danger-hover: rgba(210, 15, 57, 0.1);
+  
+  --shadow-accent: 0 0 20px rgba(136, 57, 239, 0.2);
+  
+  --navbar-bg: rgba(245, 242, 251, 0.44);
+  --navbar-border: rgba(136, 57, 239, 0.12);
+}
+
+/* Catppuccin Mauve Search Wrapper overrides */
+body.theme-catppuccin-mauve .search-input-wrapper:hover {
+  background: rgba(30, 30, 46, 0.65);
+  border-color: rgba(203, 166, 247, 0.35);
+}
+body.theme-catppuccin-mauve .search-input-wrapper:focus-within {
+  background: rgba(17, 17, 27, 0.75);
+  border-color: var(--input-focus-border);
+  box-shadow: var(--shadow-accent);
+}
+
+body.theme-catppuccin-mauve.light-theme .search-input-wrapper:hover {
+  background: rgba(245, 240, 255, 0.75);
+  border-color: rgba(136, 57, 239, 0.3);
+}
+body.theme-catppuccin-mauve.light-theme .search-input-wrapper:focus-within {
+  background: #ffffff;
+  border-color: var(--accent-color);
+  box-shadow: var(--shadow-accent);
+}
+
+/* Catppuccin Component Overrides */
+body.theme-catppuccin-mauve .modal-content {
+  background: rgba(24, 24, 37, 0.95);
+}
+body.theme-catppuccin-mauve .search-helper {
+  background: rgba(24, 24, 37, 0.72);
+}
+body.theme-catppuccin-mauve .weather-widget:hover {
+  background: rgba(30, 30, 46, 0.55);
+}
+
+/* Catppuccin Mauve Blob Gradients */
+body.theme-catppuccin-mauve .blob-1 {
+  background: radial-gradient(circle, #cba6f7 0%, rgba(203, 166, 247, 0) 70%);
+}
+body.theme-catppuccin-mauve .blob-2 {
+  background: radial-gradient(circle, #b4befe 0%, rgba(180, 190, 254, 0) 70%);
+}
+body.theme-catppuccin-mauve .blob-3 {
+  background: radial-gradient(circle, #f5e0dc 0%, rgba(245, 224, 220, 0) 70%);
+}
+
+body.theme-catppuccin-mauve.light-theme .blob-1 {
+  background: radial-gradient(circle, #8839ef 0%, rgba(136, 57, 239, 0) 70%);
+  opacity: 0.35;
+}
+body.theme-catppuccin-mauve.light-theme .blob-2 {
+  background: radial-gradient(circle, #7287fd 0%, rgba(114, 135, 253, 0) 70%);
+  opacity: 0.35;
+}
+body.theme-catppuccin-mauve.light-theme .blob-3 {
+  background: radial-gradient(circle, #dd7878 0%, rgba(221, 120, 120, 0) 70%);
+  opacity: 0.35;
+}
+
 
 /* Light Theme Element Adjustments */
 body.light-theme .blob-1 {
@@ -96,7 +223,7 @@ body.light-theme .modal-content {
   border-color: rgba(0, 0, 0, 0.08);
 }
 body.light-theme .search-input-wrapper:hover {
-  background: rgba(225, 233, 246, 0.95);
+  background: rgba(225, 233, 246, 0.75);
   border-color: rgba(0, 0, 0, 0.1);
 }
 body.light-theme .search-input-wrapper:focus-within {
@@ -104,11 +231,11 @@ body.light-theme .search-input-wrapper:focus-within {
   border-color: var(--accent-color);
 }
 body.light-theme .search-helper {
-  background: rgba(255, 255, 255, 0.96);
+  background: rgba(255, 255, 255, 0.61);
   border-color: rgba(0, 0, 0, 0.08);
   box-shadow: 
-    0 10px 30px -10px rgba(0, 0, 0, 0.12),
-    0 1px 3px rgba(0, 0, 0, 0.05);
+    0 -10px 30px -5px rgba(0, 0, 0, 0.08),
+    0 -1px 3px rgba(0, 0, 0, 0.03);
 }
 body.light-theme .helper-header {
   color: var(--text-secondary);
@@ -231,6 +358,7 @@ body {
   border-radius: 50%;
   opacity: 0.22;
   animation: float 25s infinite alternate ease-in-out;
+  will-change: transform;
 }
 
 .blob-1 {
@@ -277,21 +405,13 @@ body {
 .app-container {
   width: 100%;
   max-width: 1200px;
-  padding: 24px 24px 80px 24px;
+  padding: 120px 24px 80px 24px; /* Accommodate the 80px compact header without overlap */
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
 }
 
-/* Top Action Bar */
-.top-bar {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
-}
 
 /* Weather Widget Wrapper */
 .weather-wrapper {
@@ -303,39 +423,47 @@ body {
 .weather-widget {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 8px 16px;
+  gap: 8px;
+  height: 40px;
+  padding: 0 14px;
   border-radius: 20px;
   background: var(--card-bg);
   border: 1px solid var(--card-border);
-  backdrop-filter: blur(12px);
-  font-size: 0.9rem;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1), color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: var(--shadow-sm);
+  box-sizing: border-box;
 }
 
 .weather-widget:hover {
   border-color: var(--card-hover-border);
-  background: rgba(15, 23, 42, 0.75);
+  background: var(--btn-secondary-hover);
   transform: translateY(-2px);
-  box-shadow: var(--shadow-md), var(--shadow-accent);
+  box-shadow: var(--shadow-md);
 }
 
 body.light-theme .weather-widget:hover {
   background: #ffffff;
-  box-shadow: var(--shadow-md), var(--shadow-accent);
+  box-shadow: var(--shadow-md);
 }
 
-.weather-icon {
+.weather-icon,
+.weather-loading-icon {
   color: var(--accent-color);
-  width: 22px;
-  height: 22px;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.weather-loading-icon {
+  display: none;
 }
 
 .weather-info {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
 }
 
 .weather-temp {
@@ -344,13 +472,17 @@ body.light-theme .weather-widget:hover {
 }
 
 .weather-desc {
-  font-size: 0.75rem;
   color: var(--text-secondary);
 }
 
 /* Loading/Error States */
-.weather-widget.loading .weather-icon {
+.weather-widget.loading .weather-loading-icon {
+  display: block;
   animation: spin 1.5s infinite linear;
+}
+
+.weather-widget.loading .weather-icon {
+  display: none !important;
 }
 
 @keyframes spin {
@@ -367,12 +499,15 @@ body.light-theme .weather-widget:hover {
 .weather-forecast-panel {
   position: absolute;
   top: calc(100% + 8px);
-  left: 0;
-  width: 380px;
+  right: 0; /* Align right edge with widget */
+  left: auto;
+  width: 410px;
+  max-width: 90vw; /* Constrain size on mobile viewports */
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: 16px;
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
   box-shadow: var(--shadow-lg);
   padding: 20px;
   z-index: 100;
@@ -380,25 +515,28 @@ body.light-theme .weather-widget:hover {
   flex-direction: column;
   gap: 16px;
   user-select: none;
-  transform-origin: top left;
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-origin: top right; /* Expand animation from top right corner */
+  transition: opacity 200ms cubic-bezier(0.2, 0, 0, 1), transform 200ms cubic-bezier(0.2, 0, 0, 1);
   opacity: 1;
-  transform: scale(1) translateY(0);
+  transform: scale(1);
 }
 
 .weather-forecast-panel.hidden {
+  display: flex !important; /* Prevent display: none from blocking transition */
   opacity: 0;
-  transform: scale(0.9) translateY(-10px);
+  transform: scale(0.95);
   pointer-events: none;
 }
 
 /* Light theme overrides for panel */
 body.light-theme .weather-forecast-panel {
-  background: rgba(255, 255, 255, 0.98);
-  border-color: rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.36);
+  border-color: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
   box-shadow: 
-    0 10px 30px -10px rgba(0, 0, 0, 0.15),
-    0 1px 3px rgba(0, 0, 0, 0.05);
+    0 10px 30px -10px rgba(0, 0, 0, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.02);
 }
 
 /* Header inside forecast panel */
@@ -444,8 +582,8 @@ body.light-theme .forecast-header {
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.03);
   border-radius: 12px;
-  padding: 12px 14px;
-  gap: 10px;
+  padding: 14px 16px;
+  gap: 14px;
   transition: background 0.2s ease;
 }
 
@@ -473,8 +611,9 @@ body.light-theme .forecast-day-row:hover {
   font-size: 0.88rem;
   font-weight: 600;
   color: var(--text-primary);
-  width: 80px;
+  width: 105px;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .forecast-day-desc {
@@ -483,6 +622,8 @@ body.light-theme .forecast-day-row:hover {
   gap: 8px;
   font-size: 0.82rem;
   color: var(--text-secondary);
+  flex-grow: 1;
+  margin-left: 4px;
 }
 
 .forecast-day-icon {
@@ -526,9 +667,9 @@ body.light-theme .forecast-day-row:hover {
 .forecast-day-details {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
   border-top: 1px dashed rgba(255, 255, 255, 0.06);
-  padding-top: 10px;
+  padding-top: 12px;
   font-size: 0.78rem;
   color: var(--text-muted);
 }
@@ -538,53 +679,123 @@ body.light-theme .forecast-day-details {
 }
 
 .forecast-period {
-  display: flex;
+  display: grid;
+  grid-template-columns: 20px 80px 30px 60px 75px 30px;
   align-items: center;
-  gap: 8px;
+  justify-content: space-between;
+  width: 100%;
 }
 
-.forecast-period i {
-  width: 14px;
-  height: 14px;
-  color: var(--text-muted);
+.forecast-period-type-icon,
+.forecast-period svg.forecast-period-type-icon {
+  width: 14px !important;
+  height: 14px !important;
+  color: var(--text-muted) !important;
+  justify-self: center;
+}
+
+.forecast-period-weather-icon,
+.forecast-period svg.forecast-period-weather-icon {
+  width: 16px !important;
+  height: 16px !important;
+  color: var(--text-secondary) !important;
+  justify-self: center;
 }
 
 .forecast-period-label {
-  width: 60px;
   font-weight: 500;
   color: var(--text-secondary);
+  justify-self: start;
 }
 
 .forecast-period-temp {
-  min-width: 40px;
   font-weight: 600;
   color: var(--text-primary);
+  justify-self: start;
 }
 
 /* Rain chance styling inside forecast */
 .forecast-rain {
   display: inline-flex;
   align-items: center;
-  gap: 2px;
-  margin-left: 8px;
+  gap: 4px;
   color: var(--accent-hover);
   font-size: 0.72rem;
   font-weight: 600;
+  justify-self: start;
 }
 
-.forecast-rain i {
+.forecast-rain i,
+.forecast-rain svg {
   width: 11px !important;
   height: 11px !important;
   color: var(--accent-hover) !important;
+  justify-self: center;
 }
 
 body.light-theme .forecast-rain {
   color: var(--accent-color);
 }
 
-body.light-theme .forecast-rain i {
+body.light-theme .forecast-rain i,
+body.light-theme .forecast-rain svg {
   color: var(--accent-color) !important;
 }
+
+/* Raincoat indicator styling */
+.coat-indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-self: center;
+}
+
+.coat-indicator i,
+.coat-indicator svg {
+  width: 13px !important;
+  height: 13px !important;
+  transition: color 0.2s ease;
+  justify-self: center;
+}
+
+.coat-indicator.coat-needed i,
+.coat-indicator.coat-needed svg {
+  color: #ef4444 !important; /* Material Red */
+}
+
+.coat-indicator.coat-not-needed i,
+.coat-indicator.coat-not-needed svg {
+  color: var(--text-muted) !important; /* Neutral grey */
+}
+
+/* Forecast Panel Footer and Source Link */
+.forecast-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4px;
+  padding-top: 10px;
+  border-top: 1px solid var(--card-border);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+body.light-theme .forecast-footer {
+  border-top-color: rgba(0, 0, 0, 0.06);
+}
+
+.forecast-source-link {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease, text-decoration 0.2s ease;
+  margin-left: 3px;
+}
+
+.forecast-source-link:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
 
 /* Holding and Refreshed States on Weather Widget */
 .weather-widget.holding {
@@ -607,6 +818,7 @@ body.light-theme .forecast-rain i {
 .top-actions {
   display: flex;
   gap: 12px;
+  align-items: center;
 }
 
 .action-btn {
@@ -620,32 +832,39 @@ body.light-theme .forecast-rain i {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  backdrop-filter: blur(12px);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1), color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: var(--shadow-sm);
+  box-sizing: border-box;
+  padding: 0;
 }
 
-.action-btn i {
+.action-btn i,
+.action-btn svg {
   width: 18px;
   height: 18px;
-  transition: transform 0.3s ease;
+  transition: transform 0.25s ease;
 }
 
 .action-btn:hover {
-  background: rgba(15, 23, 42, 0.8);
+  background: var(--btn-secondary-hover);
   border-color: var(--card-hover-border);
   transform: translateY(-2px);
   color: var(--accent-color);
-  box-shadow: var(--shadow-md), var(--shadow-accent);
+  box-shadow: var(--shadow-md);
 }
 
 body.light-theme .action-btn:hover {
   background: #ffffff;
-  box-shadow: var(--shadow-md), var(--shadow-accent);
+  box-shadow: var(--shadow-md);
 }
 
-.action-btn:hover i {
+.action-btn:hover i,
+.action-btn:hover svg {
   transform: rotate(15deg);
+}
+
+#btn-mobile-search {
+  display: none !important;
 }
 
 #btn-edit-mode {
@@ -655,6 +874,36 @@ body.light-theme .action-btn:hover {
   gap: 8px;
   font-size: 0.85rem;
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#btn-add-category {
+  width: auto;
+  height: 40px;
+  border-radius: 20px;
+  padding: 0 16px;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1), color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-sm);
+  box-sizing: border-box;
+}
+
+#btn-add-category:hover {
+  background: var(--btn-secondary-hover);
+  border-color: var(--card-hover-border);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 #btn-edit-mode.active {
@@ -664,99 +913,461 @@ body.light-theme .action-btn:hover {
   box-shadow: var(--shadow-accent);
 }
 
-#btn-edit-mode.active i {
+#btn-edit-mode.active i,
+#btn-edit-mode.active svg {
   color: #fff;
 }
 
-/* Hero Section (Clock & Greeting) */
-.hero {
-  text-align: center;
-  margin-bottom: 36px;
-  user-select: none;
-}
-
-.clock-container {
-  margin-bottom: 8px;
-}
-
-.clock-time {
-  font-family: var(--font-mono);
-  font-size: 4.6rem;
-  font-weight: 500;
-  letter-spacing: 2px;
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
-  background: linear-gradient(180deg, var(--text-primary) 30%, var(--text-secondary) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 10px rgba(var(--accent-rgb), 0.15)) drop-shadow(0 4px 12px rgba(0,0,0,0.4));
-}
-
-.clock-date {
-  font-size: 1rem;
-  font-weight: 500;
-  text-transform: capitalize;
-  color: var(--accent-color);
-  letter-spacing: 0.5px;
-  margin-top: 4px;
-}
-
-.greeting {
-  font-family: var(--font-display);
-  font-size: 2.2rem;
-  font-weight: 600;
-  margin-top: 8px;
-  color: var(--text-primary);
-  letter-spacing: -0.5px;
-}
-
-/* Search Section */
-.search-section {
+/* Fixed Top Navbar with Glassmorphism */
+.top-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  max-width: 650px;
-  margin-bottom: 50px;
-  z-index: 10;
-  position: relative;
+  z-index: 100;
+  background: var(--navbar-bg);
+  border-bottom: 1px solid var(--navbar-border);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  box-shadow: var(--shadow-sm);
+  height: 76px; /* Material You standard top bar height */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 32px;
+  gap: 20px;
+  box-sizing: border-box;
 }
+
+body.light-theme .top-navbar {
+  background: var(--navbar-bg);
+  border-bottom-color: var(--navbar-border);
+}
+
+.navbar-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  min-width: 140px; /* Allow greeting to shrink and truncate down to 140px */
+}
+
+.navbar-center {
+  flex: 0 1 520px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 180px; /* Let the search field shrink fluidly down to 180px */
+  margin: 0;
+}
+
+.navbar-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  min-width: max-content; /* Never shrink below the buttons to prevent layout overflow */
+}
+
+.nav-greeting-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  user-select: none;
+  min-width: 0;
+  width: 100%;
+}
+
+.nav-greeting {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.25;
+  font-size: 1.1rem;
+  margin-top: 0;
+  letter-spacing: -0.2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.nav-clock-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  margin-top: 1px;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.nav-clock-time {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--accent-color);
+  flex-shrink: 0;
+}
+
+.nav-clock-date {
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  text-transform: capitalize;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Hide weather description earlier (at 1200px) to keep plenty of space for date, time, and greeting */
+@media (max-width: 1200px) {
+  .weather-desc {
+    display: none !important;
+  }
+}
+
+/* Tablet responsiveness: hide clock date and edit label on screens <= 1024px to give search bar more room */
+@media (max-width: 1024px) {
+  .nav-clock-date {
+    display: none !important;
+  }
+
+  #btn-edit-mode span {
+    display: none !important;
+  }
+
+  #btn-edit-mode {
+    width: 40px !important;
+    padding: 0 !important;
+    justify-content: center !important;
+    border-radius: 50% !important;
+  }
+
+  .top-navbar {
+    padding: 0 24px;
+    gap: 12px;
+  }
+
+  /* Compact weather widget styling on tablet viewports */
+  .weather-widget {
+    height: 36px !important;
+    padding: 0 10px !important;
+    border-radius: 18px !important;
+    font-size: 0.85rem;
+    gap: 6px !important;
+  }
+
+  .weather-temp {
+    font-size: 0.8rem;
+  }
+
+  .weather-icon {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* Tablet & Mobile layout: always active on <= 768px screen sizes */
+@media (max-width: 768px) {
+  .app-container {
+    padding: 0 16px 60px 16px;
+  }
+  
+  .top-navbar {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky; /* Sticky positioning naturally pushes bookmarks down and handles wrapping heights */
+    top: 0; /* Align perfectly at the very top of mobile viewport */
+    z-index: 100;
+    height: 64px; /* Collapsed mobile height */
+    width: calc(100% + 32px);
+    margin-left: -16px;
+    margin-right: -16px;
+    margin-bottom: 36px;
+    background: var(--navbar-bg);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border-bottom: 1px solid var(--navbar-border);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+  }
+
+  body.light-theme .top-navbar {
+    background: var(--navbar-bg);
+    border-bottom-color: var(--navbar-border);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02);
+  }
+
+  .navbar-left {
+    position: static !important;
+    transform: none !important;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: auto !important;
+    flex: none !important;
+  }
+
+  .navbar-right {
+    position: static !important;
+    transform: none !important;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px !important;
+    width: auto !important;
+    flex: none !important;
+  }
+
+  .navbar-center {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 64px; /* Directly below the collapsed mobile navbar */
+    width: 100%;
+    max-width: none;
+    padding: 10px 16px;
+    background: var(--navbar-bg);
+    border-bottom: 1px solid var(--navbar-border);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    z-index: -1; /* Slide behind the main navbar */
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .top-navbar.mobile-search-active .navbar-center {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+  }
+  
+  .nav-greeting {
+    display: none !important;
+  }
+  
+  .nav-clock-container {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .nav-clock-time {
+    font-weight: 500;
+    color: var(--accent-color);
+  }
+
+  .nav-clock-date {
+    display: none !important;
+  }
+
+  /* Compact button styling on mobile */
+  #btn-edit-mode span {
+    display: none !important; /* Hide Edit mode text to save horizontal space */
+  }
+  
+  #btn-mobile-search,
+  #btn-edit-mode,
+  #btn-theme-toggle,
+  #btn-settings {
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 50% !important;
+    padding: 0 !important;
+    justify-content: center !important;
+  }
+  
+  #btn-mobile-search {
+    display: flex !important;
+  }
+
+  /* Compact weather styling on mobile */
+  .weather-wrapper {
+    position: static;
+  }
+
+  .weather-widget {
+    height: 36px !important;
+    padding: 0 10px !important;
+    border-radius: 18px !important;
+    font-size: 0.85rem;
+    gap: 6px !important;
+  }
+
+  .weather-temp {
+    font-size: 0.8rem;
+  }
+
+  .weather-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .weather-desc {
+    display: none !important; /* Hide weather description text to save horizontal space */
+  }
+  
+  .weather-info {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+
+  /* More compact search input wrapper on mobile */
+  .search-input-wrapper {
+    height: 38px;
+    padding: 0 12px;
+    border-radius: 19px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.01);
+  }
+
+  .search-icon {
+    margin-right: 8px;
+    width: 16px;
+    height: 16px;
+  }
+
+  .badge-icon {
+    width: 12px;
+    height: 12px;
+  }
+
+  .search-engine-badge {
+    padding: 4px 8px;
+    margin-right: 8px;
+    border-radius: 12px;
+  }
+  
+  #search-input {
+    font-size: 0.95rem;
+  }
+
+  /* Mobile weather forecast panel adjustments */
+  .weather-forecast-panel {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    right: auto;
+    width: calc(100% - 32px);
+    max-width: 410px;
+    padding: 14px;
+    gap: 12px;
+    transform: translateX(-50%) scale(1);
+    transform-origin: top center;
+    transition: opacity 200ms cubic-bezier(0.2, 0, 0, 1), transform 200ms cubic-bezier(0.2, 0, 0, 1);
+  }
+  
+  .weather-forecast-panel.hidden {
+    display: flex !important; /* Prevent display: none from blocking transition */
+    transform: translateX(-50%) scale(0.95);
+  }
+  
+  .forecast-day-row {
+    padding: 10px 12px;
+    gap: 10px;
+  }
+  
+  .forecast-day-name {
+    width: 75px; /* Reduce width to fit smaller screens */
+    font-size: 0.82rem;
+  }
+
+  .forecast-day-desc {
+    font-size: 0.78rem;
+  }
+
+  .forecast-day-desc span {
+    display: none; /* Hide long description text on mobile to prevent overflow */
+  }
+
+  .forecast-day-temps {
+    min-width: 90px;
+    align-items: flex-end;
+  }
+
+  .forecast-feels-range {
+    font-size: 0.68rem;
+  }
+
+  .forecast-period {
+    grid-template-columns: 16px 1fr 20px 40px 48px 20px;
+    font-size: 0.72rem;
+  }
+
+  .forecast-period-weather-icon,
+  .forecast-period svg.forecast-period-weather-icon {
+    width: 14px !important;
+    height: 14px !important;
+  }
+
+  .coat-indicator i,
+  .coat-indicator svg {
+    width: 11px !important;
+    height: 11px !important;
+  }
+}
+
+/* Search Section styles removed, integrated to top-navbar */
 
 .search-container {
   width: 100%;
   position: relative;
+  min-width: 0;
 }
 
 .search-input-wrapper {
   display: flex;
   align-items: center;
   width: 100%;
-  height: 56px;
-  padding: 0 20px;
-  border-radius: 28px;
+  height: 46px; /* Material You height */
+  padding: 0 16px;
+  border-radius: 23px; /* Pill shape */
   background: var(--input-bg);
   border: 1px solid var(--input-border);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-sm);
   backdrop-filter: blur(20px);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-sizing: border-box;
 }
 
 .search-input-wrapper:hover {
-  background: rgba(15, 23, 42, 0.85);
-  border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: var(--shadow-lg);
+  background: var(--btn-secondary-hover);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+body.light-theme .search-input-wrapper:hover {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.08);
 }
 
 .search-input-wrapper:focus-within {
-  background: rgba(15, 23, 42, 0.95);
-  border-color: var(--input-focus-border);
-  box-shadow: var(--shadow-accent);
+  background: var(--bg-primary);
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 2px rgba(var(--accent-rgb), 0.2);
 }
 
 .search-icon {
   color: var(--text-muted);
-  width: 20px;
-  height: 20px;
-  margin-right: 14px;
+  width: 18px;
+  height: 18px;
+  margin-right: 12px;
   flex-shrink: 0;
-  transition: color 0.3s ease;
+  transition: color 0.25s ease;
 }
 
 .search-input-wrapper:focus-within .search-icon {
@@ -770,10 +1381,11 @@ body.light-theme .action-btn:hover {
   outline: none;
   font-family: var(--font-sans);
   color: var(--text-primary);
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   font-weight: 400;
   width: 100%;
   height: 100%;
+  min-width: 0;
 }
 
 #search-input::placeholder {
@@ -867,25 +1479,45 @@ body.light-theme .action-btn:hover {
   display: none !important;
 }
 
-/* Search helper dropdown */
+/* Search helper dropdown (displays above the search bar on desktop) */
 .search-helper {
   position: absolute;
-  top: calc(100% + 8px);
+  bottom: calc(100% + 12px);
+  top: auto;
   left: 0;
   width: 100%;
-  background: rgba(15, 23, 42, 0.95);
+  background: rgba(15, 23, 42, 0.72);
   border: 1px solid var(--input-border);
-  border-radius: 16px;
+  border-radius: 20px;
   box-shadow: var(--shadow-lg);
-  backdrop-filter: blur(20px);
-  padding: 14px;
+  backdrop-filter: blur(25px);
+  padding: 16px;
   z-index: 50;
-  animation: fade-down 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  
+  /* GPU-Accelerated Smooth Transition */
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+  visibility: visible;
+  transition: 
+    opacity 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
+    visibility 0.22s;
 }
 
-@keyframes fade-down {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Override .hidden display:none to allow exit animations */
+.search-helper.hidden {
+  display: block !important;
+  opacity: 0;
+  transform: translateY(15px) scale(0.97);
+  pointer-events: none;
+  visibility: hidden;
+}
+
+/* Light theme overrides for search helper transition */
+body.light-theme .search-helper {
+  background: rgba(255, 255, 255, 0.75);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
 .helper-header {
@@ -930,6 +1562,97 @@ body.light-theme .action-btn:hover {
   border-color: rgba(59, 130, 246, 0.2);
   color: var(--accent-hover);
   transform: translateY(-1px);
+}
+
+/* Search Suggestions List */
+.suggestions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  transition: all 0.2s ease;
+  user-select: none;
+  animation: slide-in-suggest 0.24s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.suggestion-item i,
+.suggestion-item svg {
+  width: 15px;
+  height: 15px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+}
+
+.suggestion-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+}
+
+.suggestion-item:hover i,
+.suggestion-item:hover svg {
+  color: var(--accent-color);
+}
+
+body.light-theme .suggestion-item:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+/* No Suggestions Found styles */
+.no-suggestions-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  user-select: none;
+  animation: slide-in-suggest 0.24s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes slide-in-suggest {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.no-suggestions-item i,
+.no-suggestions-item svg {
+  width: 15px;
+  height: 15px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.no-suggestions-item kbd {
+  font-family: var(--font-mono);
+  background: rgba(255, 255, 255, 0.10);
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  color: var(--text-primary);
+  margin: 0 2px;
+}
+
+body.light-theme .no-suggestions-item kbd {
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--text-primary);
 }
 
 /* Edit Mode Controls Bar */
@@ -1018,13 +1741,14 @@ body.light-theme .action-btn:hover {
   display: flex;
   gap: 6px;
   opacity: 0;
+  pointer-events: none;
   transition: opacity 0.2s ease;
 }
 
-/* Show actions only in edit mode or when hovering header */
-.bookmarks-category:hover .category-actions,
-#edit-controls-bar:not(.hidden) ~ #bookmarks-grid .category-actions {
+/* Show actions only in edit mode */
+body.edit-mode-active .category-actions {
   opacity: 1;
+  pointer-events: auto;
 }
 
 .cat-action-btn {
@@ -1076,16 +1800,17 @@ body.light-theme .action-btn:hover {
   border: 1px solid var(--card-border);
   text-decoration: none;
   color: var(--text-primary);
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: var(--shadow-sm);
   backdrop-filter: blur(8px);
   user-select: none;
   min-height: 52px;
+  will-change: transform, box-shadow;
 }
 
 /* Card hover animation */
 .bookmark-card:hover {
-  background: rgba(15, 23, 42, 0.75);
+  background: rgba(15, 23, 42, 0.55);
   border-color: var(--card-hover-border);
   transform: translateY(-3px);
   box-shadow: var(--shadow-md), var(--shadow-accent);
@@ -1238,7 +1963,7 @@ body.edit-mode-active .bookmark-card:not(.add-bookmark-card) {
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  background: rgba(15, 23, 42, 0.7);
+  background: rgba(15, 23, 42, 0.5);
   border: 1px solid var(--card-border);
   color: var(--text-primary);
   display: flex;
@@ -1249,39 +1974,62 @@ body.edit-mode-active .bookmark-card:not(.add-bookmark-card) {
 }
 
 body.light-theme .card-action-btn {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.75);
   border-color: rgba(0, 0, 0, 0.1);
   color: var(--text-primary);
 }
 
 .card-action-btn:hover {
-  background: var(--accent-color);
-  border-color: var(--accent-color);
-  color: #ffffff !important;
-  transform: scale(1.1);
-  box-shadow: var(--shadow-accent);
+  background: rgba(15, 23, 42, 0.65) !important;
+  border-color: var(--card-hover-border) !important;
+  color: var(--accent-color) !important;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md), var(--shadow-accent);
+}
+
+body.light-theme .card-action-btn:hover {
+  background: rgba(255, 255, 255, 0.8) !important;
+  border-color: var(--card-hover-border) !important;
 }
 
 .card-action-btn.danger:hover {
-  background: #ef4444;
-  border-color: #ef4444;
-  color: #ffffff !important;
-  box-shadow: 0 0 10px rgba(239, 68, 68, 0.4);
+  background: rgba(15, 23, 42, 0.65) !important;
+  border-color: rgba(239, 68, 68, 0.4) !important;
+  color: #ef4444 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25), 0 0 10px rgba(239, 68, 68, 0.15);
 }
 
-.card-action-btn i {
+body.light-theme .card-action-btn.danger:hover {
+  background: #ffffff !important;
+  border-color: rgba(239, 68, 68, 0.3) !important;
+}
+
+.card-action-btn i,
+.card-action-btn svg {
   width: 13px;
   height: 13px;
+  transition: transform 0.3s ease;
+}
+
+.card-action-btn:hover i,
+.card-action-btn:hover svg {
+  transform: rotate(15deg);
 }
 
 /* Add Bookmark Card */
 .add-bookmark-card {
+  display: none !important;
   border-style: dashed;
   border-color: rgba(255, 255, 255, 0.15);
   background: rgba(255, 255, 255, 0.02);
   justify-content: center;
   cursor: pointer;
   opacity: 0.65;
+}
+
+body.edit-mode-active .add-bookmark-card {
+  display: flex !important;
 }
 
 .add-bookmark-card:hover {
@@ -1512,6 +2260,16 @@ body.edit-mode-active .bookmark-card:not(.add-bookmark-card):active {
   gap: 6px;
 }
 
+.location-input-wrapper {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.location-input-wrapper input {
+  flex-grow: 1;
+}
+
 .form-group label {
   font-size: 0.82rem;
   font-weight: 500;
@@ -1666,6 +2424,14 @@ body.edit-mode-active .bookmark-card:not(.add-bookmark-card):active {
   color: #f87171;
 }
 
+.import-status.info {
+  display: block;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  color: #60a5fa;
+}
+
+
 /* Footer styles */
 .app-footer {
   width: 100%;
@@ -1715,7 +2481,7 @@ body.edit-mode-active .bookmark-card:not(.add-bookmark-card):active {
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
   .app-container {
-    padding: 16px 16px 60px 16px;
+    padding: 0 16px 60px 16px;
   }
   
   .top-bar {
@@ -1746,5 +2512,14 @@ body.edit-mode-active .bookmark-card:not(.add-bookmark-card):active {
     flex-direction: column;
     gap: 12px;
     align-items: flex-start;
+  }
+
+  .search-helper {
+    top: calc(100% + 12px);
+    bottom: auto;
+  }
+
+  .search-helper.hidden {
+    transform: translateY(-15px) scale(0.97);
   }
 }
